@@ -1,0 +1,18 @@
+{% extends 'partials/_master.twig' %}
+
+{% block main %}
+    <section class="section main">
+        <div class="container">
+
+            <h1 class="title is-1">{{ record.title }}</h1>
+
+            <img width="100%" src="{{ place.image | thumbnail(480, 200, 'c') }}" alt=""/>
+
+            <div class="">
+                {{ record.body }}
+
+            </div>
+
+        </div>
+    </section>
+{% endblock main %}

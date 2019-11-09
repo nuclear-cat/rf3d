@@ -1,0 +1,24 @@
+{# Footer #}
+<footer role="contentinfo" class="footer">
+    <div class="container">
+        <nav class="level" role="navigation" aria-label="footer navigation">
+            <div class="level-left">
+                <div class="level-item">
+                    <p>
+                        &copy; {{ "now"|date("Y") }} &bullet;
+                        Все права защищены <a href="{{ path('homepage') }}">RF3D</a>
+                        {#{{ __("This website is <a href='%url%' target='_blank' title='Sophisticated, lightweight & simple CMS'>Built with Bolt</a>.", {'%url%':'https://bolt.cm'}) }}#}
+                    </p>
+                </div>
+            </div>
+
+            <div class="level-right">
+                <p class="level-item"><a href="{{ path('homepage') }}" title="This is the first menu item." class="first">Главная</a></p>
+            </div>
+        </nav>
+        {{ widgets('footer') }}
+    </div>
+</footer>
+
+<script src="{{ asset('js/normalizeBrightness.js', 'theme') }}"></script>
+<script src="{{ asset('js/app.js', 'theme') }}"></script>

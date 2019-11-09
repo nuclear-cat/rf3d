@@ -1,0 +1,21 @@
+<div class="column is-3" style="padding-top: 0;">
+    <aside class="menu">
+        {% setcontent categories = 'categories' %}
+
+        <ul class="menu-list">
+            {% for category in categories %}
+                {% set subcategories = category.related('subcategories')  %}
+                <li>
+                    {#<a href="{{ category.link() }}">{{ category.title }}</a>#}
+                    <span>{{ category.title }}</span>
+                    <ul>
+                        {% for subcategory in subcategories %}
+                            <li ><a href="{{ subcategory.link() }}">{{ subcategory.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+
+    </aside>
+</div>

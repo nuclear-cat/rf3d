@@ -1,0 +1,20 @@
+{% extends 'partials/_master.twig' %}
+{% block main %}
+    <section class="section main">
+        <div class="container">
+            <div class="columns">
+
+                {% include 'partials/_side_categories.twig' %}
+
+                <div class="column">
+                    <div class="columns is-multiline is-variable bd-klmn-columns is-1">
+                        {% setcontent places = 'places/latest/5' %}
+                        {% for place in places %}
+                            {% include '_place.twig' %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock main %}

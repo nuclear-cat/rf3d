@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="{{ htmllang() }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {# make sure we always display a proper title: The record's title if there is one, appended with the
+           sitename. If there is no title, we append the sitename with the payoff, if there is one. #}
+        <title>
+            {%- if record.title is defined %}{{ record.title|striptags }} | {% endif -%}
+                {{ config.get('general/sitename') -}}
+            {% if record.title is not defined and config.get('general/payoff') %} | {{ config.get('general/payoff') }}{% endif -%}
+        </title>
+        {#<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700" rel="stylesheet">#}
+        <link href="https://fonts.googleapis.com/css?family=PT+Serif|Roboto:400,500,700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('css/bulma.css', 'theme') }}">
+        <link rel="stylesheet" href="{{ asset('css/theme.css', 'theme') }}">
+    </head>
+    <body{% if app.request.get('_route') == "homepage" %} class="front"{% endif %}>
+
+
+        <a href="#main-content" class="visually-hidden focusable skip-link">Skip to main content</a>
+
+        {% block body %}
+            <header role="banner" class="header">
+
+                <nav class="navbar is-fixed-top is-primary" role="navigation" aria-label="main navigation">
+                    <div class="container">
+                        <div class="navbar-brand">
+                            <span class="navbar-item"><a class="has-text-white" href="{{ path('homepage') }}">RF3D</a></span>
+                            <span class="navbar-burger" data-target="navbar-toggle">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </span>
+                        </div>
+                        <div class="navbar-menu" id="navbar-toggle">
+                            {% set route = app.request.get('_route') %}
+
+                            <div class="navbar-start">
+                                <a href="{{ path('homepage') }}" class="navbar-item first{{ route == 'homepage' ? ' is-active' : '' }}">Главная</a>
+                                <div class="navbar-item has-dropdown is-hoverable">
+                                    <a href="#" title="" class="navbar-link ">Город</a>
+                                    <div class="navbar-dropdown">
+                                        {% for key, city in app.config.get('taxonomy/cities/options') %}
+                                            <a href="/entry/2" title="" class="navbar-item  ">{{ city }}</a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <a href="{{ path('map') }}" class="navbar-item first{{ route == 'map' ? ' is-active' : '' }}">Карта</a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+                {#{{ include('partials/_navbar.twig') }}#}
+            {#{{ include('partials/_header.twig') }}#}
+            </header>
+            {{ widgets('main_top') }}
+
+            <a id="main-content"></a>
+            {% block main %}
+            {% endblock main %}
+            {{ widgets('main_bottom') }}
+        {% endblock body %}
+
+        {{ include('partials/_footer.twig') }}
+
+    </body>
+</html>
+
+
