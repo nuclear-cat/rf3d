@@ -10,8 +10,7 @@
                 {{ config.get('general/sitename') -}}
             {% if record.title is not defined and config.get('general/payoff') %} | {{ config.get('general/payoff') }}{% endif -%}
         </title>
-        {#<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700" rel="stylesheet">#}
-        <link href="https://fonts.googleapis.com/css?family=PT+Serif|Roboto:400,500,700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/bulma.css', 'theme') }}">
         <link rel="stylesheet" href="{{ asset('css/theme.css', 'theme') }}">
     </head>
@@ -42,7 +41,7 @@
                                     <a href="#" title="" class="navbar-link ">Город</a>
                                     <div class="navbar-dropdown">
                                         {% for key, city in app.config.get('taxonomy/cities/options') %}
-                                            <a href="/entry/2" title="" class="navbar-item  ">{{ city }}</a>
+                                            <a href="{{ path('city', { 'name' : key }) }}" title="" class="navbar-item  ">{{ city }}</a>
                                         {% endfor %}
                                     </div>
                                 </div>

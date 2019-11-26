@@ -10,8 +10,8 @@ database:
 
 
 # The name of the website
-sitename: A sample site
-payoff: The amazing payoff goes here
+sitename: RF3D
+payoff:
 
 # The theme to use.
 #

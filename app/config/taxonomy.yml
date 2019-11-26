@@ -5,7 +5,15 @@ cities:
     slug: cities
     singular_slug: city
     behaves_like: categories
-    options: { novosibirsk: 'Новосибирск', biysk: 'Бийск' }
+    options:
+      novosibirsk: 'Новосибирск'
+      biysk: 'Бийск'
+      barnaul: 'Барнаул'
+      tomsk: 'Томск'
+      omsk: 'Омск'
+      kemerovo: 'Кемерово'
+      novokuznetsk: 'Новокузнецк'
+      krasnoyarsk: 'Красноярск'
 
 tags:
     slug: tags
