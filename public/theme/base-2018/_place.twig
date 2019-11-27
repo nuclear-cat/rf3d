@@ -2,7 +2,10 @@
 
     <a href="{{ place.link() }}">
         <figure>
-            <img width="100%" src="{{ place.image | thumbnail(480, 200, 'c') }}" alt=""/>
+            {% if place.image %}
+                <img width="100%" src="{{ place.image | thumbnail(480, 200, 'c') }}" alt=""/>
+            {% endif %}
+
             <figcaption>
                 <h2>{{ place.title }}</h2>
                 {% if place.subtitle %}

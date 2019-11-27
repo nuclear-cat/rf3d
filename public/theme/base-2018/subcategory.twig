@@ -11,7 +11,13 @@
 
                     <div class="columns is-multiline is-variable bd-klmn-columns is-1">
                         {% set ids = record.relation.places|join(" || ") %}
+
                         {% setcontent places = "places" where { id: ids } allowpaging limit 10 %}
+
+                        {# Костыль из-за тупого бага #}
+                        {% if places | length == 1 %}
+                            {% set places = [places] %}
+                        {% endif %}
 
                         {% for place in places %}
                             {% include '_place.twig' %}
