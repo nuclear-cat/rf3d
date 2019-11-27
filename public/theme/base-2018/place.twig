@@ -1,16 +1,32 @@
 {% extends 'partials/_master.twig' %}
 
+{% set city_key = record.taxonomy.cities | keys | first | split('/') | last %}
+{% set city_name =  app.config.get('taxonomy/cities/options/' ~ city_key) %}
+
 {% block main %}
     <section class="section main">
         <div class="container">
 
             <h1 class="title is-1">{{ record.title }}</h1>
 
-            <img width="100%" src="{{ place.image | thumbnail(480, 200, 'c') }}" alt=""/>
+            {%  if record.subtitle %}
+                <h2 class="subtitle is-5">{{ record.subtitle }}
+                    {%  if city_name %}
+                        <br /><span class="float-right"><a href="{{ path('city', { 'name' : city_key }) }}">{{ city_name }}</a></span>
+                    {% endif %}
+                </h2>
+            {% endif %}
+
+
+
+            {%  if place.image %}
+                <img width="100%" class="" src="{{ place.image | thumbnail(480, 200, 'c') }}" alt=""/>
+            {% endif %}
+
+
 
             <div class="">
                 {{ record.body }}
-
             </div>
 
         </div>
