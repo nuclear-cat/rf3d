@@ -1,7 +1,5 @@
 {% extends 'partials/_master.twig' %}
 
-{% set city_key = record.taxonomy.cities | keys | first | split('/') | last %}
-{% set city_name =  app.config.get('taxonomy/cities/options/' ~ city_key) %}
 
 {% block main %}
     <section class="section main">
@@ -11,11 +9,20 @@
 
             {%  if record.subtitle %}
                 <h2 class="subtitle is-5">{{ record.subtitle }}
-                    {%  if city_name %}
-                        <br /><span class="float-right"><a href="{{ path('city', { 'name' : city_key }) }}">{{ city_name }}</a></span>
+
+
+                    {% if record.taxonomy.cities is defined %}
+
+                        {% set city_key = record.taxonomy.cities | keys | first | split('/') | last %}
+                        {% set city_name =  app.config.get('taxonomy/cities/options/' ~ city_key) %}
+
+                        {%  if city_name %}
+                            <br /><span class="float-right"><a href="{{ path('city', { 'name' : city_key }) }}">{{ city_name }}</a></span>
+                        {% endif %}
                     {% endif %}
                 </h2>
             {% endif %}
+
 
 
 
@@ -24,10 +31,34 @@
             {% endif %}
 
 
+            {% if record.price_from or record.price_to %}
+                <p><strong>Цена:</strong> {% if record.price_from %} от {{ record.price_from  }}{% endif %}{% if record.price_to %} от {{ record.price_to }}{% endif %}</p>
+            {% endif %}
 
-            <div class="">
-                {{ record.body }}
-            </div>
+            {% if record.phone %}
+                <p><strong>Телефон</strong>: {{ record.phone }}</p>
+            {% endif %}
+
+            {% if record.address %}
+                <p><strong>Адрес:</strong> {{ record.address }}</p>
+            {% endif %}
+
+            {% if record.url %}
+                <p><strong>Ссылка на сайт:</strong> <a href="{{ record.url }}">{{ record.url }}</a></p>
+            {% endif %}
+
+
+            {% if record.body %}
+                <br />
+                <div class="">
+                    {{ record.body }}
+                </div>
+                <br />
+            {% endif %}
+
+            {% if record.flamp_widget_id %}
+                <a class="flamp-widget" href="//novosibirsk.flamp.ru/firm/pravilno_sidi_optovo_roznichnaya_kompaniya_po_prodazhe_rastushhejj_mebeli_part_i_stulev-{{ record.flamp_widget_id  }}"  data-flamp-widget-type="responsive-new" data-flamp-widget-id="{{ record.flamp_widget_id  }}" data-flamp-widget-width="100%" data-flamp-widget-count="1">Отзывы о нас на Флампе</a><script>!function(d,s){var js,fjs=d.getElementsByTagName(s)[0];js=d.createElement(s);js.async=1;js.src="//widget.flamp.ru/loader.js";fjs.parentNode.insertBefore(js,fjs);}(document,"script");</script>
+            {% endif %}
 
         </div>
     </section>

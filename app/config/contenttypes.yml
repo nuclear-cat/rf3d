@@ -10,6 +10,30 @@ places:
             type: text
             class: large
             group: content
+        phone:
+            type: text
+            class: large
+            group: content
+        price_from:
+            type: integer
+            class: large
+            group: content
+        price_to:
+            type: integer
+            class: large
+            group: content
+        url:
+            type: text
+            class: large
+            group: content
+        address:
+            type: text
+            class: large
+            group: content
+        flamp_widget_id:
+            type: text
+            class: large
+            group: content
         domain:
             type: text
             class: large
