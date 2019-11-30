@@ -1,6 +1,7 @@
 places:
     name: Places
     singular_name: Place
+    default_status: published
     fields:
         title:
             type: text
@@ -10,7 +11,15 @@ places:
             type: text
             class: large
             group: content
+        public_on_main_page:
+            type: checkbox
+            class: large
+            group: content
         phone:
+            type: text
+            class: large
+            group: content
+        tour_url:
             type: text
             class: large
             group: content
@@ -30,6 +39,7 @@ places:
             type: text
             class: large
             group: content
+
         flamp_widget_id:
             type: text
             class: large
@@ -44,8 +54,10 @@ places:
         body:
             type: html
             height: 300px
+
         location:
             type: geolocation
+
         image:
             type: image
             placeholder: https://source.unsplash.com/1280x768/?business,workspace,interior/__random__
@@ -57,6 +69,7 @@ places:
           label: Select a subcategory
 
 categories:
+    default_status: published
     name: Categories
     singular_name: Category
     fields:
@@ -73,6 +86,7 @@ categories:
 subcategories:
     name: Subcategories
     singular_name: Subcategory
+    default_status: published
     fields:
         title:
             type: text

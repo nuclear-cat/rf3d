@@ -1,15 +1,14 @@
-<div class="column is-6 p-b-0 p-t-0" style="padding-bottom:10px; padding-top:0;">
+<div class="column is-4 p-b-0 p-t-0" style="padding-bottom:10px; padding-top:0;">
 
-    <a href="{{ place.link() }}">
+    <a href="{{ place.link() }}" class="">
         <figure>
             {% if place.image %}
                 <img width="100%" src="{{ place.image | thumbnail(480, 200, 'c') }}" alt=""/>
             {% endif %}
-
-            <figcaption>
-                <h2>{{ place.title }}</h2>
+            <figcaption style="text-align: center;">
+                <h2 class="has-text-black title is-5">{{ place.title }}</h2>
                 {% if place.subtitle %}
-                    <p>{{ place.subtitle }}</p>
+                    <p class="subtitle is-5">{{ place.subtitle }}</p>
                 {% endif %}
             </figcaption>
         </figure>
