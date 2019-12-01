@@ -5,53 +5,70 @@
     <section class="section main">
         <div class="container">
 
+
+            <nav class="breadcrumb" aria-label="breadcrumbs">
+                <ul>
+                    <li><a href="{{ path('homepage') }}">Главная</a></li>
+                    {#<li><a href="#">Documentation</a></li>#}
+                    {#<li><a href="#">Components</a></li>#}
+                    <li class="is-active"><a href="#" aria-current="page">{{ record.title }}</a></li>
+                </ul>
+            </nav>
+
             <h1 class="title is-1">{{ record.title }}</h1>
 
             {%  if record.subtitle %}
                 <h2 class="subtitle is-5">{{ record.subtitle }}
-
-
                     {% if record.taxonomy.cities is defined %}
-
                         {% set city_key = record.taxonomy.cities | keys | first | split('/') | last %}
                         {% set city_name =  app.config.get('taxonomy/cities/options/' ~ city_key) %}
 
                         {%  if city_name %}
                             <br /><span class="float-right"><a href="{{ path('city', { 'name' : city_key }) }}">{{ city_name }}</a></span>
                         {% endif %}
+
                     {% endif %}
                 </h2>
             {% endif %}
 
+            <div class="columns">
+                <div class="column is-3">
+                    {%  if place.image %}
+                        <img width="100%" class="" src="{{ place.image | thumbnail(480, 300, 'c') }}" alt=""/>
+                        {% if record.price_from or record.price_to %}
+                            <p><strong>Цена:</strong> {% if record.price_from %} от {{ record.price_from  }}{% endif %}{% if record.price_to %} от {{ record.price_to }}{% endif %}</p>
+                        {% endif %}
 
+                        {% if record.phone %}
+                            <p><strong>Телефон</strong>: {{ record.phone }}</p>
+                        {% endif %}
 
+                        {% if record.address %}
+                            <p><strong>Адрес:</strong> {{ record.address }}</p>
+                        {% endif %}
 
-            {%  if place.image %}
-                <img width="100%" class="" src="{{ place.image | thumbnail(480, 200, 'c') }}" alt=""/>
-            {% endif %}
+                        {% if record.url %}
+                            <p><strong>Ссылка на сайт:</strong> <a href="{{ record.url }}">{{ record.url }}</a></p>
+                        {% endif %}
 
+                    {% endif %}
+                </div>
+                <div class="column is-9">
 
-            {% if record.price_from or record.price_to %}
-                <p><strong>Цена:</strong> {% if record.price_from %} от {{ record.price_from  }}{% endif %}{% if record.price_to %} от {{ record.price_to }}{% endif %}</p>
-            {% endif %}
+                    {% if record.gallery | length > 0 %}
+                        <div class="place-slider">
+                            {% for image in record.gallery %}
+                                <img width="100%" class="" src="{{ image | thumbnail(1366, 768, 'c') }}" alt=""/>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
 
-            {% if record.phone %}
-                <p><strong>Телефон</strong>: {{ record.phone }}</p>
-            {% endif %}
-
-            {% if record.address %}
-                <p><strong>Адрес:</strong> {{ record.address }}</p>
-            {% endif %}
-
-            {% if record.url %}
-                <p><strong>Ссылка на сайт:</strong> <a href="{{ record.url }}">{{ record.url }}</a></p>
-            {% endif %}
-
+                </div>
+            </div>
 
             {% if record.tour_url %}
                 <br />
-                <iframe width="100%"  height="500px" src="{{ record.tour_url }}" ></iframe>
-
+                <iframe width="100%"  height="580px" src="{{ record.tour_url }}" ></iframe>
                 <br />
             {% endif %}
 
@@ -70,3 +87,12 @@
         </div>
     </section>
 {% endblock main %}
+
+{% block bottom_js %}
+    {{ parent() }}
+    <script>
+        $('.place-slider').slick({
+            dots: true,
+        });
+    </script>
+{% endblock %}

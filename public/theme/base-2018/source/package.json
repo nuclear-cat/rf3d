@@ -17,7 +17,9 @@
     "baguettebox.js": "^1.10.0",
     "bulma": "^0.7.1",
     "gulp-concat": "^2.6.1",
-    "prismjs": "^1.15.0"
+    "jquery": "^3.4.1",
+    "prismjs": "^1.15.0",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "gulp": "^4.0.0",

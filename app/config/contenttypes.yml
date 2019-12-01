@@ -61,12 +61,21 @@ places:
         image:
             type: image
             placeholder: https://source.unsplash.com/1280x768/?business,workspace,interior/__random__
+
+        gallery:
+            type: imagelist
+            extensions: [ gif, jpg, png ]
+            upload: portfolio
     taxonomy: [ cities ]
     relations:
         subcategories:
           multiple: false
           order: title
           label: Select a subcategory
+        districts:
+          multiple: false
+          order: title
+          label: Select a distric
 
 categories:
     default_status: published
@@ -93,6 +102,20 @@ subcategories:
             class: large
             group: content
 
+districts:
+    name: Districts
+    singular_name: district
+    default_status: published
+    fields:
+        title:
+            type: text
+            class: large
+            group: content
+    relations:
+        subcategories:
+          multiple: false
+          order: title
+          label: Select a subcategory
 #homepage:
 #    name: Homepage
 #    singular_name: Homepage

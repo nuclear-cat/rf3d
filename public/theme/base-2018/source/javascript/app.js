@@ -29,3 +29,6 @@ document.addEventListener('DOMContentLoaded', function () {
         e.target.parentElement.style.display = 'none';
     }, false);
 });
+
+
+$('.place-slider').slick();
