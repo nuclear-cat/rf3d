@@ -7,7 +7,7 @@
                 {% set subcategories = category.related('subcategories')  %}
                 <li>
                     {#<a href="{{ category.link() }}">{{ category.title }}</a>#}
-                    <span>{{ category.title }}</span>
+                    <span><a href="{{ category.link() }}">{{ category.title }}</a></span>
                     <ul>
                         {% for subcategory in subcategories %}
                             <li ><a href="{{ subcategory.link() }}">{{ subcategory.title }}</a></li>

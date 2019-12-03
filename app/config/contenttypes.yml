@@ -66,16 +66,16 @@ places:
             type: imagelist
             extensions: [ gif, jpg, png ]
             upload: portfolio
-    taxonomy: [ cities ]
+
     relations:
-        subcategories:
+        categories:
           multiple: false
-          order: title
-          label: Select a subcategory
+          order: id
+          label: Select a category
         districts:
           multiple: false
           order: title
-          label: Select a distric
+          label: Select a district
 
 categories:
     default_status: published
@@ -87,35 +87,22 @@ categories:
             class: large
             group: content
     relations:
-        subcategories:
+        places:
           multiple: true
           order: title
           label: Select a subcategories
-
-subcategories:
-    name: Subcategories
-    singular_name: Subcategory
-    default_status: published
-    fields:
-        title:
-            type: text
-            class: large
-            group: content
 
 districts:
     name: Districts
     singular_name: district
     default_status: published
+    taxonomy: [ cities ]
     fields:
         title:
             type: text
             class: large
             group: content
-    relations:
-        subcategories:
-          multiple: false
-          order: title
-          label: Select a subcategory
+
 #homepage:
 #    name: Homepage
 #    singular_name: Homepage

@@ -1,5 +1,7 @@
 {% extends 'partials/_master.twig' %}
 
+
+
 {% block main %}
     <section class="section main">
         <div class="container">
@@ -9,6 +11,7 @@
 
                     <div class="columns is-multiline is-variable bd-klmn-columns is-1">
                         {% set ids = record.relation.places|join(" || ") %}
+
                         {% setcontent places = "places" where { id: ids } allowpaging limit 10 %}
 
                         {# Костыль из-за тупого бага #}
