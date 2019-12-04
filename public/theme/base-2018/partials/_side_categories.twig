@@ -1,20 +1,43 @@
 <div class="column is-3" style="padding-top: 0;">
     <aside class="menu">
-        {% setcontent categories = 'categories' %}
+
+        {% set menuItems = menuItems() %}
 
         <ul class="menu-list">
-            {% for category in categories %}
-                {% set subcategories = category.related('subcategories')  %}
+
+            {% for menuItem in menuItems %}
                 <li>
-                    {#<a href="{{ category.link() }}">{{ category.title }}</a>#}
-                    <span><a href="{{ category.link() }}">{{ category.title }}</a></span>
-                    <ul>
-                        {% for subcategory in subcategories %}
-                            <li ><a href="{{ subcategory.link() }}">{{ subcategory.title }}</a></li>
-                        {% endfor %}
-                    </ul>
+                    {#<a href="{{ menuItem.slug }}">{{ menuItem.title }}</a>#}
+                    <span><a href="{{ path('contentlink', { 'contenttypeslug' : 'category', 'slug' : menuItem.slug }) }}">{{ menuItem.title }}</a></span>
+
+                    {%  if menuItem.districts is defined and menuItem.districts | length > 0 %}
+                        <ul>
+                            {% for district in menuItem.districts %}
+                                <li ><a href="{{ path('contentlink', { 'contenttypeslug' : 'district', 'slug' : district.slug }) }}">{{ district.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+
                 </li>
+
             {% endfor %}
+
+            {#{% setcontent categories = 'categories' %}#}
+
+            {#{% for category in categories %}#}
+                {#{% set subcategories = category.related('subcategories')  %}#}
+                {#<li>#}
+                    {#<span><a href="{{ category.link() }}">{{ category.title }}</a></span>#}
+                    {#<ul>#}
+                        {#{% for subcategory in subcategories %}#}
+                            {#<li ><a href="{{ subcategory.link() }}">{{ subcategory.title }}</a></li>#}
+                        {#{% endfor %}#}
+                    {#</ul>#}
+                {#</li>#}
+            {#{% endfor %}#}
+
+
+            {##}
         </ul>
 
     </aside>

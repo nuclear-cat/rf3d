@@ -3,6 +3,10 @@
 namespace Bundle\Site;
 
 use Bolt\Extension\SimpleExtension;
+use Bundle\Site\Controller\PlaceController;
+use Pimple as Container;
+use Silex\Application;
+use Silex\Provider\DoctrineServiceProvider;
 
 /**
  * Site bundle extension loader.
@@ -17,6 +21,99 @@ use Bolt\Extension\SimpleExtension;
  */
 class CustomisationExtension extends SimpleExtension
 {
+    private $app;
+
+    public function boot(Application $app)
+    {
+        parent::boot($app);
+        $this->app = $app;
+    }
+
+    protected function registerTwigFunctions() {
+        return [
+            'menuItems' => 'getMenuItems',
+        ];
+    }
+
+
+    protected function registerBackendControllers()
+    {
+        return [
+            '/' => new PlaceController(),
+        ];
+    }
+
+
+
+//    protected function registerBackendRoutes($collection)
+//    {
+////       dump($this->app); die;
+//    }
+
+
+    public function getMenuItems() {
+
+        /** @var \Bolt\Storage\Database\Connection $dbConnection */
+        $dbConnection = $this->app['db'];
+        $result = $dbConnection->query("
+            SELECT
+                c.id category_id,
+                c.title category_title,
+                c.slug category_slug,
+
+                pr.id p_relation_id,
+                pr.to_id p_relation_to_id,
+                pr.from_id p_relation_from_id,
+                
+                dr.id d_relation_id,
+              
+                p.title place_title,
+                p.id place_id,
+                
+                d.id district_id,
+                d.title district_title,
+                d.slug district_slug
+            
+            FROM bolt_categories c
+            
+            # Place relations
+            LEFT JOIN bolt_relations pr ON ((pr.to_id = c.id AND pr.to_contenttype = 'categories' AND pr.from_contenttype = 'places') OR (pr.from_id = c.id AND pr.from_contenttype = 'categories' AND pr.to_contenttype = 'places'))
+            
+            # Places
+            LEFT JOIN bolt_places p ON ((pr.from_id = p.id AND pr.from_contenttype = 'places' AND pr.to_contenttype = 'categories') OR (pr.to_id = p.id AND pr.to_contenttype = 'places' AND pr.from_contenttype = 'categories'))
+            
+            # District relations
+            LEFT JOIN bolt_relations dr ON ((dr.from_id = p.id AND dr.from_contenttype = 'places' AND dr.to_contenttype = 'districts') OR (dr.to_id = p.id AND dr.to_contenttype = 'places' AND dr.from_contenttype = 'districts'))
+            
+            # Disctricts
+            LEFT JOIN bolt_districts d ON (d.id = dr.to_id AND dr.to_contenttype = 'districts' AND dr.from_contenttype = 'places')
+              
+             ORDER BY  c.id
+        ")->fetchAll();
+
+
+        $categories = [];
+
+        foreach ($result as $row) {
+          if ($row['district_id'] > 0)  {
+              $categories[$row['category_id']]['districts'][$row['district_id']] = [
+                  'id' => $row['district_id'],
+                  'title' => $row['district_title'],
+                  'slug' => $row['district_slug'],
+              ];
+          }
+          $categories[$row['category_id']]['id'] = $row['category_id'];
+          $categories[$row['category_id']]['title'] = $row['category_title'];
+          $categories[$row['category_id']]['slug'] = $row['category_slug'];
+        }
+
+        return $categories;
+
+        die;
+
+        return $result;
+    }
+
     //https://stackoverflow.com/questions/52754936/overwrite-backend-template-in-bolt-cms
     protected function registerTwigPaths()
     {
