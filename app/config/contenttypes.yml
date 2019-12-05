@@ -54,10 +54,11 @@ places:
         body:
             type: html
             height: 300px
-
-        location:
-            type: geolocation
-
+        coordinates:
+            type: text
+            class: large
+            group: content
+            placeholder: '41.40338, 2.17403'
         image:
             type: image
             placeholder: https://source.unsplash.com/1280x768/?business,workspace,interior/__random__

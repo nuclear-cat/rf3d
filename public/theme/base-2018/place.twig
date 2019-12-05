@@ -21,11 +21,9 @@
                     {% if record.taxonomy.cities is defined %}
                         {% set city_key = record.taxonomy.cities | keys | first | split('/') | last %}
                         {% set city_name =  app.config.get('taxonomy/cities/options/' ~ city_key) %}
-
                         {%  if city_name %}
                             <br /><span class="float-right"><a href="{{ path('city', { 'name' : city_key }) }}">{{ city_name }}</a></span>
                         {% endif %}
-
                     {% endif %}
                 </h2>
             {% endif %}
@@ -85,6 +83,24 @@
 
         </div>
     </section>
+
+    {% setcontent related_places = "places" where { id: ('!'~ record.id) } limit 6 %}
+
+
+     <section class="section main">
+        <div class="container">
+            <div class="columns">
+                <div class="column">
+                    <div class="columns is-multiline is-variable bd-klmn-columns is-1">
+                        {% for related_place in related_places %}
+                            {% include '_place.twig' with { 'place' : related_place } only %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+     </section>
+
 {% endblock main %}
 
 {% block bottom_js %}
