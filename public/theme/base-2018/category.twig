@@ -1,5 +1,9 @@
 {% extends 'partials/_master.twig' %}
 
+{% set meta_title = record.meta_title ? record.meta_title : record.title %}
+{% set meta_description = record.meta_description %}
+{% set meta_keywords = record.meta_keywords %}
+
 {% block main %}
     <section class="section main">
         <div class="container">

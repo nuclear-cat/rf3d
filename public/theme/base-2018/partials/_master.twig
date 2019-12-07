@@ -4,11 +4,14 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>
-            {%- if record.title is defined %}{{ record.title|striptags }} | {% endif -%}
-                {{ config.get('general/sitename') -}}
-            {% if record.title is not defined and config.get('general/payoff') %} | {{ config.get('general/payoff') }}{% endif -%}
+            {%- if meta_title is defined and meta_title -%}
+                {{ meta_title }} | {{ config.get('general/sitename') -}}
+            {%- else -%}
+                {%- if record.title is defined %}{{ record.title|striptags }} | {{ config.get('general/sitename') -}}{% endif -%}
+            {%- endif -%}
         </title>
-
+        <meta name="description" content="{% if meta_description is defined %}{{ meta_description }}{% endif %}">
+        <meta name="keywords" content="{% if meta_keywords is defined %}{{ meta_keywords }}{% endif %}">
         <link rel="stylesheet" href="{{ asset('dist/css/style.css', 'theme') }}">
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('scripts/slick-1.8.1/slick/slick.css', 'theme') }}">

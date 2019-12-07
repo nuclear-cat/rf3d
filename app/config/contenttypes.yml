@@ -63,6 +63,19 @@ places:
             type: image
             placeholder: https://source.unsplash.com/1280x768/?business,workspace,interior/__random__
 
+        meta_title:
+            type: text
+            class: large
+            group: meta
+        meta_description:
+            type: text
+            class: large
+            group: meta
+        meta_keywords:
+            type: text
+            class: large
+            group: meta
+
         gallery:
             type: imagelist
             extensions: [ gif, jpg, png ]
@@ -87,6 +100,18 @@ categories:
             type: text
             class: large
             group: content
+        meta_title:
+            type: text
+            class: large
+            group: meta
+        meta_description:
+            type: text
+            class: large
+            group: meta
+        meta_keywords:
+            type: text
+            class: large
+            group: meta
     relations:
         places:
           multiple: true
@@ -103,6 +128,20 @@ districts:
             type: text
             class: large
             group: content
+        meta_title:
+            type: text
+            class: large
+            group: meta
+        meta_description:
+            type: text
+            class: large
+            group: meta
+        meta_keywords:
+            type: text
+            class: large
+            group: meta
+
+
 
 #homepage:
 #    name: Homepage
