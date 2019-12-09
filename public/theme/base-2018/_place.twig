@@ -1,28 +1,39 @@
-<div class="column is-4 p-b-0 p-t-0" style="padding-bottom:10px; padding-top:0;">
-    <a href="{{ place.link() }}" class="">
-        <figure>
-            {% if place.image %}
-                <img width="100%" src="{{ place.image | thumbnail(480, 300, 'c') }}" alt=""/>
-            {% endif %}
-            <figcaption style="text-align: center;">
-                <h2 class="has-text-black title is-5">{{ place.title }}</h2>
-                {% if place.subtitle %}
-                    <p class="subtitle is-5">{{ place.subtitle }}</p>
+<div class="column is-4 place-list-item">
+
+
+    <div class="box p-t-0 p-b-10 p-r-0 p-l-0 is-clipped">
+        <a href="{{ place.link() }}" class="">
+            <figure>
+                {% if place.image %}
+                    <img width="100%" src="{{ place.image | thumbnail(480, 300, 'c') }}" alt=""/>
                 {% endif %}
-            </figcaption>
-        </figure>
+                <figcaption class="m-l-20 m-r-20">
+                    <h2 class="has-text-black title is-5 m-t-10">{{ place.title }}</h2>
+                    {% if place.subtitle %}
+                        <p class="subtitle is-5">{{ place.subtitle }}</p>
+                    {% endif %}
+                </figcaption>
+            </figure>
 
-    </a>
-    {% if place.price_from > 0 or place.price_to > 0 %}
-        <p>Цена{% if place.price_from > 0  %} от {{ place.price_from }} руб.{% endif %}{% if place.price_to > 0  %} до {{ place.price_to }} руб.{% endif %}</p>
-    {% endif %}
-    {% if place.relation('districts') %}
-        {% set district =place.relation('districts') | first %}
-        <p><a href="{{ district.link() }}">{{ district.title }}</a></p>
-    {% endif %}
-    {% if place.teaser %}
-        <div class="text-muted">{{ place.teaser }}</div>
-    {% endif %}
+        </a>
+        <div class="m-l-20 m-r-20">
+            {% if place.price_from > 0 or place.price_to > 0 %}
+                <p class="m-t-5">Цена{% if place.price_from > 0  %} от {{ place.price_from }} руб.{% endif %}{% if place.price_to > 0  %} до {{ place.price_to }} руб.{% endif %}</p>
+            {% endif %}
 
-    <p><a href="{{ place.link() }}">подробнее</a></p>
+
+            {% if place.relation('districts') %}
+                {% set district =place.relation('districts') | first %}
+                <p class="m-t-5"><a href="{{ district.link() }}">{{ district.title }}</a></p>
+            {% endif %}
+            {% if place.teaser %}
+                <div class="text-muted m-t-5">{{ place.teaser }}</div>
+            {% endif %}
+
+            <p class="m-t-10 m-b-10" ><a href="{{ place.link() }}"><strong>подробнее</strong></a></p>
+        </div>
+
+    </div>
+
+
 </div>

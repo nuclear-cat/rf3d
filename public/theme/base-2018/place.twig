@@ -11,8 +11,6 @@
             <nav class="breadcrumb" aria-label="breadcrumbs">
                 <ul>
                     <li><a href="{{ path('homepage') }}">Главная</a></li>
-                    {#<li><a href="#">Documentation</a></li>#}
-                    {#<li><a href="#">Components</a></li>#}
                     <li class="is-active"><a href="#" aria-current="page">{{ record.title }}</a></li>
                 </ul>
             </nav>
@@ -85,11 +83,11 @@
                 <a class="flamp-widget" href="//novosibirsk.flamp.ru/firm/pravilno_sidi_optovo_roznichnaya_kompaniya_po_prodazhe_rastushhejj_mebeli_part_i_stulev-{{ record.flamp_widget_id  }}"  data-flamp-widget-type="responsive-new" data-flamp-widget-id="{{ record.flamp_widget_id  }}" data-flamp-widget-width="100%" data-flamp-widget-count="10">Отзывы о нас на Флампе</a><script>!function(d,s){var js,fjs=d.getElementsByTagName(s)[0];js=d.createElement(s);js.async=1;js.src="//widget.flamp.ru/loader.js";fjs.parentNode.insertBefore(js,fjs);}(document,"script");</script>
             {% endif %}
 
+
         </div>
     </section>
 
     {% setcontent related_places = "places" where { id: ('!'~ record.id) } limit 6 %}
-
 
      <section class="section main">
         <div class="container">
