@@ -62,7 +62,10 @@ places:
         image:
             type: image
             placeholder: https://source.unsplash.com/1280x768/?business,workspace,interior/__random__
-
+        slug:
+            type: slug
+            uses: title
+            group: meta
         meta_title:
             type: text
             class: large
@@ -100,6 +103,11 @@ categories:
             type: text
             class: large
             group: content
+
+        slug:
+            type: slug
+            uses: title
+            group: meta
         meta_title:
             type: text
             class: large
@@ -128,6 +136,10 @@ districts:
             type: text
             class: large
             group: content
+        slug:
+            type: slug
+            uses: title
+            group: meta
         meta_title:
             type: text
             class: large
