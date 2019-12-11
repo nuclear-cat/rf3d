@@ -1,3 +1,5 @@
+{%- set route = app.request.get('_route') -%}
+{%- set cities = app.config.get('taxonomy/cities/options') -%}
 <!doctype html>
 <html lang="{{ htmllang() }}">
     <head>
@@ -36,14 +38,12 @@
                             </span>
                         </div>
                         <div class="navbar-menu" id="navbar-toggle">
-                            {% set route = app.request.get('_route') %}
-
                             <div class="navbar-start">
                                 <a href="{{ path('homepage') }}" class="navbar-item first{{ route == 'homepage' ? ' is-active' : '' }}">Главная</a>
                                 <div class="navbar-item has-dropdown is-hoverable">
                                     <a href="#" title="" class="navbar-link ">Город</a>
                                     <div class="navbar-dropdown">
-                                        {% for key, city in app.config.get('taxonomy/cities/options') %}
+                                        {% for key, city in cities %}
                                             <a href="{{ path('city', { 'name' : key }) }}" title="" class="navbar-item">{{ city }}</a>
                                         {% endfor %}
                                     </div>

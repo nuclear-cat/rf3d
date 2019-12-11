@@ -9,19 +9,13 @@
         <div class="container">
             <div class="columns">
                 {% include 'partials/_side_categories.twig' %}
-
                 {% set ids = record.relation.places|join(" || ") %}
-
                 {% setcontent places = "places" where { id: ids } allowpaging limit 10 %}
-
-                {# Костыль из-за тупого бага #}
                 {% if places | length == 1 %}
                     {% set places = [places] %}
                 {% endif %}
 
                 {% include '_place_listing.twig' with { 'places' : places } only %}
-
-
             </div>
         </div>
     </section>
