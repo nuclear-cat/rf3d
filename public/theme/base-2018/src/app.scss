@@ -27,3 +27,24 @@ $sides: (top, bottom, left, right); // Leave this variable alone
     }
   }
 }
+
+.navbar-item-city {
+  .navbar-dropdown {
+    background-color: #fff;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-top: 2px solid #dbdbdb;
+    box-shadow: 0 8px 8px rgba(10,10,10,0.1);
+    display: none;
+    font-size: 0.875rem;
+    left: 0;
+    min-width: 100%;
+    position: absolute;
+    top: 100%;
+    z-index: 20;
+  }
+
+  &:focus-within .navbar-dropdown, &:hover .navbar-dropdown {
+    display: block;
+  }
+}
