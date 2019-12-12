@@ -7,7 +7,6 @@
 {% block main %}
     <section class="section main">
         <div class="container">
-
             <nav class="breadcrumb" aria-label="breadcrumbs">
                 <ul>
                     <li><a href="{{ path('homepage') }}">Главная</a></li>
@@ -88,6 +87,29 @@
     </section>
 
     {% setcontent related_places = "places" where { id: ('!'~ record.id) } limit 6 %}
+
+    {% if record.coordinates %}
+        <section class="section main">
+            <div class="container">
+                <script src="https://api-maps.yandex.ru/2.1/?apikey=fdc619ac-38c9-406d-be65-1fd523512198&lang=ru_RU" type="text/javascript"></script>
+                <script type="text/javascript">
+                    ymaps.ready(init);
+                    function init(){
+                        var myMap = new ymaps.Map("map", {
+                            center: [{{ record.coordinates }}],
+                            zoom: 7
+                        });
+
+                        myMap.geoObjects.add(new ymaps.Placemark([{{ record.coordinates }}], {
+                            balloonContent: '<strong>{{ record.title }}</strong>'
+                        }));
+                    }
+                </script>
+                <div id="map" style="width: 100%; height: 400px"></div>
+            </div>
+        </section>
+
+    {% endif %}
 
      <section class="section main">
         <div class="container">
