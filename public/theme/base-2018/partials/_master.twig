@@ -31,12 +31,29 @@
                     <div class="container">
                         <div class="navbar-brand">
                             <span class="navbar-item"><a class="has-text-white" href="{{ path('homepage') }}">RF3D</a></span>
+
+                            <div class="navbar-item-city navbar-item has-dropdown is-hidden-desktop">
+                                <a href="#" title="" class="navbar-link ">Город</a>
+                                <div class="navbar-dropdown dropdown">
+                                    {% for key, city in cities %}
+                                        <a href="{{ path('city', { 'name' : key }) }}" title="" class="navbar-item">{{ city }}</a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+
                             <span class="navbar-burger" data-target="navbar-toggle">
                                 <span></span>
                                 <span></span>
                                 <span></span>
                             </span>
+
+
                         </div>
+
+
+
+
                         <div class="navbar-menu" id="navbar-toggle">
                             <div class="navbar-start">
                                 <a href="{{ path('homepage') }}" class="navbar-item first{{ route == 'homepage' ? ' is-active' : '' }}">Главная</a>
@@ -63,7 +80,6 @@
         {% endblock body %}
 
         {{ include('partials/_footer.twig') }}
-
 
         {% block bottom_js %}
             <script src="{{ asset('dist/js/bundle.js', 'theme') }}"></script>
