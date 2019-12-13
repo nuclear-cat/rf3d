@@ -33,7 +33,7 @@
                             <span class="navbar-item"><a class="has-text-white" href="{{ path('homepage') }}">RF3D</a></span>
 
                             <div class="navbar-item-city navbar-item has-dropdown is-hidden-desktop">
-                                <a href="#" title="" class="navbar-link ">Город</a>
+                                <a href="#" title="" class="navbar-link ">{{ city_name is defined and cities[city_name] is defined ? cities[city_name] : 'Город' }}</a>
                                 <div class="navbar-dropdown dropdown">
                                     {% for key, city in cities %}
                                         <a href="{{ path('city', { 'name' : key }) }}" title="" class="navbar-item">{{ city }}</a>
@@ -58,7 +58,7 @@
                             <div class="navbar-start">
                                 <a href="{{ path('homepage') }}" class="navbar-item first{{ route == 'homepage' ? ' is-active' : '' }}">Главная</a>
                                 <div class="navbar-item has-dropdown is-hoverable">
-                                    <a href="#" title="" class="navbar-link ">Город</a>
+                                    <a href="#" title="" class="navbar-link ">{{ city_name is defined and cities[city_name] is defined ? cities[city_name] : 'Город' }}</a>
                                     <div class="navbar-dropdown">
                                         {% for key, city in cities %}
                                             <a href="{{ path('city', { 'name' : key }) }}" title="" class="navbar-item">{{ city }}</a>
@@ -68,6 +68,9 @@
                                 {#<a href="{{ path('map') }}" class="navbar-item first{{ route == 'map' ? ' is-active' : '' }}">Карта</a>#}
                             </div>
                         </div>
+
+
+
                     </div>
                 </nav>
             </header>
