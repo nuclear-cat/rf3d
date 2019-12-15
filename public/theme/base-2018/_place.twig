@@ -24,10 +24,12 @@
                 {% if place.capacity > 0 %}
                     <p class="has-text-black"><strong>Вместимость:</strong> до <span class="has-text-danger has-text-black">{{ place.capacity }}</span> чел.</p>
                 {% endif %}
+
                 {% if place.relation('districts') %}
                     {% set district =place.relation('districts') | first %}
-                <div class="m-t-5 has-text-black"><strong>Район:</strong> {{ district.title }}</p>
+                    <p class="m-t-5 has-text-black"><strong>Район:</strong> {{ district.title }}</p>
                 {% endif %}
+
                 {% if place.teaser %}
                     <div class="text-muted m-t-5 has-text-black">{{ place.teaser }}</div>
                 {% endif %}
