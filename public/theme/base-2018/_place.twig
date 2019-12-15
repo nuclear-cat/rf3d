@@ -1,39 +1,41 @@
 <div class="column is-4 place-list-item">
 
-
-    <div class="box p-t-0 p-b-10 p-r-0 p-l-0 is-clipped">
-        <a href="{{ place.link() }}" class="">
+    <a href="{{ place.link() }}">
+        <div class="place-list-item-box box p-t-0 p-b-10 p-r-0 p-l-0 is-clipped">
             <figure>
                 {% if place.image %}
                     <img width="100%" src="{{ place.image | thumbnail(480, 300, 'c') }}" alt=""/>
                 {% endif %}
                 <figcaption class="m-l-20 m-r-20">
-                    <h2 class="has-text-black title is-5 m-t-10">{{ place.title }}</h2>
+                    <h6 class="has-text-black title is-6 m-t-10">{{ place.title }}</h6>
                     {% if place.subtitle %}
-                        <p class="subtitle is-5">{{ place.subtitle }}</p>
+                        <p class="subtitle is-6">{{ place.subtitle }}</p>
                     {% endif %}
                 </figcaption>
             </figure>
 
-        </a>
-        <div class="m-l-20 m-r-20">
-            {% if place.price_from > 0 or place.price_to > 0 %}
-                <p class="m-t-5">Цена{% if place.price_from > 0  %} от {{ place.price_from }} руб.{% endif %}{% if place.price_to > 0  %} до {{ place.price_to }} руб.{% endif %}</p>
-            {% endif %}
 
+            <div class="m-l-20 m-r-20">
 
-            {% if place.relation('districts') %}
-                {% set district =place.relation('districts') | first %}
-                <p class="m-t-5"><a href="{{ district.link() }}">{{ district.title }}</a></p>
-            {% endif %}
-            {% if place.teaser %}
-                <div class="text-muted m-t-5">{{ place.teaser }}</div>
-            {% endif %}
+                {% if place.price_from > 0 or place.price_to > 0 %}
+                    <p class="m-t-5 is-small has-text-black"><strong>Цена:</strong> {% if place.price_from > 0  %} от <span class="has-text-danger">{{ place.price_from }}</span> руб.{% endif %}</p>
+                {% endif %}
 
-            <p class="m-t-10 m-b-10" ><a href="{{ place.link() }}"><strong>подробнее</strong></a></p>
+                {% if place.capacity > 0 %}
+                    <p class="has-text-black"><strong>Вместимость:</strong> до <span class="has-text-danger has-text-black">{{ place.capacity }}</span> чел.</p>
+                {% endif %}
+                {% if place.relation('districts') %}
+                    {% set district =place.relation('districts') | first %}
+                <div class="m-t-5 has-text-black"><strong>Район:</strong> {{ district.title }}</p>
+                {% endif %}
+                {% if place.teaser %}
+                    <div class="text-muted m-t-5 has-text-black">{{ place.teaser }}</div>
+                {% endif %}
+
+                <div class="m-t-10 m-b-10 has-text-black" ><span class="has-text-danger"><strong>подробнее</strong></span></div>
+            </div>
+
         </div>
-
-    </div>
-
+    </a>
 
 </div>
