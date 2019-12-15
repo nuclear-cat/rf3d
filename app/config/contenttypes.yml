@@ -31,6 +31,10 @@ places:
             type: integer
             class: large
             group: content
+        capacity:
+            type: integer
+            class: large
+            group: content
         url:
             type: text
             class: large
