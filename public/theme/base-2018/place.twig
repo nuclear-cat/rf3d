@@ -40,6 +40,10 @@
                             <p><strong>Телефон</strong>: {{ record.phone }}</p>
                         {% endif %}
 
+                        {% if record.capacity > 0 %}
+                            <p><strong>Вместимость</strong>: {{ record.capacity }} чел.</p>
+                        {% endif %}
+
                         {% if record.address %}
                             <p><strong>Адрес:</strong> {{ record.address }}</p>
                         {% endif %}
@@ -51,16 +55,13 @@
                     {% endif %}
                 </div>
                 <div class="column is-9">
-
                     {% if record.gallery | length > 0 %}
                         <div class="place-slider">
-                        {#<div >#}
                             {% for image in record.gallery %}
                                 <img width="100%" class="" src="{{ image | thumbnail(1380, 1380, 'r') }}" alt=""/>
                             {% endfor %}
                         </div>
                     {% endif %}
-
                 </div>
             </div>
 
