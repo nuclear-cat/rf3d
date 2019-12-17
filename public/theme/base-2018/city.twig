@@ -9,14 +9,10 @@
             <div class="columns">
                 {% include 'partials/_side_categories.twig' %}
                 <div class="column">
-                    <div class="columns is-multiline is-variable bd-klmn-columns is-1">
 
-                        {% set ids = getPlacesByCity(city_name) | join(" || ") %}
-                        {% setcontent places = "places" where { id: ids } allowpaging limit 10 %}
-                        {% for place in places %}
-                            {% include '_place.twig' %}
-                        {% endfor %}
-                    </div>
+                    {% set ids = getPlacesByCity(city_name) | join(" || ") %}
+                    {% setcontent places = "places" where { id: ids } allowpaging limit 10 %}
+                    {% include '_place_listing.twig' with { 'places' : places } only %}
                     {{ pager('places') }}
                 </div>
             </div>
