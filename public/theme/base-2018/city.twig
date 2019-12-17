@@ -8,13 +8,10 @@
         <div class="container">
             <div class="columns">
                 {% include 'partials/_side_categories.twig' %}
-                <div class="column">
-
-                    {% set ids = getPlacesByCity(city_name) | join(" || ") %}
-                    {% setcontent places = "places" where { id: ids } allowpaging limit 10 %}
-                    {% include '_place_listing.twig' with { 'places' : places } only %}
-                    {{ pager('places') }}
-                </div>
+                {% set ids = getPlacesByCity(city_name) | join(" || ") %}
+                {% setcontent places = "places" where { id: ids } allowpaging limit 10 %}
+                {% include '_place_listing.twig' with { 'places' : places } only %}
+                {{ pager('places') }}
             </div>
         </div>
     </section>

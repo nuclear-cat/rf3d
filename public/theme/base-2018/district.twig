@@ -14,7 +14,6 @@
                 {% if places | length == 1 %}
                     {% set places = [places] %}
                 {% endif %}
-
                 {% include '_place_listing.twig' with { 'places' : places } only %}
             </div>
         </div>
