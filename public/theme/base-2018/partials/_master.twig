@@ -18,7 +18,7 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('scripts/slick-1.8.1/slick/slick.css', 'theme') }}">
         <link rel="stylesheet" href="{{ asset('scripts/slick-1.8.1/slick/slick-theme.css', 'theme') }}">
-
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     </head>
     <body{% if app.request.get('_route') == "homepage" %} class="front"{% endif %}>
 
@@ -30,6 +30,11 @@
                 <nav class="navbar is-fixed-top is-info" role="navigation" aria-label="main navigation">
                     <div class="container">
                         <div class="navbar-brand">
+
+                            {% if back_url is defined %}
+                                <span class="navbar-item"><a class="has-text-white" href="{{ back_url }}"><i class="fa fa-arrow-left"></i></a></span>
+                            {% endif %}
+
                             <span class="navbar-item"><a class="has-text-white" href="{{ path('homepage') }}">RF3D</a></span>
 
                             <div class="navbar-item-city navbar-item has-dropdown is-hidden-desktop">

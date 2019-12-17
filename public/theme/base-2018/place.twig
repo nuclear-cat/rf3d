@@ -33,23 +33,23 @@
                     {%  if place.image %}
                         <img width="100%" class="" src="{{ place.image | thumbnail(480, 300, 'c') }}" alt=""/>
                         {% if record.price_from or record.price_to %}
-                            <p><strong>Цена:</strong> {% if record.price_from %} от {{ record.price_from  }}{% endif %}{% if record.price_to %} от {{ record.price_to }}{% endif %}</p>
+                            <div><strong>Цена:</strong> {% if record.price_from %} от {{ record.price_from  }}{% endif %}{% if record.price_to %} от {{ record.price_to }}{% endif %}</div>
                         {% endif %}
 
                         {% if record.phone %}
-                            <p><strong>Телефон</strong>: {{ record.phone }}</p>
+                            <div><strong>Телефон</strong>: {{ record.phone }}</div>
                         {% endif %}
 
                         {% if record.capacity > 0 %}
-                            <p><strong>Вместимость</strong>: {{ record.capacity }} чел.</p>
+                            <div><strong>Вместимость</strong>: {{ record.capacity }} чел.</div>
                         {% endif %}
 
                         {% if record.address %}
-                            <p><strong>Адрес:</strong> {{ record.address }}</p>
+                            <div><strong>Адрес:</strong> {{ record.address }}</div>
                         {% endif %}
 
                         {% if record.url %}
-                            <p><strong>Ссылка на сайт:</strong> <a href="{{ record.url }}">{{ record.url }}</a></p>
+                            <div><strong>Ссылка на сайт:</strong> <a href="{{ record.url }}">{{ record.url }}</a></div>
                         {% endif %}
 
                     {% endif %}

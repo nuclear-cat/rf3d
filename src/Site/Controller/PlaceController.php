@@ -11,8 +11,6 @@ use Silex\ControllerCollection;
 use Silex\ControllerProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
-
 use Bolt\Exception\InvalidRepositoryException;
 use Bolt\Form\FormType\ContentEditType;
 use Bolt\Storage\ContentRequest\ListingOptions;
@@ -21,15 +19,11 @@ use Symfony\Component\Form\Button;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-
-
 /**
  * The controller for Drop Bear routes.
  *
  * @author Kenny Koala <kenny@dropbear.com.au>
  */
-//class PlaceController extends Base
-//class PlaceController extends BackendBase
 class PlaceController extends BackendBase
 {
     /**

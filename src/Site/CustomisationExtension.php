@@ -32,6 +32,7 @@ class CustomisationExtension extends SimpleExtension
     protected function registerTwigFunctions() {
         return [
             'menuItems' => 'getMenuItems',
+            'getPlacesByCity' => 'getPlacesByCity'
         ];
     }
 
@@ -43,13 +44,44 @@ class CustomisationExtension extends SimpleExtension
         ];
     }
 
+    protected function registerFrontendControllers()
+    {
+        return [
+            '/' => new \Bundle\Site\Controller\Frontend\PlaceController(),
+        ];
+    }
 
+    public function getPlacesByCity($cityName)
+    {
+        /** @var \Bolt\Storage\Database\Connection $dbConnection */
+        $dbConnection = $this->app['db'];
+        $stmt = $dbConnection->prepare("
+            SELECT p.id
+            
+            FROM bolt_places p
+            
+            # District relations
+            JOIN bolt_relations dr ON ((dr.from_id = p.id AND dr.from_contenttype = 'places' AND dr.to_contenttype = 'districts') OR (dr.to_id = p.id AND dr.to_contenttype = 'places' AND dr.from_contenttype = 'districts'))
+            
+            # Disctricts
+            JOIN bolt_districts d ON (d.id = dr.to_id AND dr.to_contenttype = 'districts' AND dr.from_contenttype = 'places')
 
-//    protected function registerBackendRoutes($collection)
-//    {
-////       dump($this->app); die;
-//    }
+            # District taxonomies
+            JOIN bolt_taxonomy t ON (t.content_id = d.id AND t.contenttype = 'places' AND t.taxonomytype = 'cities')
 
+            WHERE t.slug = :cityName
+        ");
+        $stmt->bindValue('cityName', $cityName);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $ids = [];
+
+        foreach ($result as $row) {
+            $ids[] = $row['id'];
+        }
+
+        return $ids;
+    }
 
     public function getMenuItems() {
 
