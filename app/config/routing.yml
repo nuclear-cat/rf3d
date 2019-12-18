@@ -3,17 +3,17 @@ homepage:
     defaults:
         _controller: controller.frontend:homepage
 
+category_district:
+     path: /category/{category}/district/{district}
+     defaults:
+         _controller: controller.frontend:template
+         template: category_district
+
 map:
      path: /map
      defaults:
          _controller: controller.frontend:template
          template: map
-
-city:
-     path: /city/{name}
-     defaults:
-         _controller: controller.frontend:template
-         template: city
 
 search:
     path: /search
@@ -48,6 +48,14 @@ contentlisting:
         _controller: controller.frontend:listing
     requirements:
         contenttypeslug: controller.requirement:pluralContentTypes
+
+
+city:
+     path: /{cityName}
+     defaults:
+         _controller: controller.frontend:template
+         template: city
+
 
 # ------------------------------------------------------------------------------
 # Place your own routes here, that have a LOWER priority than the default routes.
