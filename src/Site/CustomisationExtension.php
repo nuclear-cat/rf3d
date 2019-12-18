@@ -78,7 +78,7 @@ class CustomisationExtension extends SimpleExtension
 
 
         foreach ($result as $row) {
-            $ids[] = $row['id'];
+            $ids[] = $row['place_id'];
         }
 
         return $ids;
