@@ -56,7 +56,7 @@ class CustomisationExtension extends SimpleExtension
         /** @var \Bolt\Storage\Database\Connection $dbConnection */
         $dbConnection = $this->app['db'];
         $stmt = $dbConnection->prepare("
-            SELECT p.id
+            SELECT p.id place_id, p.title, dr.to_id, d.id AS did, d.title dtitle, t.slug
             
             FROM bolt_places p
             
@@ -67,14 +67,15 @@ class CustomisationExtension extends SimpleExtension
             JOIN bolt_districts d ON (d.id = dr.to_id AND dr.to_contenttype = 'districts' AND dr.from_contenttype = 'places')
 
             # District taxonomies
-            JOIN bolt_taxonomy t ON (t.content_id = d.id AND t.contenttype = 'places' AND t.taxonomytype = 'cities')
-
+            LEFT JOIN bolt_taxonomy t ON (t.content_id = d.id AND t.contenttype = 'districts' AND t.taxonomytype = 'cities')
+            
             WHERE t.slug = :cityName
         ");
         $stmt->bindValue('cityName', $cityName);
         $stmt->execute();
         $result = $stmt->fetchAll();
         $ids = [];
+
 
         foreach ($result as $row) {
             $ids[] = $row['id'];

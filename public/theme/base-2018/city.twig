@@ -10,6 +10,9 @@
                 {% include 'partials/_side_categories.twig' %}
                 {% set ids = getPlacesByCity(city_name) | join(" || ") %}
                 {% setcontent places = "places" where { id: ids } allowpaging limit 10 %}
+                {% if places | length == 1 %}
+                    {% set places = [places] %}
+                {% endif %}
                 {% include '_place_listing.twig' with { 'places' : places } only %}
                 {{ pager('places') }}
             </div>
