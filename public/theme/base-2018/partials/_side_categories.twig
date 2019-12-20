@@ -1,7 +1,7 @@
 <div class="column is-3" style="padding-top: 0;">
     <aside class="menu">
 
-        {% set menuItems = menuItems() %}
+        {% set menuItems = menuItems(city_name is defined and city_name ? city_name : null) %}
 
         <ul class="menu-list">
 
@@ -13,11 +13,10 @@
                     {%  if menuItem.districts is defined and menuItem.districts | length > 0 %}
                         <ul>
                             {% for district in menuItem.districts %}
-                                <li ><a href="{{ path('contentlink', { 'contenttypeslug' : 'district', 'slug' : district.slug }) }}">{{ district.title }}</a></li>
+                                <li><a href="{{ path('contentlink', { 'contenttypeslug' : 'district', 'slug' : district.slug }) }}">{{ district.title }}</a></li>
                             {% endfor %}
                         </ul>
                     {% endif %}
-
                 </li>
 
             {% endfor %}

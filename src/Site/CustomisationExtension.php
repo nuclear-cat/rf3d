@@ -84,11 +84,11 @@ class CustomisationExtension extends SimpleExtension
         return $ids;
     }
 
-    public function getMenuItems() {
-
+    public function getMenuItems($cityName = null)
+    {
         /** @var \Bolt\Storage\Database\Connection $dbConnection */
         $dbConnection = $this->app['db'];
-        $result = $dbConnection->query("
+        $stmt = $dbConnection->prepare("
             SELECT
                 c.id category_id,
                 c.title category_title,
@@ -120,10 +120,20 @@ class CustomisationExtension extends SimpleExtension
             
             # Disctricts
             LEFT JOIN bolt_districts d ON (d.id = dr.to_id AND dr.to_contenttype = 'districts' AND dr.from_contenttype = 'places')
-              
-             ORDER BY  c.id
-        ")->fetchAll();
+            
+            # District taxonomies
+            LEFT JOIN bolt_taxonomy t ON (t.content_id = d.id AND t.contenttype = 'districts' AND t.taxonomytype = 'cities')
+            
+            ". ($cityName ? 'WHERE t.slug = :cityName' : '') ." 
 
+             ORDER BY  c.id
+        ");
+
+        if ($cityName) {
+            $stmt->bindValue('cityName', $cityName);
+        }
+        $stmt->execute();
+        $result = $stmt->fetchAll();
 
         $categories = [];
 
@@ -141,10 +151,6 @@ class CustomisationExtension extends SimpleExtension
         }
 
         return $categories;
-
-        die;
-
-        return $result;
     }
 
     //https://stackoverflow.com/questions/52754936/overwrite-backend-template-in-bolt-cms
