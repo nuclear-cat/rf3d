@@ -24,8 +24,10 @@
                         {% endif %}
 
                         {% if place.relation('districts') %}
-                            {% set district =place.relation('districts') | first %}
-                            <p class="m-t-5 has-text-black"><strong>Район:</strong> {{ district.title }}</p>
+                            {% set district = place.relation('districts') | first %}
+                            {% if district %}
+                                <p class="m-t-5 has-text-black"><strong>Район:</strong> {{ district.title }}</p>
+                            {% endif %}
                         {% endif %}
 
                         {% if place.teaser %}
