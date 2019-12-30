@@ -4,6 +4,8 @@ namespace Bundle\Site;
 
 use Bolt\Extension\SimpleExtension;
 use Bundle\Site\Controller\PlaceController;
+use Bundle\Site\Entity\Place;
+use Bundle\Site\Repository\PlaceRepository;
 use Pimple as Container;
 use Silex\Application;
 use Silex\Provider\DoctrineServiceProvider;
@@ -21,7 +23,15 @@ use Silex\Provider\DoctrineServiceProvider;
  */
 class CustomisationExtension extends SimpleExtension
 {
+
     private $app;
+
+    protected function registerRepositoryMappings()
+    {
+        return [
+            'places' => [ Place::class => PlaceRepository::class ],
+        ];
+    }
 
     public function boot(Application $app)
     {
@@ -29,13 +39,13 @@ class CustomisationExtension extends SimpleExtension
         $this->app = $app;
     }
 
-    protected function registerTwigFunctions() {
+    protected function registerTwigFunctions()
+    {
         return [
             'menuItems' => 'getMenuItems',
             'getPlacesByCity' => 'getPlacesByCity'
         ];
     }
-
 
     protected function registerBackendControllers()
     {

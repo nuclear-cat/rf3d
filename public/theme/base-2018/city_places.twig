@@ -1,0 +1,15 @@
+{% set city_name = citySlug %}
+{% extends 'partials/_master.twig' %}
+{#{% set meta_title = record.meta_title ? record.meta_title : record.title %}#}
+{#{% set meta_description = record.meta_description %}#}
+{#{% set meta_keywords = record.meta_keywords %}#}
+{% block main %}
+    <section class="section main">
+        <div class="container">
+            <div class="columns">
+                {% include 'partials/_side_categories.twig' %}
+                {% include '_place_listing.twig' with { 'places' : places } only %}
+            </div>
+        </div>
+    </section>
+{% endblock main %}

@@ -1,5 +1,6 @@
 places:
     name: Places
+    taxonomy: [ cities ]
     singular_name: Place
     default_status: published
     fields:
@@ -101,6 +102,7 @@ places:
 categories:
     default_status: published
     name: Categories
+    taxonomy: [ cities ]
     singular_name: Category
     fields:
         title:

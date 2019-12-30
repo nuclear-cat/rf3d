@@ -3,6 +3,14 @@ homepage:
     defaults:
         _controller: controller.frontend:homepage
 
+
+#city_category:
+#     path: /category/{cityName}/{categorySlug}
+#     defaults:
+#         _controller: controller.frontend:template
+#         template: category_district
+#
+
 category_district:
      path: /category/{category}/district/{district}
      defaults:
@@ -49,8 +57,13 @@ contentlisting:
     requirements:
         contenttypeslug: controller.requirement:pluralContentTypes
 
-
 city:
+     path: /{cityName}
+     defaults:
+         _controller: controller.frontend:template
+         template: city
+
+place_by_city:
      path: /{cityName}
      defaults:
          _controller: controller.frontend:template

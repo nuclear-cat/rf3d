@@ -1,17 +1,34 @@
 {% extends 'partials/_master.twig' %}
 
-{% set meta_title = record.meta_title ? record.meta_title : record.title %}
-{% set meta_description = record.meta_description %}
-{% set meta_keywords = record.meta_keywords %}
+{#{% set meta_title = record.meta_title ? record.meta_title : record.title %}#}
+{#{% set meta_description = record.meta_description %}#}
+{#{% set meta_keywords = record.meta_keywords %}#}
 
 {% block main %}
+
+    {% setcontent category = 'category/' ~ app.request.get('category') %}
+    {% setcontent district = 'district/' ~ app.request.get('district') %}
+
+    {{ dump(category.id) }}
+    {{ dump(district.id) }}
+
     <section class="section main">
         <div class="container">
             <div class="columns">
                 {% include 'partials/_side_categories.twig' %}
                 <div class="column">
 
-                    {#{% set ids = record.relation.places|join(" || ") %}#}
+                    {% set category_ids = category.relation.places|join(" || ") %}
+
+                    {{ dump(category_ids) }}
+
+                    {% set district_ids = district.relation.places|join(" || ") %}
+
+                    {{ dump(district_ids) }}
+
+
+
+
                     {#{% setcontent places = "places" where { id: ids } allowpaging limit 10 %}#}
 
                     {# Костыль из-за тупого бага #}
@@ -21,14 +38,7 @@
 
                     {#{% include '_place_listing.twig' with { 'places' : places } only %}#}
 
-                    {#<div class="columns is-multiline is-variable bd-klmn-columns is-1">#}
-                        {##}
 
-                        {#{% for place in places %}#}
-                            {#{% include '_place.twig' %}#}
-                        {#{% endfor %}#}
-                    {#</div>#}
-                    {##}
                     {#{{ pager('places') }}#}
 
                 </div>

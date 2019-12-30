@@ -3,13 +3,19 @@
 {% set meta_title = record.meta_title ? record.meta_title : record.title %}
 {% set meta_description = record.meta_description %}
 {% set meta_keywords = record.meta_keywords %}
-
+{% if record.taxonomy.cities is defined %}
+    {% set city_key = record.taxonomy.cities | keys | first | split('/') | last %}
+    {% set city_name =  app.config.get('taxonomy/cities/options/' ~ city_key) %}
+{% endif %}
 {% block main %}
     <section class="section main">
         <div class="container">
             <nav class="breadcrumb" aria-label="breadcrumbs">
                 <ul>
                     <li><a href="{{ path('homepage') }}">Главная</a></li>
+                    {% if city_name is defined and city_name %}
+                        <li><a href="{{ path('city', { 'cityName' : city_key }) }}">{{ city_name }}</a></li>
+                    {% endif %}
                     <li class="is-active"><a href="#" aria-current="page">{{ record.title }}</a></li>
                 </ul>
             </nav>
@@ -22,7 +28,10 @@
                         {% set city_key = record.taxonomy.cities | keys | first | split('/') | last %}
                         {% set city_name =  app.config.get('taxonomy/cities/options/' ~ city_key) %}
                         {%  if city_name %}
-                            <br /><span class="float-right"><a href="{{ path('city', { 'name' : city_key }) }}">{{ city_name }}</a></span>
+                            <br />
+                            <span class="float-right">
+                                <a href="{{ path('city', { 'cityName' : city_key }) }}" title="" class="navbar-item">{{ city_name }}</a>
+                            </span>
                         {% endif %}
                     {% endif %}
                 </h2>

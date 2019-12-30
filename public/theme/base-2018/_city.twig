@@ -1,0 +1,14 @@
+<div class="column is-4 place-list-item">
+    <a href="{{ place.link() }}">
+        <div class="place-list-item-box box p-t-0 p-b-10 p-r-0 p-l-0 is-clipped">
+            <figure>
+                {% if place.image %}
+                    <img width="100%" src="{{ place.image | thumbnail(480, 300, 'c') }}" alt=""/>
+                {% endif %}
+                <figcaption class="m-l-20 m-r-20">
+                    <h3 class="has-text-black title is-3 m-t-10">{{ place.title }}</h3>
+                </figcaption>
+            </figure>
+        </div>
+    </a>
+</div>
