@@ -1,12 +1,11 @@
-{% extends 'partials/_master.twig' %}
-
 {% set meta_title = record.meta_title ? record.meta_title : record.title %}
 {% set meta_description = record.meta_description %}
 {% set meta_keywords = record.meta_keywords %}
 {% if record.taxonomy.cities is defined %}
-    {% set city_key = record.taxonomy.cities | keys | first | split('/') | last %}
-    {% set city_name =  app.config.get('taxonomy/cities/options/' ~ city_key) %}
+    {% set city_name = record.taxonomy.cities | keys | first | split('/') | last %}
+    {% set city_title =  app.config.get('taxonomy/cities/options/' ~ city_name) %}
 {% endif %}
+{% extends 'partials/_master.twig' %}
 {% block main %}
     <section class="section main">
         <div class="container">
@@ -14,7 +13,7 @@
                 <ul>
                     <li><a href="{{ path('homepage') }}">Главная</a></li>
                     {% if city_name is defined and city_name %}
-                        <li><a href="{{ path('city', { 'cityName' : city_key }) }}">{{ city_name }}</a></li>
+                        <li><a href="{{ path('city', { 'cityName' : city_name }) }}">{{ city_title }}</a></li>
                     {% endif %}
                     <li class="is-active"><a href="#" aria-current="page">{{ record.title }}</a></li>
                 </ul>
@@ -25,12 +24,12 @@
             {%  if record.subtitle %}
                 <h2 class="subtitle is-5">{{ record.subtitle }}
                     {% if record.taxonomy.cities is defined %}
-                        {% set city_key = record.taxonomy.cities | keys | first | split('/') | last %}
-                        {% set city_name =  app.config.get('taxonomy/cities/options/' ~ city_key) %}
+                        {% set city_name = record.taxonomy.cities | keys | first | split('/') | last %}
+                        {% set city_title =  app.config.get('taxonomy/cities/options/' ~ city_title) %}
                         {%  if city_name %}
                             <br />
                             <span class="float-right">
-                                <a href="{{ path('city', { 'cityName' : city_key }) }}" title="" class="navbar-item">{{ city_name }}</a>
+                                <a href="{{ path('city', { 'cityName' : city_name }) }}" title="" class="navbar-item">{{ city_title }}</a>
                             </span>
                         {% endif %}
                     {% endif %}

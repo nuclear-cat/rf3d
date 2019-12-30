@@ -1,5 +1,5 @@
 {% extends 'partials/_master.twig' %}
-
+{% set city_name = city %}
 {% set meta_title = category.meta_title ? category.meta_title : category.title %}
 {% set meta_description = category.meta_description %}
 {% set meta_keywords = category.meta_keywords %}
@@ -10,20 +10,8 @@
             <div class="columns">
                 {% include 'partials/_side_categories.twig' %}
                 <div class="column">
-
-                    {% set ids = category.relation('places')|join(" || ") %}
-                    {#{% setcontent places = "places" where { id: ids } allowpaging limit 10 %}#}
-
-                    {# Костыль из-за  бага #}
-                    {#{% if places | length == 1 %}#}
-                        {#{% set places = [places] %}#}
-                    {#{% endif %}#}
-
                     {% include '_place_listing.twig' with { 'places' : places } only %}
-
-
                     {{ pager() }}
-
                 </div>
             </div>
         </div>

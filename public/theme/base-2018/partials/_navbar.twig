@@ -2,7 +2,9 @@
 <nav class="navbar is-fixed-top is-primary" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand">
-            <span class="navbar-item"><a class="has-text-white" href="{{ path('homepage') }}">RF3D</a></span>
+            <span class="navbar-item">
+                <a class="has-text-white" href="{{ path('homepage') }}">RF3D</a>
+            </span>
             <span class="navbar-burger" data-target="navbar-toggle">
                 <span></span>
                 <span></span>
@@ -11,7 +13,6 @@
         </div>
         <div class="navbar-menu" id="navbar-toggle">
             {% set route = app.request.get('_route') %}
-            
             <div class="navbar-start">
                 <a href="{{ path('homepage') }}" class="navbar-item first{{ route == 'homepage' ? ' is-active' : '' }}">Главная</a>
                 <div class="navbar-item has-dropdown is-hoverable">

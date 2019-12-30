@@ -100,10 +100,8 @@ class PlaceController extends ConfigurableBase
         return $c;
     }
 
-    public function listingPlacesByDistrictAndCategory(Request $request, $districtSlug, $categorySlug)
+    public function listingPlacesByDistrictAndCategory(Request $request, $citySlug = null, $districtSlug, $categorySlug)
     {
-        $citySlug = null;
-
         /** @var \Bundle\Site\Repository\PlaceRepository $placesRepo */
         $placesRepo = $this->app['storage']->getRepository('places');
         /** @var \Bolt\Pager\PagerManager $pagerManager */
