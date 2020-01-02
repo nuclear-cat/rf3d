@@ -8,7 +8,13 @@
         <div class="container">
             <div class="columns">
                 {% include 'partials/_side_categories.twig' %}
-                {% include '_place_listing.twig' with { 'places' : places } only %}
+                <div class="column  p-t-0">
+                    <div class="columns is-multiline is-variable bd-klmn-columns is-1 is-flex place-list-items">
+                        {% for place in places %}
+                            {% include '_place.twig' with { 'show_place_info' : false }%}
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
     </section>

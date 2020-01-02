@@ -12,48 +12,43 @@
                         <p class="subtitle is-6">{{ place.subtitle }}</p>
                     {% endif %}
 
-
-                    <div class="">
-
-                        {% if place.price_from > 0 or place.price_to > 0 %}
-                            <p class="m-t-5 is-small has-text-black"><strong>Цена:</strong> {% if place.price_from > 0  %} от <span class="has-text-danger">{{ place.price_from }}</span> руб.{% endif %}</p>
-                        {% endif %}
-
-                        {% if place.capacity > 0 %}
-                            <p class="has-text-black"><strong>Вместимость:</strong> до <span class="has-text-danger has-text-black">{{ place.capacity }}</span> чел.</p>
-                        {% endif %}
-
-                        {% if place.relation('districts') %}
-                            {% set district = place.relation('districts') | first %}
-                            {% if district %}
-                                <p class="m-t-5 has-text-black"><strong>Район:</strong> {{ district.title }}</p>
+                    {% if not (show_place_info is defined and not show_place_info) %}
+                        <div class="">
+                            {% if place.price_from > 0 or place.price_to > 0 %}
+                                <p class="m-t-5 is-small has-text-black"><strong>Цена:</strong> {% if place.price_from > 0  %} от <span class="has-text-danger">{{ place.price_from }}</span> руб.{% endif %}</p>
                             {% endif %}
-                        {% endif %}
 
-                        {% if place.relation('categories') | first %}
-                            {% set category = place.relation('categories') | first %}
-                            {#{{ record.relation('categories') }}#}
-                            {#{% if category %}#}
-                                {#<p class="m-t-5 has-text-black"><strong>Категория:</strong> {{ category.title }}</p>#}
-                            {#{% endif %}#}
+                            {% if place.capacity > 0 %}
+                                <p class="has-text-black"><strong>Вместимость:</strong> до <span class="has-text-danger has-text-black">{{ place.capacity }}</span> чел.</p>
+                            {% endif %}
 
-                            {##}
-                        {% endif %}
+                            {% if place.relation('districts') %}
+                                {% set district = place.relation('districts') | first %}
+                                {% if district %}
+                                    <p class="m-t-5 has-text-black"><strong>Район:</strong> {{ district.title }}</p>
+                                {% endif %}
+                            {% endif %}
 
-                        {% if place.teaser %}
-                            <div class="text-muted m-t-5 has-text-black">{{ place.teaser | raw }}</div>
-                        {% endif %}
+                            {% if place.relation('categories') | first %}
+                                {% set category = place.relation('categories') | first %}
+                                {#{{ record.relation('categories') }}#}
+                                {#{% if category %}#}
+                                    {#<p class="m-t-5 has-text-black"><strong>Категория:</strong> {{ category.title }}</p>#}
+                                {#{% endif %}#}
 
-                        <div class="m-t-10 m-b-10 has-text-black" ><span class="has-text-danger"><strong>подробнее</strong></span></div>
-                    </div>
+                                {##}
+                            {% endif %}
 
+                            {% if place.teaser %}
+                                <div class="text-muted m-t-5 has-text-black">{{ place.teaser | raw }}</div>
+                            {% endif %}
+
+                            <div class="m-t-10 m-b-10 has-text-black" ><span class="has-text-danger"><strong>подробнее</strong></span></div>
+                        </div>
+                    {% endif %}
 
                 </figcaption>
             </figure>
-
-
-
-
         </div>
     </a>
 
