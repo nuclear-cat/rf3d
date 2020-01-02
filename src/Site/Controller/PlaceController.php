@@ -142,8 +142,6 @@ class PlaceController extends BackendBase
             $content['editreferrer'] = $referrer;
         }
 
-//        dump($context['contenttype']->getFields()->getRelation('category')); die;
-
         return $this->render('@bolt/editcontent/editcontent.twig', $context);
     }
 

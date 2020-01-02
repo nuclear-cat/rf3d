@@ -78,7 +78,7 @@ class PlaceRepository extends Repository\ContentRepository
             $qb->andWhere('p.public_on_main_page = :onlyMainPage');
             $qb->setParameter('onlyMainPage', true);
         }
-
+        $qb->orderBy('p.sort');
         return $qb;
     }
 }

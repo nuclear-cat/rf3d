@@ -245,18 +245,9 @@ class PlaceController extends ConfigurableBase
         $totalPlaces = $placesRepo->getTotalPlacesByCity(null, $categorySlug, null);
         $places = $placesRepo->getPlacesByCity(null, $categorySlug, null, $page, $limit);
 
-        /** @var Place $place */
-        foreach ($places as $place) {
-//            dump($place->getTitle());
-
-//            dump($place->getRelation('categories'));
-        }
-//        die;
-
         $pager->setCount($totalPlaces);
         $pager->setCurrent($page);
         $pager->setTotalpages(ceil($totalPlaces / $limit));
-
 
         return $this->render('city_category.twig', [], [
             'category'  => $category,

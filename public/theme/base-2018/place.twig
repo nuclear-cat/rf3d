@@ -15,7 +15,7 @@
         <div class="container">
             <nav class="breadcrumb" aria-label="breadcrumbs">
                 <ul>
-                    <li><a href="{{ path('homepage') }}">Главная</a></li>
+                    {#<li><a href="{{ path('homepage') }}">Главная</a></li>#}
 
                     {% if city_name is defined and city_name %}
                         <li><a href="{{ path('_city_citySlug', { 'citySlug' : city_name }) }}">{{ city_title }}</a></li>

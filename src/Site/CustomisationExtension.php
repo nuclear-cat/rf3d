@@ -3,27 +3,17 @@
 namespace Bundle\Site;
 
 use Bolt\Extension\SimpleExtension;
+use Bundle\Site\Command\PlacesResortCommand;
 use Bundle\Site\Controller\PlaceController;
 use Bundle\Site\Entity\Place;
 use Bundle\Site\Repository\PlaceRepository;
 use Pimple as Container;
 use Silex\Application;
 use Silex\Provider\DoctrineServiceProvider;
+use Symfony\Component\Console\Command\Command;
 
-/**
- * Site bundle extension loader.
- *
- * This is the base bundle you can use to further customise Bolt for your
- * specific site.
- *
- * It is perfectly safe to remove this bundle, just remember to remove the
- * entry from your .bolt.yml or .bolt.php file.
- *
- * For more information on building bundles see https://docs.bolt.cm/extensions
- */
 class CustomisationExtension extends SimpleExtension
 {
-
     private $app;
 
     protected function registerRepositoryMappings()
@@ -37,6 +27,13 @@ class CustomisationExtension extends SimpleExtension
     {
         parent::boot($app);
         $this->app = $app;
+    }
+
+    protected function registerNutCommands(Container $container)
+    {
+        return [
+            new PlacesResortCommand()
+        ];
     }
 
     protected function registerTwigFunctions()
