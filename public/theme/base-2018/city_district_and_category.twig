@@ -1,14 +1,29 @@
 {% set city_name = city %}
+{% set city_title =  app.config.get('taxonomy/cities/options/' ~ city_name) %}
 {% extends 'partials/_master.twig' %}
 {#{% set meta_title = district.meta_title ? district.meta_title : district.title %}#}
 {#{% set meta_description = district.meta_description %}#}
 {#{% set meta_keywords = district.meta_keywords %}#}
 {% block main %}
     <section class="section main">
+
         <div class="container">
             <div class="columns">
                 {% include 'partials/_side_categories.twig' %}
-                {% include '_place_listing.twig' with { 'places' : places } only %}
+                <div class="column">
+                    <nav class="breadcrumb p-l-10" aria-label="breadcrumbs">
+                        <ul>
+                            {% if city_name is defined and city_name %}
+                                <li><a href="{{ path('_city_citySlug', { 'citySlug' : city_name }) }}">{{ city_title }}</a></li>
+                            {% endif %}
+                            <li><a href="{{ path('_category_categorySlug', { 'categorySlug' : category.slug }) }}">{{ category.title }}</a></li>
+                            <li class="is-active"><a href="#" aria-current="page">{{ district.title }}</a></li>
+                        </ul>
+                    </nav>
+
+                    {% include '_place_listing.twig' with { 'places' : places } only %}
+                    {{ pager() }}
+                </div>
             </div>
         </div>
     </section>
