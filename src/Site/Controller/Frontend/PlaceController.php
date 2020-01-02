@@ -5,6 +5,7 @@ use Bolt\Controller\Base;
 use Bolt\Controller\ConfigurableBase;
 use Bolt\Storage\Database\Schema\Table\ContentType;
 use Bolt\Storage\Entity\Content;
+use Bundle\Site\Entity\Place;
 use Silex\Application;
 use Silex\ControllerCollection;
 use Silex\ControllerProviderInterface;
@@ -243,6 +244,15 @@ class PlaceController extends ConfigurableBase
         $limit = 10;
         $totalPlaces = $placesRepo->getTotalPlacesByCity(null, $categorySlug, null);
         $places = $placesRepo->getPlacesByCity(null, $categorySlug, null, $page, $limit);
+
+        /** @var Place $place */
+        foreach ($places as $place) {
+//            dump($place->getTitle());
+
+//            dump($place->getRelation('categories'));
+        }
+//        die;
+
         $pager->setCount($totalPlaces);
         $pager->setCurrent($page);
         $pager->setTotalpages(ceil($totalPlaces / $limit));

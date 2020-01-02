@@ -5,6 +5,10 @@
     {% set city_name = record.taxonomy.cities | keys | first | split('/') | last %}
     {% set city_title =  app.config.get('taxonomy/cities/options/' ~ city_name) %}
 {% endif %}
+
+{% set category = record.relation('categories') | first %}
+{% set district = record.relation('districts') | first %}
+
 {% extends 'partials/_master.twig' %}
 {% block main %}
     <section class="section main">
@@ -12,9 +16,19 @@
             <nav class="breadcrumb" aria-label="breadcrumbs">
                 <ul>
                     <li><a href="{{ path('homepage') }}">Главная</a></li>
+
                     {% if city_name is defined and city_name %}
                         <li><a href="{{ path('_city_citySlug', { 'citySlug' : city_name }) }}">{{ city_title }}</a></li>
                     {% endif %}
+
+                    {% if category %}
+                        <li><a href="{{ path('_category_categorySlug', { 'categorySlug' : category.slug }) }}">{{ category.title }}</a></li>
+                    {% endif %}
+
+                    {% if district %}
+                        <li><a href="{{ path('_district_districtSlug_category_categorySlug', { 'districtSlug' : district.slug , 'categorySlug' : category.slug }) }}">{{ district.title }}</a></li>
+                    {% endif %}
+
                     <li class="is-active"><a href="#" aria-current="page">{{ record.title }}</a></li>
                 </ul>
             </nav>
