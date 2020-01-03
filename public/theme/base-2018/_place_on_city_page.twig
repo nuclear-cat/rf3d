@@ -1,0 +1,18 @@
+<div class="column is-4 place-list-item is-4-desktop is-6-tablet is-half-mobile ">
+    <a href="{{ place.link() }}">
+        <div class="place-list-item-box box p-t-0 p-b-10 p-r-0 p-l-0 is-clipped">
+            <figure>
+                {% if place.image %}
+                    <img width="100%" src="{{ place.image | thumbnail(480, 300, 'c') }}" alt=""/>
+                {% endif %}
+                <figcaption class="m-l-20 m-r-20">
+                    <h6 class="has-text-black title is-6 m-t-10">{{ place.title }}</h6>
+                    {% if place.subtitle %}
+                        <p class="subtitle is-6">{{ place.subtitle }}</p>
+                    {% endif %}
+                </figcaption>
+            </figure>
+        </div>
+    </a>
+
+</div>
