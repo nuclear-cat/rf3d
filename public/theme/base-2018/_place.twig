@@ -6,6 +6,7 @@
                 {% if place.image %}
                     <img width="100%" src="{{ place.image | thumbnail(480, 300, 'c') }}" alt=""/>
                 {% endif %}
+
                 <figcaption class="m-l-20 m-r-20">
                     <h6 class="has-text-black title is-6 m-t-10">{{ place.title }}</h6>
                     {% if place.subtitle %}

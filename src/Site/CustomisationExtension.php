@@ -35,13 +35,22 @@ class CustomisationExtension extends SimpleExtension
             new PlacesResortCommand()
         ];
     }
-
     protected function registerTwigFunctions()
     {
         return [
             'menuItems' => 'getMenuItems',
-            'getPlacesByCity' => 'getPlacesByCity'
+            'getPlacesByCity' => 'getPlacesByCity',
+            'getPlaces' => 'getPlaces'
         ];
+    }
+
+    public function getPlaces($citySlug = null, $categorySlug = null, $districtSlug = null, $page = 1, $limit = 10, $onlyMainPage = false)
+    {
+        /** @var \Bundle\Site\Repository\PlaceRepository $placesRepo */
+        $placesRepo = $this->app['storage']->getRepository('places');
+        $places = $placesRepo->getPlacesByCity($citySlug, $categorySlug, $districtSlug, $page, $limit, $onlyMainPage);
+
+        return $places;
     }
 
     protected function registerBackendControllers()
