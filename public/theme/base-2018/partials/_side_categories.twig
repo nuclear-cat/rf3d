@@ -1,26 +1,29 @@
 <div class="column is-3" style="padding-top: 0;">
     <aside class="menu">
 
-        {% set menuItems = menuItems(city_name is defined and city_name ? city_name : null) %}
+        {% set categories = menuItems(city_name is defined and city_name ? city_name : null) %}
+        {% set active_category = active_category is defined ? active_category : null %}
 
         <ul class="menu-list">
+            {% for category in categories %}
 
-            {% for menuItem in menuItems %}
-                <li>
-                    {#<a href="{{ menuItem.slug }}">{{ menuItem.title }}</a>#}
-                    <span><a href="{{ path('contentlink', { 'contenttypeslug' : 'category', 'slug' : menuItem.slug }) }}">{{ menuItem.title }}</a></span>
 
-                    {%  if menuItem.districts is defined and menuItem.districts | length > 0 %}
-                        <ul>
-                            {% for district in menuItem.districts %}
-                                {#<li><a href="{{ path('contentlink', { 'contenttypeslug' : 'district', 'slug' : district.slug }) }}">{{ district.title }}</a></li>#}
-                                <li><a href="{{ path('_district_districtSlug_category_categorySlug', { 'districtSlug' : district.slug, 'categorySlug' : menuItem.slug }) }}">{{ district.title }}</a></li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-                </li>
+                {% if not (active_category and active_category.slug != category.slug ) %}
+                    <li>
+                        {#<a href="{{ category.slug }}">{{ category.title }}</a>#}
+                        <span><a href="{{ path('contentlink', { 'contenttypeslug' : 'category', 'slug' : category.slug }) }}">{{ category.title }}</a></span>
+
+                        {% if category.districts is defined and category.districts | length > 0 %}
+                            <ul>
+                                {% for district in category.districts %}
+                                    {#<li><a href="{{ path('contentlink', { 'contenttypeslug' : 'district', 'slug' : district.slug }) }}">{{ district.title }}</a></li>#}
+                                    <li><a href="{{ path('_district_districtSlug_category_categorySlug', { 'districtSlug' : district.slug, 'categorySlug' : category.slug }) }}">{{ district.title }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </li>
+                {% endif %}
             {% endfor %}
         </ul>
-
     </aside>
 </div>

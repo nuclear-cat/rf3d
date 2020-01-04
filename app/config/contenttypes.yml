@@ -129,6 +129,10 @@ categories:
             type: text
             class: large
             group: meta
+        sort:
+            type: integer
+            class: large
+            group: meta
     relations:
         places:
           multiple: true

@@ -29,6 +29,13 @@ groups:
     options: { main: "The main group", meta: "Meta group", other: "The other stuff" }
     has_sortorder: true
 
+orders:
+    slug: orders
+    singular_slug: group
+    behaves_like: grouping
+    options: { main: "The main group", meta: "Meta group", other: "The other stuff" }
+    has_sortorder: true
+
 categories:
     name: Categories
     slug: categories

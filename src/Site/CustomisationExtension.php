@@ -5,7 +5,9 @@ namespace Bundle\Site;
 use Bolt\Extension\SimpleExtension;
 use Bundle\Site\Command\PlacesResortCommand;
 use Bundle\Site\Controller\PlaceController;
+use Bundle\Site\Entity\Category;
 use Bundle\Site\Entity\Place;
+use Bundle\Site\Repository\CategoryRepository;
 use Bundle\Site\Repository\PlaceRepository;
 use Pimple as Container;
 use Silex\Application;
@@ -20,6 +22,7 @@ class CustomisationExtension extends SimpleExtension
     {
         return [
             'places' => [ Place::class => PlaceRepository::class ],
+            'categories' => [ Category::class => CategoryRepository::class ],
         ];
     }
 
@@ -71,6 +74,7 @@ class CustomisationExtension extends SimpleExtension
     {
         /** @var \Bolt\Storage\Database\Connection $dbConnection */
         $dbConnection = $this->app['db'];
+
         $stmt = $dbConnection->prepare("
             SELECT p.id place_id, p.title, dr.to_id, d.id AS did, d.title dtitle, t.slug
             
@@ -104,11 +108,15 @@ class CustomisationExtension extends SimpleExtension
     {
         /** @var \Bolt\Storage\Database\Connection $dbConnection */
         $dbConnection = $this->app['db'];
+
+        $dbConnection->query("SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));");
+
         $stmt = $dbConnection->prepare("
             SELECT
                 c.id category_id,
                 c.title category_title,
                 c.slug category_slug,
+                c.sort category_sort_order,
 
                 pr.id p_relation_id,
                 pr.to_id p_relation_to_id,
@@ -122,6 +130,8 @@ class CustomisationExtension extends SimpleExtension
                 d.id district_id,
                 d.title district_title,
                 d.slug district_slug
+                
+                #,CONCAT(d.title) districts
             
             FROM bolt_categories c
             
@@ -141,9 +151,12 @@ class CustomisationExtension extends SimpleExtension
             LEFT JOIN bolt_taxonomy t ON (t.content_id = d.id AND t.contenttype = 'districts' AND t.taxonomytype = 'cities')
             
             ". ($cityName ? 'WHERE t.slug = :cityName' : '') ." 
-
-             ORDER BY  c.id
+            
+            #GROUP BY c.id
+                
+            ORDER BY  c.sort ASC
         ");
+
 
         if ($cityName) {
             $stmt->bindValue('cityName', $cityName);
@@ -151,9 +164,12 @@ class CustomisationExtension extends SimpleExtension
         $stmt->execute();
         $result = $stmt->fetchAll();
 
+
         $categories = [];
+        $categoryKeys = [];
 
         foreach ($result as $row) {
+
           if ($row['district_id'] > 0)  {
               $categories[$row['category_id']]['districts'][$row['district_id']] = [
                   'id' => $row['district_id'],
@@ -164,6 +180,7 @@ class CustomisationExtension extends SimpleExtension
           $categories[$row['category_id']]['id'] = $row['category_id'];
           $categories[$row['category_id']]['title'] = $row['category_title'];
           $categories[$row['category_id']]['slug'] = $row['category_slug'];
+          $categories[$row['category_id']]['sort_order'] = $row['category_sort_order'];
         }
 
         return $categories;
