@@ -109,8 +109,6 @@ class CustomisationExtension extends SimpleExtension
         /** @var \Bolt\Storage\Database\Connection $dbConnection */
         $dbConnection = $this->app['db'];
 
-        $dbConnection->query("SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));");
-
         $stmt = $dbConnection->prepare("
             SELECT
                 c.id category_id,
