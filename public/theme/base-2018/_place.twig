@@ -19,7 +19,7 @@
                         {% endif %}
 
                         {% if place.capacity > 0 %}
-                            <p class="has-text-black"><strong>Вместимость:</strong> до <span class="has-text-danger has-text-black">{{ place.capacity }}</span> чел.</p>
+                            <p class="has-text-black"><strong>Вместимость:</strong> до <strong class="has-text-danger has-text-black">{{ place.capacity }}</strong> чел.</p>
                         {% endif %}
 
                         {% if place.relation('districts') %}
