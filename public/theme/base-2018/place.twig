@@ -60,7 +60,7 @@
                         {% endif %}
 
                         {% if record.phone %}
-                            <div><strong>Телефон</strong>: {{ record.phone }}</div>
+                            <div><strong>Телефон</strong>: <a href="tel:{{ record.phone }}}">{{ record.phone }}</a></div>
                         {% endif %}
 
                         {% if record.capacity > 0 %}
@@ -85,6 +85,12 @@
                                 <img width="100%" class="" src="{{ image | thumbnail(1380, 1380, 'r') }}" alt=""/>
                             {% endfor %}
                         </div>
+                        <div class="place-slider-nav">
+                            {% for image in record.gallery %}
+                                <img width="100%" class="" src="{{ image | thumbnail(300, 200, 'c') }}" alt=""/>
+                            {% endfor %}
+                        </div>
+
                     {% endif %}
                 </div>
             </div>
@@ -100,12 +106,9 @@
                 <div class="">
                     {{ record.body }}
                 </div>
-                <br />
             {% endif %}
 
-            {% if record.flamp_widget_id %}
-                <a class="flamp-widget" href="//novosibirsk.flamp.ru/firm/pravilno_sidi_optovo_roznichnaya_kompaniya_po_prodazhe_rastushhejj_mebeli_part_i_stulev-{{ record.flamp_widget_id  }}"  data-flamp-widget-type="responsive-new" data-flamp-widget-id="{{ record.flamp_widget_id  }}" data-flamp-widget-width="100%" data-flamp-widget-count="10">Отзывы о нас на Флампе</a><script>!function(d,s){var js,fjs=d.getElementsByTagName(s)[0];js=d.createElement(s);js.async=1;js.src="//widget.flamp.ru/loader.js";fjs.parentNode.insertBefore(js,fjs);}(document,"script");</script>
-            {% endif %}
+
 
 
         </div>
@@ -113,7 +116,7 @@
 
 
     {% if record.coordinates %}
-        <section class="section main">
+        <section class="section">
             <div class="container">
                 <script src="https://api-maps.yandex.ru/2.1/?apikey=fdc619ac-38c9-406d-be65-1fd523512198&lang=ru_RU" type="text/javascript"></script>
                 <script type="text/javascript">
@@ -135,9 +138,19 @@
 
     {% endif %}
 
+
+    {% if record.flamp_widget_id %}
+        <section class="section">
+            <div class="container">
+                <a class="flamp-widget" href="//novosibirsk.flamp.ru/firm/pravilno_sidi_optovo_roznichnaya_kompaniya_po_prodazhe_rastushhejj_mebeli_part_i_stulev-{{ record.flamp_widget_id  }}"  data-flamp-widget-type="responsive-new" data-flamp-widget-id="{{ record.flamp_widget_id  }}" data-flamp-widget-width="100%" data-flamp-widget-count="10">Отзывы о нас на Флампе</a><script>!function(d,s){var js,fjs=d.getElementsByTagName(s)[0];js=d.createElement(s);js.async=1;js.src="//widget.flamp.ru/loader.js";fjs.parentNode.insertBefore(js,fjs);}(document,"script");</script>
+            </div>
+        </section>
+    {% endif %}
+
+
     {% set related_places = getPlaces(null, (category ? category.slug : null), null, 1, 8) %}
 
-    <section class="section main">
+    <section class="section">
         <div class="container">
             <div class="columns">
                 <div class="column">
@@ -159,6 +172,18 @@
         $('.place-slider').slick({
             dots: true,
             adaptiveHeight: true,
+            asNavFor: '.place-slider-nav'
         });
+
+        $('.place-slider-nav').slick({
+            slidesToShow: 4,
+
+            slidesToScroll: 1,
+            asNavFor: '.place-slider',
+            dots: false,
+            // centerMode: true,
+            focusOnSelect: true
+        });
+
     </script>
 {% endblock %}
