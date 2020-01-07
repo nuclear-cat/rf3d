@@ -5,6 +5,8 @@
 {% set meta_description = category.meta_description %}
 {% set meta_keywords = category.meta_keywords %}
 
+{%- set back_url = city_name ? path('_city_citySlug', { 'citySlug' : city_name }) : null -%}
+
 {% block main %}
     <section class="section main">
         <div class="container">

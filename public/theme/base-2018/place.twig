@@ -1,22 +1,19 @@
-{% set meta_title = record.meta_title ? record.meta_title : record.title %}
-{% set meta_description = record.meta_description %}
-{% set meta_keywords = record.meta_keywords %}
-{% if record.taxonomy.cities is defined %}
-    {% set city_name = record.taxonomy.cities | keys | first | split('/') | last %}
-    {% set city_title =  app.config.get('taxonomy/cities/options/' ~ city_name) %}
-{% endif %}
-
-{% set category = record.relation('categories') | first %}
-{% set district = record.relation('districts') | first %}
-
-{% extends 'partials/_master.twig' %}
-{% block main %}
+{%- set meta_title = record.meta_title ? record.meta_title : record.title -%}
+{%- set meta_description = record.meta_description -%}
+{%- set meta_keywords = record.meta_keywords -%}
+{%- if record.taxonomy.cities is defined -%}
+    {% set city_name = record.taxonomy.cities | keys | first | split('/') | last -%}
+    {% set city_title =  app.config.get('taxonomy/cities/options/' ~ city_name) -%}
+{%- endif %}
+{%- set category = record.relation('categories') | first -%}
+{%- set district = record.relation('districts') | first -%}
+{%- set back_url = (district and category) ? path('_district_districtSlug_category_categorySlug', { 'districtSlug' : district.slug , 'categorySlug' : category.slug }) : null -%}
+{%- extends 'partials/_master.twig' -%}
+{%- block main -%}
     <section class="section main">
         <div class="container">
             <nav class="breadcrumb" aria-label="breadcrumbs">
                 <ul>
-                    {#<li><a href="{{ path('homepage') }}">Главная</a></li>#}
-
                     {% if city_name is defined and city_name %}
                         <li><a href="{{ path('_city_citySlug', { 'citySlug' : city_name }) }}">{{ city_title }}</a></li>
                     {% endif %}
@@ -124,7 +121,7 @@
                     function init(){
                         var myMap = new ymaps.Map("map", {
                             center: [{{ record.coordinates }}],
-                            zoom: 7
+                            zoom: 14
                         });
 
                         myMap.geoObjects.add(new ymaps.Placemark([{{ record.coordinates }}], {

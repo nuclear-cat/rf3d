@@ -1,9 +1,11 @@
 {% set city_name = city %}
 {% set city_title =  app.config.get('taxonomy/cities/options/' ~ city_name) %}
 {% extends 'partials/_master.twig' %}
-{#{% set meta_title = district.meta_title ? district.meta_title : district.title %}#}
-{#{% set meta_description = district.meta_description %}#}
-{#{% set meta_keywords = district.meta_keywords %}#}
+{% set meta_title = district.meta_title ? district.meta_title : district.title %}
+{% set meta_description = district.meta_description %}
+{% set meta_keywords = district.meta_keywords %}
+{%- set back_url = category ? path('_category_categorySlug', { 'categorySlug' : category.slug }) : null -%}
+
 {% block main %}
     <section class="section main">
 
