@@ -145,7 +145,7 @@ class PlaceController extends ConfigurableBase
             }
         }
 
-        $limit = 10;
+        $limit = 100;
         $totalPlaces = $placesRepo->getTotalPlacesByCity(null, $categorySlug, $districtSlug);
         $places = $placesRepo->getPlacesByCity(null, $categorySlug, $districtSlug, $page, $limit);
         $pager->setCount($totalPlaces);
@@ -241,7 +241,7 @@ class PlaceController extends ConfigurableBase
             }
         }
 
-        $limit = 10;
+        $limit = 120;
         $totalPlaces = $placesRepo->getTotalPlacesByCity(null, $categorySlug, null);
         $places = $placesRepo->getPlacesByCity(null, $categorySlug, null, $page, $limit);
 
