@@ -119,39 +119,42 @@ class CustomisationExtension extends SimpleExtension
                 pr.id p_relation_id,
                 pr.to_id p_relation_to_id,
                 pr.from_id p_relation_from_id,
-                
+
                 dr.id d_relation_id,
-              
+
                 p.title place_title,
                 p.id place_id,
-                
+
                 d.id district_id,
                 d.title district_title,
                 d.slug district_slug
-                
+
                 #,CONCAT(d.title) districts
-            
+
             FROM bolt_categories c
-            
+
             # Place relations
             LEFT JOIN bolt_relations pr ON ((pr.to_id = c.id AND pr.to_contenttype = 'categories' AND pr.from_contenttype = 'places') OR (pr.from_id = c.id AND pr.from_contenttype = 'categories' AND pr.to_contenttype = 'places'))
-            
+
             # Places
             LEFT JOIN bolt_places p ON ((pr.from_id = p.id AND pr.from_contenttype = 'places' AND pr.to_contenttype = 'categories') OR (pr.to_id = p.id AND pr.to_contenttype = 'places' AND pr.from_contenttype = 'categories'))
-            
+
             # District relations
             LEFT JOIN bolt_relations dr ON ((dr.from_id = p.id AND dr.from_contenttype = 'places' AND dr.to_contenttype = 'districts') OR (dr.to_id = p.id AND dr.to_contenttype = 'places' AND dr.from_contenttype = 'districts'))
-            
+
             # Disctricts
             LEFT JOIN bolt_districts d ON (d.id = dr.to_id AND dr.to_contenttype = 'districts' AND dr.from_contenttype = 'places')
-            
+
             # District taxonomies
-            LEFT JOIN bolt_taxonomy t ON (t.content_id = d.id AND t.contenttype = 'districts' AND t.taxonomytype = 'cities')
+            #LEFT JOIN bolt_taxonomy t ON (t.content_id = d.id AND t.contenttype = 'districts' AND t.taxonomytype = 'cities')
             
-            ". ($cityName ? 'WHERE t.slug = :cityName' : '') ." 
-            
+            # Category taxonomies
+            LEFT JOIN bolt_taxonomy t ON (t.content_id = c.id AND t.contenttype = 'categories' AND t.taxonomytype = 'cities')
+
+            ". ($cityName ? 'WHERE t.slug = :cityName' : '') ."
+
             #GROUP BY c.id
-                
+
             ORDER BY  c.sort ASC
         ");
 
@@ -159,9 +162,9 @@ class CustomisationExtension extends SimpleExtension
         if ($cityName) {
             $stmt->bindValue('cityName', $cityName);
         }
+
         $stmt->execute();
         $result = $stmt->fetchAll();
-
 
         $categories = [];
         $categoryKeys = [];
