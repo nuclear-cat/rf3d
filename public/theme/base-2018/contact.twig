@@ -1,0 +1,72 @@
+{% extends 'partials/_master.twig' %}
+{% block main %}
+    <section class="section main">
+        <div class="container">
+
+            {% for message in app.session.flashbag.get('success') %}
+                <article class="message is-success">
+                    <div class="message-body">{{ message }}</div>
+                </article>
+
+            {% endfor %}
+
+            {% for message in app.session.flashbag.get('error') %}
+                <article class="message is-danger">
+                    <div class="message-body">{{ message }}</div>
+                </article>
+            {% endfor %}
+
+            {{ form_start(form) }}
+                <div class="field">
+                    <div class="control">
+                        {{ form_row(form.name, { 'attr' : { 'class' : 'input is-normal' } }) }}
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                        {{ form_row(form.city, { 'attr' : { 'class' : 'input is-normal' } }) }}
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                        {{ form_row(form.phone, { 'attr' : { 'class' : 'input is-normal' } }) }}
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                        {{ form_row(form.organizationName, { 'attr' : { 'class' : 'input is-normal' } }) }}
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="control">
+                        {{ form_row(form.text, { 'attr' : { 'class' : 'textarea is-normal' } }) }}
+                    </div>
+                </div>
+
+                {{ form_row(form.recaptcha) }}
+
+                <div class="g-recaptcha m-b-10" data-sitekey="{{ recaptcha_key }}" data-callback="recaptchaCallback"></div>
+
+                {{ form_row(form.send, { 'attr' : { 'class' : 'button is-info', 'disabled' : 'disabled' } }) }}
+
+
+            {{ form_end(form) }}
+
+
+        </div>
+    </section>
+{% endblock main %}
+{% block bottom_js %}
+    {{ parent() }}
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script type="text/javascript">
+        function recaptchaCallback(response) {
+            document.getElementById('{{ form.recaptcha.vars.id }}').value = response;
+            document.getElementById('{{ form.send.vars.id }}').disabled = false;
+        }
+    </script>
+{% endblock %}

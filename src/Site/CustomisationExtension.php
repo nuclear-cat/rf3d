@@ -67,6 +67,7 @@ class CustomisationExtension extends SimpleExtension
     {
         return [
             '/' => new \Bundle\Site\Controller\Frontend\PlaceController(),
+            '/contact' => new \Bundle\Site\Controller\Frontend\ContactController(),
         ];
     }
 
