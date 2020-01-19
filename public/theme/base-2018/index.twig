@@ -5,7 +5,7 @@
             <div class="column p-t-0 p-l-0 p-r-0">
                 <div class="columns is-multiline is-variable bd-klmn-columns is-1 is-flex place-list-items">
                     {% for key, cityTitle in app.config.get('taxonomy/cities/options') %}
-                        <div class="column is-6 place-list-item">
+                        <div class="column is-6 is-6-mobile is-4-tablet is-3-desktop place-list-item">
                             <a href="{{ path('_city_citySlug', { 'citySlug' : key }) }}">
                                 <div class="place-list-item-box box p-t-0 p-b-10 p-r-0 p-l-0 is-clipped">
                                     <figure>
