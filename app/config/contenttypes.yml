@@ -166,6 +166,36 @@ districts:
             class: large
             group: meta
 
+entries:
+    name: Entries
+    singular_name: Entry
+    fields:
+#        title:
+#            type: text
+#            class: large
+#            group: content
+#        slug:
+#            type: slug
+#            uses: title
+        body:
+            type: html
+            height: 300px
+        image:
+            type: image
+            group: media
+            placeholder: https://source.unsplash.com/1280x768/?business,workspace,interior/__random__
+
+    taxonomy: [ cities ]
+#    record_template: entry.twig
+#    listing_template: listing.twig
+#    listing_records: 10
+    default_status: published
+    sort: -datepublish
+#
+#
+#
+#    recordsperpage: 20
+
 
 
 #homepage:
@@ -233,41 +263,8 @@ districts:
 #    recordsperpage: 20
 #
 #
-#entries:
-#    name: Entries
-#    singular_name: Entry
-#    fields:
-#        title:
-#            type: text
-#            class: large
-#            group: content
-#        slug:
-#            type: slug
-#            uses: title
-#        teaser:
-#            type: html
-#            height: 150px
-#        body:
-#            type: html
-#            height: 300px
-#        image:
-#            type: image
-#            group: media
-#            placeholder: https://source.unsplash.com/1280x768/?business,workspace,interior/__random__
-#        video:
-#            type: video
-#    relations:
-#        pages:
-#          multiple: false
-#          order: title
-#          label: Select a page
-#    taxonomy: [ categories, tags ]
-#    record_template: entry.twig
-#    listing_template: listing.twig
-#    listing_records: 10
-#    default_status: published
-#    sort: -datepublish
-#    recordsperpage: 20
+
+
 #
 #
 ## The 'Showcases' is not particularly useful in most cases, but it does a good

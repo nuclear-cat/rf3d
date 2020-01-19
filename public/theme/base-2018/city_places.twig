@@ -14,6 +14,16 @@
                             {% include '_place_on_city_page.twig' %}
                         {% endfor %}
                     </div>
+
+                    {% setcontent entries = 'entries' where { cities: city_name }  %}
+
+                    {% if entries | length > 0 %}
+                        <div class="container">
+                            {% for entry in entries %}
+                                <div>{{ entry.body | raw }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
