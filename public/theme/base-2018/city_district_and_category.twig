@@ -24,7 +24,12 @@
                     </nav>
 
                     {% include '_place_listing.twig' with { 'places' : places } only %}
+
                     {{ pager() }}
+
+                    {% if district.body | length > 0 %}
+                        <div class="container">{{ district.body | raw }} </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

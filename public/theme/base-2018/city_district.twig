@@ -9,6 +9,11 @@
             <div class="columns">
                 {% include 'partials/_side_categories.twig' %}
                 {% include '_place_listing.twig' with { 'places' : places } only %}
+
+                {% if district.body | length > 0 %}
+                    <div class="container">{{ district.body | raw }} </div>
+                {% endif %}
+
             </div>
         </div>
     </section>

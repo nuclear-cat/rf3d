@@ -108,11 +108,13 @@ categories:
     taxonomy: [ cities ]
     singular_name: Category
     fields:
+        body:
+            type: html
+            height: 300px
         title:
             type: text
             class: large
             group: content
-
         slug:
             type: slug
             uses: title
@@ -140,11 +142,15 @@ categories:
           label: Select a subcategories
 
 districts:
+
     name: Districts
     singular_name: district
     default_status: published
     taxonomy: [ cities ]
     fields:
+        body:
+            type: html
+            height: 300px
         title:
             type: text
             class: large
