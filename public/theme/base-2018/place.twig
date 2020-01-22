@@ -53,7 +53,7 @@
                     {%  if place.image %}
                         <img width="100%" class="" src="{{ place.image | thumbnail(480, 300, 'c') }}" alt=""/>
                         {% if record.price_from or record.price_to %}
-                            <div><strong>Цена:</strong> {% if record.price_from %} от {{ record.price_from  }}{% endif %}{% if record.price_to %} от {{ record.price_to }}{% endif %}</div>
+                            <div><strong>Цена:</strong> {% if record.price_from %} от {{ record.price_from  }}{% endif %}{% if record.price_to %} до {{ record.price_to }}{% endif %}</div>
                         {% endif %}
 
                         {% if record.phone %}
