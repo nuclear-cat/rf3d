@@ -156,7 +156,7 @@ class CustomisationExtension extends SimpleExtension
 
             #GROUP BY c.id
 
-            ORDER BY  c.sort ASC
+            ORDER BY  c.sort ASC, d.sort ASC
         ");
 
 

@@ -173,7 +173,10 @@ districts:
             type: text
             class: large
             group: meta
-
+        sort:
+            type: integer
+            class: large
+            group: meta
 entries:
     name: Entries
     singular_name: Entry
