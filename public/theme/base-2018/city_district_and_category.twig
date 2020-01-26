@@ -11,7 +11,7 @@
 
         <div class="container">
             <div class="columns">
-                {% include 'partials/_side_categories.twig' %}
+                {% include 'partials/_side_categories.twig' with { 'active_category' : category } only %}
                 <div class="column">
                     <nav class="breadcrumb p-l-10" aria-label="breadcrumbs">
                         <ul>
