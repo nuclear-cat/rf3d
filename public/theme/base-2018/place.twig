@@ -56,8 +56,15 @@
                             <div><strong>Цена:</strong> {% if record.price_from %} от {{ record.price_from  }}{% endif %}{% if record.price_to %} до {{ record.price_to }}{% endif %}</div>
                         {% endif %}
 
-                        {% if record.phone %}
-                            <div><strong>Телефон</strong>: <a href="tel:{{ record.phone }}}">{{ record.phone }}</a></div>
+                        {% set phones = record.phone | split(',') %}
+
+                        {% if phones | length > 0 %}
+                            <div>
+                                <strong>Телефон{{ phones | length >= 2 ? 'ы' : '' }}</strong>:
+                                {% for key, phone in phones %}
+                                    <a href="tel:{{ phone }}}">{{ phone }}</a>{{ ((key + 1) >= (phones | length)) ? '' : ', ' }}
+                                {% endfor %}
+                            </div>
                         {% endif %}
 
                         {% if record.capacity > 0 %}
