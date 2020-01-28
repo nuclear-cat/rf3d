@@ -14,10 +14,10 @@
         </title>
         <meta name="description" content="{% if meta_description is defined %}{{ meta_description }}{% endif %}">
         <meta name="keywords" content="{% if meta_keywords is defined %}{{ meta_keywords }}{% endif %}">
-        <link rel="stylesheet" href="{{ asset('dist/css/style.css', 'theme') }}">
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('scripts/slick-1.8.1/slick/slick.css', 'theme') }}">
         <link rel="stylesheet" href="{{ asset('scripts/slick-1.8.1/slick/slick-theme.css', 'theme') }}">
+        <link rel="stylesheet" href="{{ asset('dist/css/style.css', 'theme') }}">
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         <link rel="shortcut icon" href="{{ asset('img/favicon.ico', 'theme') }}">
     </head>
@@ -27,14 +27,12 @@
 
         {% block body %}
             <header role="banner" class="header">
-
                 <nav class="navbar is-fixed-top is-info" role="navigation" aria-label="main navigation">
                     <div class="container">
                         <div class="navbar-brand">
 
-                            {% if back_url is defined %}
-                                <span class="navbar-item"><a class="has-text-white" href="{{ back_url }}"><i class="fa fa-arrow-left"></i></a></span>
-                            {% endif %}
+
+                            <span id="js-back-arrow" style="display: none;" class="navbar-item"><a onclick="window.history.back();" class="has-text-white" href="#"><i class="fa fa-arrow-left"></i></a></span>
 
                             <span class="navbar-item"><a class="has-text-white" href="{{ path('homepage') }}">RF3D</a></span>
 
@@ -42,7 +40,7 @@
                                 <a href="#" title="" class="navbar-link ">{{ city_name is defined and cities[city_name] is defined ? cities[city_name] : 'Город' }}</a>
                                 <div class="navbar-dropdown dropdown">
                                     {% for key, city in cities %}
-                                        <a href="{{ path('_city_citySlug', { 'citySlug' : key }) }}" title="" class="navbar-item">{{ city }}</a>
+                                        <a href="{{ path('_city_citySlug', { 'citySlug' : key, 'backUrl' : app.request.pathInfo }) }}" title="" class="navbar-item">{{ city }}</a>
                                     {% endfor %}
                                 </div>
                             </div>
@@ -68,7 +66,7 @@
                                     <a href="#" title="" class="navbar-link ">{{ city_name is defined and cities[city_name] is defined ? cities[city_name] : 'Город' }}</a>
                                     <div class="navbar-dropdown">
                                         {% for key, city in cities %}
-                                           <a href="{{ path('_city_citySlug', { 'citySlug' : key }) }}" title="" class="navbar-item">{{ city }}</a>
+                                           <a href="{{ path('_city_citySlug', { 'citySlug' : key, 'backUrl' : app.request.pathInfo }) }}" title="" class="navbar-item">{{ city }}</a>
                                         {% endfor %}
                                     </div>
                                 </div>
@@ -119,6 +117,12 @@
         </script>
         <noscript><div><img src="https://mc.yandex.ru/watch/56947234" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
         <!— /Yandex.Metrika counter —>
+
+        <script>
+            if (history.length >= 1) {
+                document.getElementById('js-back-arrow').style.display = 'flex';
+            }
+        </script>
 
     </body>
 </html>
