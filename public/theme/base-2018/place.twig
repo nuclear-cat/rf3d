@@ -15,15 +15,15 @@
             <nav class="breadcrumb" aria-label="breadcrumbs">
                 <ul>
                     {% if city_name is defined and city_name %}
-                        <li><a href="{{ path('_city_citySlug', { 'citySlug' : city_name, 'backUrl' : app.request.pathInfo  }) }}">{{ city_title }}</a></li>
+                        <li><a href="{{ path('_city_citySlug', { 'citySlug' : city_name }) }}">{{ city_title }}</a></li>
                     {% endif %}
 
                     {% if category %}
-                        <li><a href="{{ path('_category_categorySlug', { 'categorySlug' : category.slug, 'backUrl' : app.request.pathInfo  }) }}">{{ category.title }}</a></li>
+                        <li><a href="{{ path('_category_categorySlug', { 'categorySlug' : category.slug }) }}">{{ category.title }}</a></li>
                     {% endif %}
 
                     {% if district %}
-                        <li><a href="{{ path('_district_districtSlug_category_categorySlug', { 'districtSlug' : district.slug , 'categorySlug' : category.slug, 'backUrl' : app.request.pathInfo  }) }}">{{ district.title }}</a></li>
+                        <li><a href="{{ path('_district_districtSlug_category_categorySlug', { 'districtSlug' : district.slug , 'categorySlug' : category.slug  }) }}">{{ district.title }}</a></li>
                     {% endif %}
 
                     <li class="is-active"><a href="#" aria-current="page">{{ record.title }}</a></li>
@@ -40,7 +40,7 @@
                         {%  if city_name %}
                             <br />
                             <span class="float-right">
-                                <a href="{{ path('city', { 'cityName' : city_name, 'backUrl' : app.request.pathInfo }) }}" title="" class="navbar-item">{{ city_title }}</a>
+                                <a href="{{ path('city', { 'cityName' : city_name }) }}" title="" class="navbar-item">{{ city_title }}</a>
                             </span>
                         {% endif %}
                     {% endif %}

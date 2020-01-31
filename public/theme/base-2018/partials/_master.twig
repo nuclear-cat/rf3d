@@ -40,7 +40,7 @@
                                 <a href="#" title="" class="navbar-link ">{{ city_name is defined and cities[city_name] is defined ? cities[city_name] : 'Город' }}</a>
                                 <div class="navbar-dropdown dropdown">
                                     {% for key, city in cities %}
-                                        <a href="{{ path('_city_citySlug', { 'citySlug' : key, 'backUrl' : app.request.pathInfo }) }}" title="" class="navbar-item">{{ city }}</a>
+                                        <a href="{{ path('_city_citySlug', { 'citySlug' : key }) }}" title="" class="navbar-item">{{ city }}</a>
                                     {% endfor %}
                                 </div>
                             </div>
@@ -66,7 +66,7 @@
                                     <a href="#" title="" class="navbar-link ">{{ city_name is defined and cities[city_name] is defined ? cities[city_name] : 'Город' }}</a>
                                     <div class="navbar-dropdown">
                                         {% for key, city in cities %}
-                                           <a href="{{ path('_city_citySlug', { 'citySlug' : key, 'backUrl' : app.request.pathInfo }) }}" title="" class="navbar-item">{{ city }}</a>
+                                           <a href="{{ path('_city_citySlug', { 'citySlug' : key }) }}" title="" class="navbar-item">{{ city }}</a>
                                         {% endfor %}
                                     </div>
                                 </div>
