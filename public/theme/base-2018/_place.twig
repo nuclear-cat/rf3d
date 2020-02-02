@@ -15,7 +15,7 @@
 
                     <div class="">
                         {% if place.price_from > 0 or place.price_to > 0 %}
-                            <p class="m-t-5 is-small has-text-black"><strong>Цена:</strong> {% if place.price_from > 0  %} от <span class="has-text-danger">{{ place.price_from }}</span> руб.{% endif %}</p>
+                            <p class="m-t-5 is-small has-text-black"><strong>Цена:</strong> {% if place.price_from > 0  %} от <strong class="has-text-danger">{{ place.price_from }}</strong> руб.{% endif %}</p>
                         {% endif %}
 
                         {% if place.capacity > 0 %}
