@@ -48,3 +48,16 @@ $sides: (top, bottom, left, right); // Leave this variable alone
     display: block;
   }
 }
+
+
+
+.slick-prev:before, .slick-next:before {
+  font-size: 40px !important;
+  opacity: 1 !important;
+  text-shadow: 0px 2px rgba(0,0,0,0.5);
+}
+.slick-prev, .slick-next {
+  width: 40px;
+  height: 40px;
+}
+
