@@ -25,6 +25,7 @@
     "webpack-cli": "^3.3.10"
   },
   "scripts": {
-    "prod": "webpack --mode production"
+    "prod": "webpack --mode production",
+    "watch": "webpack --mode development --watch --info-verbosity verbose"
   }
 }

@@ -1,0 +1,98 @@
+{% extends '@bolt/_sub/_listing.twig' %}
+
+{% block listing_columns %}{{ parent() }}{% endblock %}
+
+
+
+{% block listing_header %}
+    {% from '@bolt/_buic/_listing.twig' import buic_listing_slink %}
+
+    {# COLUMN: Select #}
+    {% if prop.extended and modifiable %}
+        <th class="menu hidden-xs">
+            <div class="btn-group">
+                <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li class="select-all"><a href="#">{{ __('general.phrase.select-all') }}</a></li>
+                    <li class="hidden select-none"><a href="#">{{ __('general.phrase.select-none') }}</a></li>
+                    <li class="hidden divider" role="separator"></li>
+                    <li class="hidden dropdown-header">{{ __('general.phrase.selection') }} (#):</li>
+                    <li class="hidden"><a href="#">• {{ __('general.phrase.delete') }}</a></li>
+                    <li class="hidden disabled"><a href="#">• {{ __('general.phrase.publish') }}</a></li>
+                    <li class="hidden disabled"><a href="#">• {{ __('general.phrase.depublish') }}</a></li>
+                </ul>
+            </div>
+        </th>
+    {% else %}
+        <th style="margin: 0; padding: 0;"></th>
+    {% endif %}
+
+    {# COLUMN: ID #}
+    <th class="hidden-xs">{{ buic_listing_slink('id', __('general.phrase.id'))}}</th>
+
+    {# COLUMN: Content #}
+    <th style="width:80%">{{ buic_listing_slink(content.getTitleColumnName(content.contenttype), __('general.phrase.title') ~ ' / ' ~ __('Excerpt')) }}</th>
+
+    {#<th>City</th>#}
+    {# COLUMN: Thumbnail #}
+    <th class="listthumb"></th>
+
+    {# COLUMN: Meta #}
+    <th class="username hidden-sm hidden-xs">{{ buic_listing_slink('datecreated', __('general.phrase.meta'))}}</th>
+
+    {# COLUMN: Action #}
+    <th><span class="hidden-xs">{{ __('general.phrase.action-plural') }}</span></th>
+{% endblock %}
+
+
+{#{% block listing_header %}{{ parent() }}{% endblock %}#}
+
+{% block listing_id %}{{ parent() }}{% endblock %}
+
+
+{% block listing_content %}
+    {# COLUMN: Content #}
+    <td class="excerpt {% if prop.extended %}large{% endif %}">
+        {% set title = content.getTitle(true)|default("<em>(" ~ __('general.phrase.no-title') ~ ")</em>") %}
+        <span>
+            <strong class="visible-xs">№ {{ content.id }}. </strong>
+            <strong>
+                {% if modifiable %}
+                    <a href="{{ path('editcontent', {'contenttypeslug': content.contenttype.slug, 'id': content.id}) }}" title="Slug: {{ content.slug }}">
+                        {{ title|raw -}}
+                    </a>
+                {% else %}
+                    {{ title|raw }}
+                {% endif %}
+            </strong>
+
+            {{ content.excerpt(excerptlength - title|length, false, filter|default()) }}
+        </span>
+
+    </td>
+
+    {# COLUMN: Thumbnail #}
+    <td class="listthumb">
+
+        {% set listimage = content|first_image %}
+        {% if listimage is not empty %}
+            {% if listimage is iterable and listimage['file'] is not defined %}
+                {% set listimage = listimage|first %}
+            {% endif %}
+            {% set thumb_height = (thumbsize * 0.75)|round %}
+            {% set thumb_small = listimage|thumbnail(thumbsize, thumb_height, 'c') %}
+            {% set thumb_large = listimage|thumbnail(1000, 800, 'r') %}
+            {% set thumb_title = __('general.phrase.image') ~ ': ' ~ listimage.title|default(' - ') %}
+            <a href="{{ thumb_large }}" class="magnific" title="{{ thumb_title }}">
+                <img src="{{ thumb_small }}" width="{{ thumbsize }}" height="{{ thumb_height }}" alt="{{ __('general.phrase.thumbnail') }}">
+            </a>
+        {% endif %}
+    </td>
+
+{% endblock %}
+
+{% block listing_meta %}{{ parent() }}{% endblock %}
+
+{% block listing_actions %}{{ parent() }}{% endblock %}

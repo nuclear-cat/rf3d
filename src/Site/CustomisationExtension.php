@@ -4,6 +4,7 @@ namespace Bundle\Site;
 
 use Bolt\Extension\SimpleExtension;
 use Bundle\Site\Command\PlacesResortCommand;
+use Bundle\Site\Controller\Backend\DistrictListingController;
 use Bundle\Site\Controller\PlaceController;
 use Bundle\Site\Entity\Category;
 use Bundle\Site\Entity\Place;
@@ -11,6 +12,7 @@ use Bundle\Site\Repository\CategoryRepository;
 use Bundle\Site\Repository\PlaceRepository;
 use Pimple as Container;
 use Silex\Application;
+use Silex\ControllerCollection;
 use Silex\Provider\DoctrineServiceProvider;
 use Symfony\Component\Console\Command\Command;
 
@@ -59,7 +61,7 @@ class CustomisationExtension extends SimpleExtension
     protected function registerBackendControllers()
     {
         return [
-            '/' => new PlaceController(),
+            '/overview/districts' => new DistrictListingController(),
         ];
     }
 

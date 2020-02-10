@@ -55,7 +55,7 @@
                     {%  if place.image %}
                         <img width="100%" class="" src="{{ place.image | thumbnail(480, 300, 'c') }}" alt=""/>
                         {% if record.price_from or record.price_to %}
-                            <div><strong>Цена:</strong> {% if record.price_from %} от {{ record.price_from  }}{% endif %}{% if record.price_to %} до {{ record.price_to }}{% endif %}</div>
+                            <div><strong>Цена:</strong> {% if record.price_from %} от {{ record.price_from  }}{% endif %}{% if record.price_to %} до {{ record.price_to }}{% endif %} руб.</div>
                         {% endif %}
 
                         {% set phones = record.phone | split(',') %}
@@ -86,7 +86,7 @@
 
                 <div class="column is-9">
                     {% if record.gallery | length > 0 %}
-                        <div class="place-slider">
+                        <div class="place-slider" >
                             {% for image in record.gallery %}
                                 <img width="100%" class="" src="{{ image | thumbnail(1380, 1380, 'r') }}" alt=""/>
                             {% endfor %}
@@ -174,22 +174,22 @@
 
 {% block bottom_js %}
     {{ parent() }}
-    <script>
-        $('.place-slider').slick({
-            dots: true,
-            adaptiveHeight: true,
-            asNavFor: '.place-slider-nav'
-        });
+    {#<script>#}
+        {#$('.place-slider').slick({#}
+            {#dots: true,#}
+            {#adaptiveHeight: true,#}
+            {#asNavFor: '.place-slider-nav'#}
+        {#});#}
 
-        $('.place-slider-nav').slick({
-            slidesToShow: 4,
+        {#$('.place-slider-nav').slick({#}
+            {#slidesToShow: 4,#}
 
-            slidesToScroll: 1,
-            asNavFor: '.place-slider',
-            dots: false,
-            // centerMode: true,
-            focusOnSelect: true
-        });
+            {#slidesToScroll: 1,#}
+            {#asNavFor: '.place-slider',#}
+            {#dots: false,#}
+            {#// centerMode: true,#}
+            {#focusOnSelect: true#}
+        {#});#}
 
-    </script>
+    {#</script>#}
 {% endblock %}
