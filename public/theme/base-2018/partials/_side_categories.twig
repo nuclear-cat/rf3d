@@ -3,7 +3,8 @@
 
         {% set categories = menuItems(city_name is defined and city_name ? city_name : null) %}
         {% set active_category = active_category is defined ? active_category : null %}
-        
+        {% set active_district = active_district is defined ? active_district : null %}
+
         <ul class="menu-list">
             {% for category in categories %}
                 {% if not (active_category and active_category.slug != category.slug ) %}
@@ -16,7 +17,11 @@
                             <div class="m-l-10 dropdown is-hidden-desktop is-hidden-tablet" id="districtDropdown{{ category.id }}">
                                 <div class="dropdown-trigger">
                                     <button class="button" aria-haspopup="true" onclick="document.getElementById('districtDropdown{{ category.id }}').classList.toggle('is-active');" aria-controls="dropdown-menu">
-                                        <span>Район</span>
+                                        {% if active_district %}
+                                            <span>{{ active_district.title }}</span>
+                                        {% else %}
+                                            <span>Выбрать район</span>
+                                        {% endif %}
                                         <i class="fa fa-caret-down m-l-5"></i>
                                     </button>
                                 </div>
