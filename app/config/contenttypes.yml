@@ -1,3 +1,28 @@
+homepage:
+    name: Homepage
+    singular_name: Homepage
+    fields:
+        title:
+            type: text
+            class: large
+            group: content
+        meta_title:
+            type: text
+            class: large
+            group: meta
+        meta_description:
+            type: text
+            class: large
+            group: meta
+        meta_keywords:
+            type: text
+            class: large
+    viewless: true
+    singleton: true
+    default_status: published
+    icon_many: "fa:home"
+    icon_one: "fa:home"
+
 places:
     name: Places
     taxonomy: [ cities ]
@@ -209,44 +234,6 @@ entries:
 
 
 
-#homepage:
-#    name: Homepage
-#    singular_name: Homepage
-#    fields:
-#        title:
-#            type: text
-#            class: large
-#            group: content
-#            postfix: |
-#                The 'Homepage' can contain basic information about the website. This title will be
-#                shown on the homepage of the website, as the name implies. To change the
-#                <em><strong>name</strong></em> of the site, as is shown in the header, and the tab
-#                in the webbrowser, edit <code>sitename:</code> in the configuration file.
-#        image:
-#            type: image
-#            placeholder: https://source.unsplash.com/1920x640/?cityscape,landscape,nature/__random__
-#        teaser:
-#            type: html
-#            height: 150px
-#        content:
-#            type: html
-#            height: 300px
-#        contentlink:
-#            type: text
-#            label: Link
-#            placeholder: 'contenttype/slug or http://example.org/'
-#            postfix: "Use this to add a link for this Homepage. This could either be an 'internal' link like <tt>page//about</tt>, if you use a contenttype/slug combination. Otherwise use a proper URL, like `http://example.org`."
-#        slug:
-#            type: slug
-#            uses: title
-#            group: meta
-#    viewless: true
-#    singleton: true
-#    default_status: published
-#    icon_many: "fa:home"
-#    icon_one: "fa:home"
-#
-#
 #pages:
 #    name: Pages
 #    singular_name: Page

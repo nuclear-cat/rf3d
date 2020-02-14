@@ -2,12 +2,8 @@
 
 {% block listing_columns %}{{ parent() }}{% endblock %}
 
-
-
 {% block listing_header %}
     {% from '@bolt/_buic/_listing.twig' import buic_listing_slink %}
-
-    {# COLUMN: Select #}
     {% if prop.extended and modifiable %}
         <th class="menu hidden-xs">
             <div class="btn-group">
@@ -55,6 +51,9 @@
 {% block listing_content %}
     {# COLUMN: Content #}
     <td class="excerpt {% if prop.extended %}large{% endif %}">
+
+        {{ dump(content.taxonomy) }}
+
         {% set title = content.getTitle(true)|default("<em>(" ~ __('general.phrase.no-title') ~ ")</em>") %}
         <span>
             <strong class="visible-xs">№ {{ content.id }}. </strong>

@@ -24,7 +24,6 @@
 
                     {% include '_place_listing.twig' with { 'places' : places } only %}
                     {{ pager() }}
-
                     {% if category.body | length > 0 %}
                         <div class="container">{{ category.body | raw }} </div>
                     {% endif %}

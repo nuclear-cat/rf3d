@@ -2,18 +2,15 @@
 {% set meta_title = district.meta_title ? district.meta_title : district.title %}
 {% set meta_description = district.meta_description %}
 {% set meta_keywords = district.meta_keywords %}
-
 {% block main %}
     <section class="section main">
         <div class="container">
             <div class="columns">
                 {% include 'partials/_side_categories.twig' %}
                 {% include '_place_listing.twig' with { 'places' : places } only %}
-
                 {% if district.body | length > 0 %}
                     <div class="container">{{ district.body | raw }} </div>
                 {% endif %}
-
             </div>
         </div>
     </section>

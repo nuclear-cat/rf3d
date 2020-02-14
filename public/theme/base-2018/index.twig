@@ -1,3 +1,9 @@
+{% setcontent homepages = 'homepage' limit 1  %}
+{% set homepage = homepages | first %}
+{% set meta_title = homepage.values.meta_title %}
+{% set meta_description = homepage.values.meta_description %}
+{% set meta_keywords = homepage.values.meta_keywords %}
+
 {% extends 'partials/_master.twig' %}
 {% block main %}
     <section class="section main">
