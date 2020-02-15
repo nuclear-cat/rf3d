@@ -1,8 +1,12 @@
 {% set city_name = citySlug %}
+{% setcontent entries = 'entries' where { cities: city_name }  %}
+{% set first_entrie = entries | first %}
 {% extends 'partials/_master.twig' %}
-{#{% set meta_title = record.meta_title ? record.meta_title : record.title %}#}
-{#{% set meta_description = record.meta_description %}#}
-{#{% set meta_keywords = record.meta_keywords %}#}
+{% if first_entrie %}
+    {% set meta_title = first_entrie.meta_title ? first_entrie.meta_title: city_name %}
+    {% set meta_description = first_entrie.meta_description %}
+    {% set meta_keywords = first_entrie.meta_keywords %}
+{% endif %}
 {% block main %}
     <section class="section main">
         <div class="container">
@@ -14,9 +18,6 @@
                             {% include '_place_on_city_page.twig' %}
                         {% endfor %}
                     </div>
-
-                    {% setcontent entries = 'entries' where { cities: city_name }  %}
-
                     {% if entries | length > 0 %}
                         <div class="container">
                             {% for entry in entries %}

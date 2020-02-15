@@ -26,6 +26,13 @@
                         </div>
                     {% endfor %}
                 </div>
+
+                {% if homepage %}
+                    <div class="container">
+                       {{ homepage.body | raw }}
+                    </div>
+                {% endif %}
+
             </div>
         </div>
     </section>

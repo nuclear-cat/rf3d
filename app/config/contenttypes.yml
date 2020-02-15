@@ -6,6 +6,9 @@ homepage:
             type: text
             class: large
             group: content
+        body:
+            type: html
+            height: 300px
         meta_title:
             type: text
             class: large
@@ -22,7 +25,6 @@ homepage:
     default_status: published
     icon_many: "fa:home"
     icon_one: "fa:home"
-
 places:
     name: Places
     taxonomy: [ cities ]
@@ -206,13 +208,17 @@ entries:
     name: Entries
     singular_name: Entry
     fields:
-#        title:
-#            type: text
-#            class: large
-#            group: content
-#        slug:
-#            type: slug
-#            uses: title
+        meta_title:
+            type: text
+            class: large
+            group: meta
+        meta_description:
+            type: text
+            class: large
+            group: meta
+        meta_keywords:
+            type: text
+            class: large
         body:
             type: html
             height: 300px
