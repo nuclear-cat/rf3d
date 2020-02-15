@@ -51,9 +51,6 @@
 {% block listing_content %}
     {# COLUMN: Content #}
     <td class="excerpt {% if prop.extended %}large{% endif %}">
-
-        {{ dump(content.taxonomy) }}
-
         {% set title = content.getTitle(true)|default("<em>(" ~ __('general.phrase.no-title') ~ ")</em>") %}
         <span>
             <strong class="visible-xs">№ {{ content.id }}. </strong>
