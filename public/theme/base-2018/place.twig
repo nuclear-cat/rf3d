@@ -19,7 +19,7 @@
             <nav class="breadcrumb" aria-label="breadcrumbs">
                 <ul>
                     {% if city_name is defined and city_name %}
-                        <li><a href="{{ path('_city_citySlug', { 'citySlug' : city_name }) }}">{{ city_title }}</a></li>
+                        <li><a href="{{ path('_city_citySlug', { 'citySlug' : city_name }) }}">Главная {{ city_title }}</a></li>
                     {% endif %}
 
                     {% if category %}
