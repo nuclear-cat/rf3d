@@ -60,7 +60,7 @@
 
                         {% set phones = record.phone | split(',') %}
 
-                        {% if phones | length > 0 %}
+                        {% if record.phone and phones | length > 0 %}
                             <div>
                                 <strong>Телефон{{ phones | length >= 2 ? 'ы' : '' }}</strong>:
                                 {% for key, phone in phones %}
