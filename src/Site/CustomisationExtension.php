@@ -78,6 +78,8 @@ class CustomisationExtension extends SimpleExtension
         /** @var \Bolt\Storage\Database\Connection $dbConnection */
         $dbConnection = $this->app['db'];
 
+        $dbConnection->query('SET SQL_BIG_SELECTS = 1');
+
         $stmt = $dbConnection->prepare("
             SELECT p.id place_id, p.title, dr.to_id, d.id AS did, d.title dtitle, t.slug
             
