@@ -170,7 +170,6 @@ categories:
           label: Select a subcategories
 
 districts:
-
     name: Districts
     singular_name: district
     default_status: published
@@ -233,11 +232,46 @@ entries:
 #    listing_records: 10
     default_status: published
     sort: -datepublish
-#
-#
-#
-#    recordsperpage: 20
 
+
+contact_messages:
+    sort: -id
+    name: Contact messages
+    singular_name: Contact message
+    default_status: draft
+    viewless: true
+    fields:
+        title:
+            type: text
+            class: large
+            group: content
+        name:
+            type: text
+            class: large
+            group: content
+        city:
+            type: text
+            class: large
+            group: content
+        phone:
+            type: text
+            class: large
+            group: content
+        organization_name:
+            type: text
+            class: large
+            group: content
+        ip:
+            type: text
+            class: large
+            group: content
+        body:
+            type: html
+            height: 300px
+            group: content
+        is_spam:
+            type: checkbox
+            group: content
 
 
 #pages:
