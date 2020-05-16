@@ -15,6 +15,7 @@ cities:
       novokuznetsk: 'Новокузнецк'
       krasnoyarsk: 'Красноярск'
       mountain_altai: 'Горный Алтай'
+      belokurikha: 'Белокуриха'
 
 tags:
     slug: tags
