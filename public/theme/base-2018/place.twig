@@ -64,7 +64,7 @@
                             <div>
                                 <strong>Телефон{{ phones | length >= 2 ? 'ы' : '' }}</strong>:
                                 {% for key, phone in phones %}
-                                    <a href="tel:{{ phone }}}">{{ phone }}</a>{{ ((key + 1) >= (phones | length)) ? '' : ', ' }}
+                                    <a href="tel:{{ phone }}">{{ phone }}</a>{{ ((key + 1) >= (phones | length)) ? '' : ', ' }}
                                 {% endfor %}
                             </div>
                         {% endif %}
