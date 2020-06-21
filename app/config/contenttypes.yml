@@ -118,7 +118,19 @@ places:
             type: imagelist
             extensions: [ gif, jpg, png ]
             upload: portfolio
-
+        rooms:
+            group: rooms
+            type: repeater
+            collapsible: false
+            fields:
+                title:
+                    type: text
+                content:
+                    type: html
+                gallery:
+                    type: imagelist
+                    extensions: [ gif, jpg, png ]
+                    upload: portfolio
     relations:
         categories:
           multiple: false

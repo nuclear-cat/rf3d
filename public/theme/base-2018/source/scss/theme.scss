@@ -209,3 +209,7 @@ pre {
 .main {
     margin-top:5em;
 }
+
+p:empty {
+    height: 20px;
+}
