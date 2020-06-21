@@ -1,0 +1,30 @@
+version: '3.3'
+
+services:
+  rf3d-db:
+    container_name: rf3d-db
+    image: mysql:5.7
+    volumes:
+      - ./lib/mysql:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: db
+      MYSQL_ROOT_PASSWORD: root_pass
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+
+  rf3d-web:
+    container_name: f3d-web
+    build: ./
+    ports:
+      - "8010:80"
+    depends_on:
+      - rf3d-db
+
+    volumes:
+      - ./:/var/www/app
+
+    working_dir: /var/www/app
+    stdin_open: true
+    tty: true
+    command: app/nut server:run 0.0.0.0:80

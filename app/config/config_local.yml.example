@@ -1,0 +1,6 @@
+database:
+    driver: mysql
+    username: user
+    password: password
+    databasename: rf3d
+    host: rf3d-db
