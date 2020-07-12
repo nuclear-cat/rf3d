@@ -10,7 +10,6 @@
 {#{%- set back_url = (district and category) ? path('_district_districtSlug_category_categorySlug', { 'districtSlug' : district.slug , 'categorySlug' : category.slug }) : null -%}#}
 {%- extends 'partials/_master.twig' -%}
 {%- block main -%}
-
     <style>
 
     </style>
@@ -88,7 +87,7 @@
                     {% if record.gallery | length > 0 %}
                         <div class="place-slider" >
                             {% for image in record.gallery %}
-                                <img width="100%" class="" src="{{ image | thumbnail(1380, 1380, 'r') }}" alt=""/>
+                                <img width="100%" class="" src="{{ image | thumbnail(256, 256, 'r') }}" data-lazy="{{ image | thumbnail(1380, 1380, 'r') }}" alt=""/>
                             {% endfor %}
                         </div>
                         <div class="place-slider-nav">
@@ -120,6 +119,28 @@
         </div>
     </section>
 
+    {% if record.rooms | length > 0 %}
+        <section class="section">
+            <div class="container" >
+                {% for room in record.rooms | slice(0, 1) %}
+                    <div class="m-b-40">
+                        <h4 class="title is-4">{{ room.title }}</h4>
+                        <div class="js-rooms-slider js-rooms-gallery">
+                            {% for image in room.gallery %}
+                                <a data-fancybox="gallery" style="padding:5px" href="{{ image | thumbnail(1920, 1920, 'c') }}">
+                                    <img src="{{ image | thumbnail(480, 300, 'c') }}"  alt="{{ room.title }}"/>
+                                </a>
+                            {% endfor %}
+                        </div>
+                        <div class="m-t-30">
+                            {{ room.content | raw }}
+                        </div>
+                    </div>
+
+                {% endfor %}
+            </div>
+        </section>
+    {% endif %}
 
     {% if record.coordinates %}
         <section class="section">
@@ -174,22 +195,5 @@
 
 {% block bottom_js %}
     {{ parent() }}
-    {#<script>#}
-        {#$('.place-slider').slick({#}
-            {#dots: true,#}
-            {#adaptiveHeight: true,#}
-            {#asNavFor: '.place-slider-nav'#}
-        {#});#}
-
-        {#$('.place-slider-nav').slick({#}
-            {#slidesToShow: 4,#}
-
-            {#slidesToScroll: 1,#}
-            {#asNavFor: '.place-slider',#}
-            {#dots: false,#}
-            {#// centerMode: true,#}
-            {#focusOnSelect: true#}
-        {#});#}
-
-    {#</script>#}
+    <script src="{{ asset('dist/js/place.bundle.js', 'theme') }}"></script>
 {% endblock %}

@@ -4,3 +4,10 @@ database:
     password: password
     databasename: rf3d
     host: rf3d-db
+
+debug: true
+debug_show_loggedoff: false
+debuglog:
+    enabled: true
+    filename: bolt-debug.log
+    level: DEBUG

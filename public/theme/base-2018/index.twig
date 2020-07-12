@@ -1,5 +1,4 @@
 {% setcontent homepages = 'homepage' limit 1  %}
-{% setcontent entries = 'entries'  %}
 {% set homepage = homepages | first %}
 {% if homepage %}
     {% set meta_title = homepage.values.meta_title %}
@@ -15,19 +14,11 @@
                     {% for key, cityTitle in app.config.get('taxonomy/cities/options') %}
                         <div class="column is-6 is-6-mobile is-4-tablet is-3-desktop place-list-item">
                             <a href="{{ path('_city_citySlug', { 'citySlug' : key }) }}">
-                                {% set cityImg = null %}
-                                {% for entry in entries %}
-                                    {% for entryCityKey, entryCity in entry.taxonomy.cities %}
-                                        {% if (entryCityKey == '/cities/' ~ key and entry.image) %}
-                                            {% set cityImg = entry.image%}
-                                        {% endif %}
-                                    {% endfor %}
-                                {% endfor %}
                                 <div class="place-list-item-box box p-t-0 p-b-10 p-r-0 p-l-0 is-clipped">
                                     <figure>
-                                        <img width="100%" src="{{ (cityImg ? cityImg : ('cities/' ~ key ~ '.jpg')) | thumbnail(480, 300, 'c') }}" alt=""/>
+                                        <img width="100%" src="{{ ('cities/' ~ key ~ '.jpg') | thumbnail(480, 300, 'c') }}" alt=""/>
                                         <figcaption class="m-l-20 m-r-20">
-                                            <h4 class="has-text-black has-text-weight-bold has-text-centered is-size-4-desktop is-size-6-mobile m-t-10">{{ cityTitle }}</h4>
+                                            <h4 class="has-text-black has-text-centered title is-4 m-t-10">{{ cityTitle }}</h4>
                                         </figcaption>
                                     </figure>
                                 </div>
@@ -35,11 +26,13 @@
                         </div>
                     {% endfor %}
                 </div>
+
                 {% if homepage %}
                     <div class="container">
                        {{ homepage.body | raw }}
                     </div>
                 {% endif %}
+
             </div>
         </div>
     </section>

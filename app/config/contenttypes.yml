@@ -131,6 +131,10 @@ places:
                     type: imagelist
                     extensions: [ gif, jpg, png ]
                     upload: portfolio
+        rooms_body:
+            type: html
+            height: 300px
+
     relations:
         categories:
           multiple: false

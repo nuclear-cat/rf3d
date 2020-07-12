@@ -20,6 +20,7 @@
         <link rel="stylesheet" href="{{ asset('dist/css/style.css', 'theme') }}">
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         <link rel="shortcut icon" href="{{ asset('img/favicon.ico', 'theme') }}">
+        <link rel="stylesheet" href="{{ asset('scripts/lightGallery-master/dist/css/lightgallery.css', 'theme') }}">
     </head>
     <body{% if app.request.get('_route') == "homepage" %} class="front"{% endif %}>
 
@@ -87,12 +88,10 @@
         {{ include('partials/_footer.twig') }}
 
         {% block bottom_js %}
-            <script src="{{ asset('dist/js/bundle.js', 'theme') }}"></script>
+            <script src="{{ asset('dist/js/app.bundle.js', 'theme') }}"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
             <script src="{{ asset('scripts/slick-1.8.1/slick/slick.min.js', 'theme') }}"></script>
-
-            {#<script src="{{ asset('js/normalizeBrightness.js', 'theme') }}"></script>#}
-            {#<script src="{{ asset('js/app.js', 'theme') }}"></script>#}
+            <script src="{{ asset('scripts/lightGallery-master/dist/js/lightgallery-all.js', 'theme') }}"></script>
         {% endblock %}
 
         <!— Yandex.Metrika counter —>

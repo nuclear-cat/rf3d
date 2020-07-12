@@ -14,10 +14,10 @@ services:
       MYSQL_PASSWORD: password
 
   rf3d-web:
-    container_name: f3d-web
+    container_name: rf3d-web
     build: ./
     ports:
-      - "8010:80"
+      - "8010:8000"
     depends_on:
       - rf3d-db
 
@@ -27,4 +27,4 @@ services:
     working_dir: /var/www/app
     stdin_open: true
     tty: true
-    command: app/nut server:run 0.0.0.0:80
+    command: app/nut server:run 0.0.0.0:8000
