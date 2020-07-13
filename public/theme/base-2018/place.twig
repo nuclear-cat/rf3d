@@ -127,7 +127,7 @@
                         <h4 class="title is-4">{{ room.title }}</h4>
                         <div class="js-rooms-slider js-rooms-gallery">
                             {% for image in room.gallery %}
-                                <a data-fancybox="gallery" style="padding:5px" href="{{ image | thumbnail(1920, 1920) }}">
+                                <a data-fancybox="gallery" style="padding:5px" href="{{ image | thumbnail(2048, 2048) }}">
                                     <img src="{{ image | thumbnail(480, 300, 'c') }}"  alt="{{ room.title }}"/>
                                 </a>
                             {% endfor %}
