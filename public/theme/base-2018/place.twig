@@ -122,7 +122,7 @@
     {% if record.rooms | length > 0 %}
         <section class="section">
             <div class="container" >
-                {% for room in record.rooms | slice(0, 1) %}
+                {% for room in record.rooms %}
                     <div class="m-b-40">
                         <h4 class="title is-4">{{ room.title }}</h4>
                         <div class="js-rooms-slider js-rooms-gallery">
