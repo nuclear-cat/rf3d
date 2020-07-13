@@ -71,3 +71,8 @@ $sides: (top, bottom, left, right); // Leave this variable alone
 p:empty {
   height: 20px;
 }
+
+.slick-loading .slick-list
+{
+  background: none !important;
+}
