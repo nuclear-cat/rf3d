@@ -4,5 +4,6 @@ $('.js-rooms-slider').slick({
     centerPadding: '40px',
     dots: false,
     // centerMode: true,
-    focusOnSelect: true
+    focusOnSelect: true,
+    lazyLoad: 'progressive'
 });
