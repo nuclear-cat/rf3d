@@ -1,6 +1,7 @@
 import $ from "jquery";
 
 $('.place-slider').slick({
+    lazyLoad: 'progressive',
     dots: true,
     adaptiveHeight: true,
     asNavFor: '.place-slider-nav'
