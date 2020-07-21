@@ -118,6 +118,10 @@ places:
             type: imagelist
             extensions: [ gif, jpg, png ]
             upload: portfolio
+        rooms_head:
+            type: html
+            height: 300px
+            group: rooms
         rooms:
             group: rooms
             type: repeater
@@ -131,6 +135,8 @@ places:
                     type: imagelist
                     extensions: [ gif, jpg, png ]
                     upload: portfolio
+                bottom_content:
+                    type: html
         rooms_body:
             type: html
             height: 300px
