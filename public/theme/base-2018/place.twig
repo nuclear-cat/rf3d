@@ -128,9 +128,12 @@
                 {% for key, room in record.rooms %}
                     <div style="border: 1px solid #b8b8b8" class="m-b-40 p-b-10 p-t-10 p-l-10 p-r-10">
                         <h4 class="title is-4">{{ room.title }}</h4>
-                        <div class="m-b-30">
-                            {{ room.content | raw }}
-                        </div>
+
+                        {% if room.content %}
+                            <div class="m-b-30">
+                                {{ room.content | raw }}
+                            </div>
+                        {% endif %}
                         <div class="js-rooms-slider js-rooms-gallery">
                             {% for image in room.gallery %}
                                 <a data-fancybox="room-gallery-{{ key }}" style="padding:5px" href="{{ image | thumbnail(2048, 2048, 'r') }}">
@@ -138,9 +141,11 @@
                                 </a>
                             {% endfor %}
                         </div>
-                        <div class="m-t-30">
-                            {{ room.bottom_content | raw }}
-                        </div>
+                        {% if room.bottom_content %}
+                            <div class="m-t-30">
+                                {{ room.bottom_content | raw }}
+                            </div>
+                        {% endif %}
                     </div>
                 {% endfor %}
             </div>
