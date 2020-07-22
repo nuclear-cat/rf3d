@@ -130,12 +130,14 @@ places:
                 title:
                     type: text
                 content:
+                    height: 70px
                     type: html
                 gallery:
                     type: imagelist
                     extensions: [ gif, jpg, png ]
                     upload: portfolio
                 bottom_content:
+                    height: 70px
                     type: html
         rooms_body:
             type: html
