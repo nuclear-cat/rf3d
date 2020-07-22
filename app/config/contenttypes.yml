@@ -120,7 +120,7 @@ places:
             upload: portfolio
         rooms_head:
             type: html
-            height: 200px
+            height: 150px
             group: rooms
         rooms:
             group: rooms
@@ -139,7 +139,7 @@ places:
                     type: html
         rooms_body:
             type: html
-            height: 200px
+            height: 150px
 
     relations:
         categories:
