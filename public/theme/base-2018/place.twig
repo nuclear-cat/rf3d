@@ -18,15 +18,21 @@
             <nav class="breadcrumb" aria-label="breadcrumbs">
                 <ul>
                     {% if city_name is defined and city_name %}
-                        <li><a href="{{ path('_city_citySlug', { 'citySlug' : city_name }) }}">Главная {{ city_title }}</a></li>
+                        <li>
+                            <a href="{{ path('_city_citySlug', { 'citySlug' : city_name }) }}">Главная {{ city_title }}</a>
+                        </li>
                     {% endif %}
 
                     {% if category %}
-                        <li><a href="{{ path('_category_categorySlug', { 'categorySlug' : category.slug }) }}">{{ category.title }}</a></li>
+                        <li>
+                            <a href="{{ path('_category_categorySlug', { 'categorySlug' : category.slug }) }}">{{ category.title }}</a>
+                        </li>
                     {% endif %}
 
                     {% if district %}
-                        <li><a href="{{ path('_district_districtSlug_category_categorySlug', { 'districtSlug' : district.slug , 'categorySlug' : category.slug  }) }}">{{ district.title }}</a></li>
+                        <li>
+                            <a href="{{ path('_district_districtSlug_category_categorySlug', { 'districtSlug' : district.slug , 'categorySlug' : category.slug  }) }}">{{ district.title }}</a>
+                        </li>
                     {% endif %}
 
                     <li class="is-active"><a href="#" aria-current="page">{{ record.title }}</a></li>
@@ -35,15 +41,16 @@
 
             <h1 class="title is-4">{{ record.title }}</h1>
 
-            {%  if record.subtitle %}
+            {% if record.subtitle %}
                 <h2 class="subtitle is-5">{{ record.subtitle }}
                     {% if record.taxonomy.cities is defined %}
                         {% set city_name = record.taxonomy.cities | keys | first | split('/') | last %}
                         {% set city_title =  app.config.get('taxonomy/cities/options/' ~ city_title) %}
-                        {%  if city_name %}
-                            <br />
+                        {% if city_name %}
+                            <br/>
                             <span class="float-right">
-                                <a href="{{ path('city', { 'cityName' : city_name }) }}" title="" class="navbar-item">{{ city_title }}</a>
+                                <a href="{{ path('city', { 'cityName' : city_name }) }}" title=""
+                                   class="navbar-item">{{ city_title }}</a>
                             </span>
                         {% endif %}
                     {% endif %}
@@ -51,10 +58,13 @@
             {% endif %}
             <div class="columns">
                 <div class="column is-3">
-                    {%  if place.image %}
+                    {% if place.image %}
                         <img width="100%" class="" src="{{ place.image | thumbnail(480, 300, 'c') }}" alt=""/>
                         {% if record.price_from or record.price_to %}
-                            <div><strong>Цена:</strong> {% if record.price_from %} от {{ record.price_from  }}{% endif %}{% if record.price_to %} до {{ record.price_to }}{% endif %} руб.</div>
+                            <div>
+                                <strong>Цена:</strong> {% if record.price_from %} от {{ record.price_from }}{% endif %}{% if record.price_to %} до {{ record.price_to }}{% endif %}
+                                руб.
+                            </div>
                         {% endif %}
 
                         {% set phones = record.phone | split(',') %}
@@ -63,7 +73,8 @@
                             <div>
                                 <strong>Телефон{{ phones | length >= 2 ? 'ы' : '' }}</strong>:
                                 {% for key, phone in phones %}
-                                    <a href="tel:{{ phone }}">{{ phone }}</a>{{ ((key + 1) >= (phones | length)) ? '' : ', ' }}
+                                    <a
+                                    href="tel:{{ phone }}">{{ phone }}</a>{{ ((key + 1) >= (phones | length)) ? '' : ', ' }}
                                 {% endfor %}
                             </div>
                         {% endif %}
@@ -85,9 +96,10 @@
 
                 <div class="column is-9">
                     {% if record.gallery | length > 0 %}
-                        <div class="place-slider" >
+                        <div class="place-slider">
                             {% for image in record.gallery %}
-                                <img width="100%" class="" src="{{ image | thumbnail(256, 256, 'r') }}" data-lazy="{{ image | thumbnail(1380, 1380, 'r') }}" alt=""/>
+                                <img width="100%" class="" src="{{ image | thumbnail(256, 256, 'r') }}"
+                                     data-lazy="{{ image | thumbnail(1380, 1380, 'r') }}" alt=""/>
                             {% endfor %}
                         </div>
                         <div class="place-slider-nav">
@@ -101,13 +113,14 @@
             </div>
 
             {% if record.tour_url %}
-                <br />
-                <iframe allowfullscreen="allowfullscreen" width="100%"  height="580px" src="{{ record.tour_url }}" ></iframe>
-                <br />
+                <br/>
+                <iframe allowfullscreen="allowfullscreen" width="100%" height="580px"
+                        src="{{ record.tour_url }}"></iframe>
+                <br/>
             {% endif %}
 
             {% if record.body %}
-                <br />
+                <br/>
                 <div class="">
                     {{ record.body }}
                 </div>
@@ -115,33 +128,33 @@
         </div>
     </section>
     {% if record.rooms_head %}
-         <section class="section p-t-0">
-            <div class="container" >
+        <section class="section p-t-0">
+            <div class="container">
                 {{ record.rooms_head }}
             </div>
-         </section>
+        </section>
     {% endif %}
 
     {% if record.rooms | length > 0 %}
         <section class="section p-t-0">
-            <div class="container" >
+            <div class="container">
                 {% for key, room in record.rooms %}
                     <div style="border: 1px solid #b8b8b8" class="m-b-40 p-b-10 p-t-10 p-l-10 p-r-10">
                         <h4 class="title is-4">{{ room.title }}</h4>
-
-                        {% if room.content %}
+                        {% if room.content is defined and  room.content %}
                             <div class="m-b-30">
                                 {{ room.content | raw }}
                             </div>
                         {% endif %}
                         <div class="js-rooms-slider js-rooms-gallery">
                             {% for image in room.gallery %}
-                                <a data-fancybox="room-gallery-{{ key }}" style="padding:5px" href="{{ image | thumbnail(2048, 2048, 'r') }}">
-                                    <img src="{{ image | thumbnail(480, 300, 'c') }}"  alt="{{ room.title }}"/>
+                                <a data-fancybox="room-gallery-{{ key }}" style="padding:5px"
+                                   href="{{ image | thumbnail(2048, 2048, 'r') }}">
+                                    <img src="{{ image | thumbnail(480, 300, 'c') }}" alt="{{ room.title }}"/>
                                 </a>
                             {% endfor %}
                         </div>
-                        {% if room.bottom_content %}
+                        {% if room.bottom_content is defined and room.bottom_content %}
                             <div class="m-t-30">
                                 {{ room.bottom_content | raw }}
                             </div>
@@ -154,7 +167,7 @@
 
     {% if record.rooms_body %}
         <section class="section p-t-0">
-            <div class="container" >
+            <div class="container">
                 {{ record.rooms_body }}
             </div>
         </section>
@@ -163,10 +176,12 @@
     {% if record.coordinates %}
         <section class="section p-t-0">
             <div class="container">
-                <script src="https://api-maps.yandex.ru/2.1/?apikey=fdc619ac-38c9-406d-be65-1fd523512198&lang=ru_RU" type="text/javascript"></script>
+                <script src="https://api-maps.yandex.ru/2.1/?apikey=fdc619ac-38c9-406d-be65-1fd523512198&lang=ru_RU"
+                        type="text/javascript"></script>
                 <script type="text/javascript">
                     ymaps.ready(init);
-                    function init(){
+
+                    function init() {
                         var myMap = new ymaps.Map("map", {
                             center: [{{ record.coordinates }}],
                             zoom: 14
@@ -186,7 +201,17 @@
     {% if record.flamp_widget_id %}
         <section class="section p-t-0">
             <div class="container">
-                <a class="flamp-widget" href="//novosibirsk.flamp.ru/firm/pravilno_sidi_optovo_roznichnaya_kompaniya_po_prodazhe_rastushhejj_mebeli_part_i_stulev-{{ record.flamp_widget_id  }}"  data-flamp-widget-type="responsive-new" data-flamp-widget-id="{{ record.flamp_widget_id  }}" data-flamp-widget-width="100%" data-flamp-widget-count="10">Отзывы о нас на Флампе</a><script>!function(d,s){var js,fjs=d.getElementsByTagName(s)[0];js=d.createElement(s);js.async=1;js.src="//widget.flamp.ru/loader.js";fjs.parentNode.insertBefore(js,fjs);}(document,"script");</script>
+                <a class="flamp-widget"
+                   href="//novosibirsk.flamp.ru/firm/pravilno_sidi_optovo_roznichnaya_kompaniya_po_prodazhe_rastushhejj_mebeli_part_i_stulev-{{ record.flamp_widget_id }}"
+                   data-flamp-widget-type="responsive-new" data-flamp-widget-id="{{ record.flamp_widget_id }}"
+                   data-flamp-widget-width="100%" data-flamp-widget-count="10">Отзывы о нас на Флампе</a>
+                <script>!function (d, s) {
+                        var js, fjs = d.getElementsByTagName(s)[0];
+                        js = d.createElement(s);
+                        js.async = 1;
+                        js.src = "//widget.flamp.ru/loader.js";
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }(document, "script");</script>
             </div>
         </section>
     {% endif %}
@@ -206,7 +231,7 @@
                 </div>
             </div>
         </div>
-     </section>
+    </section>
 
 {% endblock main %}
 
