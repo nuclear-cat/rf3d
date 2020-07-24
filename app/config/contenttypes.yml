@@ -123,6 +123,7 @@ places:
             height: 150px
             group: rooms
         rooms:
+            initial: 0
             group: rooms
             type: repeater
             collapsible: false
