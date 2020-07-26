@@ -17,8 +17,8 @@
                                 <div class="place-list-item-box box p-t-0 p-b-10 p-r-0 p-l-0 is-clipped">
                                     {% setcontent entries = 'entries' where { cities: key } limit 1 %}
                                     <figure>
-                                        {% if entries | length > 0 %}
-                                            {% set first_entry = entries | first %}
+                                        {% set first_entry = entries | first %}
+                                        {% if entries | length > 0 and first_entry and first_entry.image | length > 0 %}
                                             <img width="100%" src="{{ first_entry.image | thumbnail(480, 300, 'c') }}" alt=""/>
                                         {% else %}
                                             <img width="100%" src="{{ ('cities/' ~ key ~ '.jpg') | thumbnail(480, 300, 'c') }}" alt=""/>
