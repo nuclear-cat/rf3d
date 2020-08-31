@@ -59,7 +59,7 @@
             <div class="columns">
                 <div class="column is-3">
                     {% if place.image %}
-                        <img width="100%" class="" src="{{ place.image | thumbnail(480, 300, 'c') }}" alt=""/>
+                        <img width="100%" class="is-hidden-mobile" src="{{ place.image | thumbnail(480, 300, 'c') }}" alt=""/>
                         {% if record.price_from or record.price_to %}
                             <div>
                                 <strong>Цена:</strong> {% if record.price_from %} от {{ record.price_from }}{% endif %}{% if record.price_to %} до {{ record.price_to }}{% endif %}
