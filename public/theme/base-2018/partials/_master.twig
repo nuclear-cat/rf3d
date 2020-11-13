@@ -60,10 +60,14 @@
                         <div class="navbar-menu" id="navbar-toggle">
                             <div class="navbar-start">
                                 <div class="navbar-item has-dropdown is-hoverable">
-                                    <a href="#" title="" class="navbar-link ">{{ city_name is defined and cities[city_name] is defined ? cities[city_name] : 'Город' }}</a>
-                                    <div class="navbar-dropdown">
+                                    <a href="#" title=""
+                                       class="navbar-link ">{{ city_name is defined and cities[city_name] is defined ? cities[city_name] : 'Город' }}</a>
+                                    <div class="navbar-dropdown havbar-cities-dropdown">
                                         {% for key, city in cities %}
-                                           <a href="{{ path('_city_citySlug', { 'citySlug' : key }) }}" title="" class="navbar-item">{{ city }}</a>
+                                            <div class="havbar-cities-dropdown-city">
+                                                <a href="{{ path('_city_citySlug', { 'citySlug' : key }) }}" title=""
+                                                   class="navbar-item">{{ city }}</a>
+                                            </div>
                                         {% endfor %}
                                     </div>
                                 </div>
