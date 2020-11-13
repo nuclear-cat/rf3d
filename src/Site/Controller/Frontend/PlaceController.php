@@ -146,6 +146,10 @@ class PlaceController extends ConfigurableBase
         }
 
         $limit = 100;
+
+        $dbConnection = $this->app['db'];
+        $dbConnection->query('SET SQL_BIG_SELECTS = 1');
+
         $totalPlaces = $placesRepo->getTotalPlacesByCity(null, $categorySlug, $districtSlug);
         $places = $placesRepo->getPlacesByCity(null, $categorySlug, $districtSlug, $page, $limit);
         $pager->setCount($totalPlaces);
