@@ -11,3 +11,5 @@ debuglog:
     enabled: true
     filename: bolt-debug.log
     level: DEBUG
+
+cookies_domain: site.com (Обязательно указать)

@@ -1,23 +1,11 @@
 <?php
 namespace Bundle\Site\Controller\Backend;
 
-//namespace Bolt\Extension\DropBear\KoalaCatcher\Controller;
-
-use Bolt\Controller\Backend\BackendBase;
 use Bolt\Controller\Backend\Records;
-use Bolt\Controller\Base;
-use Silex\Application;
 use Silex\ControllerCollection;
-use Silex\ControllerProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Bolt\Exception\InvalidRepositoryException;
-use Bolt\Form\FormType\ContentEditType;
 use Bolt\Storage\ContentRequest\ListingOptions;
 use Bolt\Translation\Translator as Trans;
-use Symfony\Component\Form\Button;
-use Symfony\Component\Form\Form;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * The controller for Drop Bear routes.
@@ -46,7 +34,6 @@ class DistrictListingController extends Records
      */
     public function overview(Request $request, $contenttypeslug = 'districts')
     {
-
         if (!$this->isAllowed('contenttype:' . $contenttypeslug)) {
             $this->flashes()->error(Trans::__('general.phrase.access-denied-privilege-view-page'));
 
@@ -77,6 +64,5 @@ class DistrictListingController extends Records
         ];
 
         return $this->render('bolt/districts_overview.twig', $context);
-        return $this->render('@bolt/overview/overview.twig', $context);
     }
 }

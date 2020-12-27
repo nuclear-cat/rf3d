@@ -20,7 +20,6 @@ services:
       - "8010:8000"
     depends_on:
       - rf3d-db
-
     volumes:
       - ./:/var/www/app
 

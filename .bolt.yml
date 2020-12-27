@@ -1,2 +1,3 @@
 extensions:
     - Bundle\Site\CustomisationExtension
+    - Bundle\CMS\CMSExtension
