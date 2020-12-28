@@ -5,6 +5,7 @@ namespace Bundle\CMS\Form;
 use Bolt\Translation\Translator as Trans;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -52,15 +53,16 @@ class ContentEditType extends AbstractType
             )
             ->add(
                 'preview',
-                ButtonType::class,
-                [
+                ButtonType::class, [
                     'label' => Trans::__('general.phrase.preview'),
                 ]
             )
+            ->add('_token', HiddenType::class, [
+                'mapped' => false,
+            ])
             ->add(
                 'delete',
-                SubmitType::class,
-                [
+                SubmitType::class, [
                     'label' => Trans::__('contenttypes.generic.delete', ['%contenttype%' => $options['contenttype_name']]),
                     'attr' => [
                         'style' => 'visibility: hidden;',
