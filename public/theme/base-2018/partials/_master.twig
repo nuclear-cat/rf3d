@@ -2,125 +2,164 @@
 {%- set cities = app.config.get('taxonomy/cities/options') -%}
 <!doctype html>
 <html lang="{{ htmllang() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>
-            {%- if meta_title is defined and meta_title -%}
-                {{ meta_title }} | {{ config.get('general/sitename') -}}
-            {%- else -%}
-                {%- if record.title is defined %}{{ record.title|striptags }} | {{ config.get('general/sitename') -}}{% endif -%}
-            {%- endif -%}
-        </title>
-        <meta name="description" content="{% if meta_description is defined %}{{ meta_description }}{% endif %}">
-        <meta name="keywords" content="{% if meta_keywords is defined %}{{ meta_keywords }}{% endif %}">
-        <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('scripts/slick-1.8.1/slick/slick.css', 'theme') }}">
-        <link rel="stylesheet" href="{{ asset('scripts/slick-1.8.1/slick/slick-theme.css', 'theme') }}">
-        <link rel="stylesheet" href="{{ asset('dist/css/style.css', 'theme') }}">
-        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-        <link rel="shortcut icon" href="{{ asset('img/favicon.ico', 'theme') }}">
-        <link rel="stylesheet" href="{{ asset('scripts/lightGallery-master/dist/css/lightgallery.css', 'theme') }}">
-    </head>
-    <body{% if app.request.get('_route') == "homepage" %} class="front"{% endif %}>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {%- if meta_title is defined and meta_title -%}
+            {{ meta_title }} | {{ config.get('general/sitename') -}}
+        {%- else -%}
+            {%- if record.title is defined %}{{ record.title|striptags }} | {{ config.get('general/sitename') -}}{% endif -%}
+        {%- endif -%}
+    </title>
+    <meta name="description" content="{% if meta_description is defined %}{{ meta_description }}{% endif %}">
+    <meta name="keywords" content="{% if meta_keywords is defined %}{{ meta_keywords }}{% endif %}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('scripts/slick-1.8.1/slick/slick.css', 'theme') }}">
+    <link rel="stylesheet" href="{{ asset('scripts/slick-1.8.1/slick/slick-theme.css', 'theme') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/style.css', 'theme') }}">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="shortcut icon" href="{{ asset('img/favicon.ico', 'theme') }}">
+    <link rel="stylesheet" href="{{ asset('scripts/lightGallery-master/dist/css/lightgallery.css', 'theme') }}">
+</head>
+<body{% if app.request.get('_route') == "homepage" %} class="front"{% endif %}>
 
-        <a href="#main-content" class="visually-hidden focusable skip-link">Skip to main content</a>
+<a href="#main-content" class="visually-hidden focusable skip-link">Skip to main content</a>
 
-        {% block body %}
-            <header role="banner" class="header">
-                <nav class="navbar is-fixed-top is-info" role="navigation" aria-label="main navigation">
-                    <div class="container">
-                        <div class="navbar-brand">
-
-
-                            <span id="js-back-arrow" style="display: none; padding-top: 0; padding-bottom: 0;" class="is-hidden-desktop navbar-item"><a onclick="window.history.back();" class="has-text-white" href="#"><i style="font-size: 25px;" class="fa fa-arrow-left"></i></a></span>
-
-                            <span class="navbar-item"><a class="has-text-white" href="{{ path('homepage') }}">RF3D</a></span>
-
-                            <div class="navbar-item-city navbar-item has-dropdown is-hidden-desktop">
-                                <a href="#" title="" class="navbar-link ">{{ city_name is defined and cities[city_name] is defined ? cities[city_name] : 'Город' }}</a>
-                                <div class="navbar-dropdown dropdown">
-                                    {% for key, city in cities %}
-                                        <a href="{{ path('_city_citySlug', { 'citySlug' : key }) }}" title="" class="navbar-item">{{ city }}</a>
-                                    {% endfor %}
-                                </div>
-                            </div>
-
-
-
-                            <span class="navbar-burger" data-target="navbar-toggle">
+{% block body %}
+    <header role="banner" class="header">
+        <nav class="navbar is-fixed-top is-info" role="navigation" aria-label="main navigation">
+            <div class="container">
+                <div class="navbar-brand">
+                    <span id="js-back-arrow" style="display: none; padding-top: 0; padding-bottom: 0;"
+                          class="is-hidden-desktop navbar-item"><a onclick="window.history.back();"
+                                                                   class="has-text-white" href="#"><i
+                                    style="font-size: 25px;" class="fa fa-arrow-left"></i></a></span>
+                    <span class="navbar-item">
+                                <a class="has-text-white" href="{{ path('homepage') }}">RF3D</a>
+                            </span>
+                    <a id="citiesModalButton" href="#" class="navbar-item">Город<i class="fa fa-layers-bottom-left"></i></a>
+                    <span class="navbar-burger" data-target="navbar-toggle">
                                 <span></span>
                                 <span></span>
                                 <span></span>
                             </span>
+                </div>
+
+                <div class="navbar-menu" id="navbar-toggle">
+                    <div class="navbar-start">
+                        {# <div class="navbar-item has-dropdown is-hoverable"> #}
+                        {# <a href="#" title="" #}
+                        {# class="navbar-link">{{ city_name is defined and cities[city_name] is defined ? cities[city_name] : 'Город' }}</a> #}
+                        {# <div class="navbar-dropdown havbar-cities-dropdown"> #}
+                        {# {% for key, city in cities %} #}
+                        {# <div class="havbar-cities-dropdown-city"> #}
+                        {# <a href="{{ path('_city_citySlug', { 'citySlug' : key }) }}" title="" #}
+                        {# class="navbar-item">{{ city }}</a> #}
+                        {# </div> #}
+                        {# {% endfor %} #}
+                        {# </div> #}
+                        {# </div> #}
+
+                        <a href="{{ path('_contact_') }}"
+                           class="navbar-item{{ route == '_contact_' ? ' is-active' : '' }}">Контакты</a>
 
 
-                        </div>
-
-                        <div class="navbar-menu" id="navbar-toggle">
-                            <div class="navbar-start">
-                                <div class="navbar-item has-dropdown is-hoverable">
-                                    <a href="#" title=""
-                                       class="navbar-link ">{{ city_name is defined and cities[city_name] is defined ? cities[city_name] : 'Город' }}</a>
-                                    <div class="navbar-dropdown havbar-cities-dropdown">
-                                        {% for key, city in cities %}
-                                            <div class="havbar-cities-dropdown-city">
-                                                <a href="{{ path('_city_citySlug', { 'citySlug' : key }) }}" title=""
-                                                   class="navbar-item">{{ city }}</a>
-                                            </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-
-                                <a href="{{ path('_contact_') }}" class="navbar-item{{ route == '_contact_' ? ' is-active' : '' }}">Контакты</a>
-
-
-                                {#<a href="{{ path('map') }}" class="navbar-item first{{ route == 'map' ? ' is-active' : '' }}">Карта</a>#}
-                            </div>
-                        </div>
+                        {# <a href="{{ path('map') }}" class="navbar-item first{{ route == 'map' ? ' is-active' : '' }}">Карта</a> #}
                     </div>
-                </nav>
-            </header>
-            {{ widgets('main_top') }}
+                </div>
+            </div>
+        </nav>
+    </header>
 
-            <a id="main-content"></a>
-            {% block main %}
-            {% endblock main %}
-            {{ widgets('main_bottom') }}
-        {% endblock body %}
+    <div class="modal" id="citiesModal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <div class="box">
+                <h3 class="title is-4">Выберите город</h3>
+                <div class="m-b-20">
+                    <div class="control has-icons-right">
+                        <input id="citiesModalFilterField" class="input js-shuffle-search" type="text" placeholder="Поиск">
+                    </div>
+                </div>
+                <div style="height: 500px; overflow-y: scroll">
+                    <section class="modal-card-body" id="citiesModalBody">
+                        {% for key, city in cities %}
+                            <div class="js-cities-modal-list-item havbar-city-item" data-title="{{ city }}">
+                                <a href="{{ path('_city_citySlug', { 'citySlug' : key }) }}" title=""
+                                   class="navbar-item">{{ city }}</a>
+                            </div>
+                        {% endfor %}
+                    </section>
+                </div>
+            </div>
+        </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+    </div>
 
-        {{ include('partials/_footer.twig') }}
 
-        {% block bottom_js %}
-            <script src="{{ asset('dist/js/app.bundle.js', 'theme') }}"></script>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-            <script src="{{ asset('scripts/slick-1.8.1/slick/slick.min.js', 'theme') }}"></script>
-            <script src="{{ asset('scripts/lightGallery-master/dist/js/lightgallery-all.js', 'theme') }}"></script>
-        {% endblock %}
+    {{ widgets('main_top') }}
 
-        <!— Yandex.Metrika counter —>
-        <script type="text/javascript" >
-            (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-                m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    <a id="main-content"></a>
+    {% block main %}
+    {% endblock main %}
+    {{ widgets('main_bottom') }}
+{% endblock body %}
 
-            ym(56947234, "init", {
-                clickmap:true,
-                trackLinks:true,
-                accurateTrackBounce:true,
-                webvisor:true
-            });
-        </script>
-        <noscript><div><img src="https://mc.yandex.ru/watch/56947234" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-        <!— /Yandex.Metrika counter —>
+{{ include('partials/_footer.twig') }}
 
-        <script>
-            if (history.length >= 1) {
-                document.getElementById('js-back-arrow').style.display = 'flex';
-            }
-        </script>
+{% block bottom_js %}
+    <script src="{{ asset('dist/js/app.bundle.js', 'theme') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="{{ asset('scripts/slick-1.8.1/slick/slick.min.js', 'theme') }}"></script>
+    <script src="{{ asset('scripts/lightGallery-master/dist/js/lightgallery-all.js', 'theme') }}"></script>
 
-    </body>
+    <script>
+        $(".modal-button").click(function () {
+            var target = $(this).data("target");
+            $("html").addClass("is-clipped");
+            $(target).addClass("is-active");
+        });
+
+        $(".modal-close").click(function () {
+            $("html").removeClass("is-clipped");
+            $(this).parent().removeClass("is-active");
+        });
+    </script>
+
+{% endblock %}
+
+<!— Yandex.Metrika counter —>
+<script type="text/javascript">
+    (function (m, e, t, r, i, k, a) {
+        m[i] = m[i] || function () {
+            (m[i].a = m[i].a || []).push(arguments)
+        };
+        m[i].l = 1 * new Date();
+        k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+    })
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(56947234, "init", {
+        clickmap: true,
+        trackLinks: true,
+        accurateTrackBounce: true,
+        webvisor: true
+    });
+</script>
+<noscript>
+    <div><img src="https://mc.yandex.ru/watch/56947234" style="position:absolute; left:-9999px;" alt=""/></div>
+</noscript>
+<!— /Yandex.Metrika counter —>
+
+<script>
+    if (history.length >= 1) {
+        document.getElementById('js-back-arrow').style.display = 'flex';
+    }
+</script>
+
+</body>
 </html>
 
 
