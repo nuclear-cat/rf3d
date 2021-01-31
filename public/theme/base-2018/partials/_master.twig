@@ -41,20 +41,15 @@
                             </span>
 
                     <div class="navbar-item has-dropdown is-hoverable">
-                        <a id="citiesModalButton" href="#" title="" class="navbar-link ">Город</a>
-                        <div class="navbar-dropdown havbar-cities-dropdown is-hidden-mobile is-hidden-tablet">
+                        <a id="citiesModalButton" href="#" title="" class="navbar-link navbar-link-city-modal is-arrowless">Город</a>
+                        <div class="navbar-dropdown navbar-cities-dropdown is-hidden-touch is-hidden-mobile">
                             {% for key, cityTitle in cities() %}
-                                <div class="havbar-cities-dropdown-city">
+                                <div class="navbar-cities-dropdown-city">
                                     <a href="{{ path('_city_citySlug', { 'citySlug' : key }) }}" title="" class="navbar-item">{{cityTitle}}</a>
                                 </div>
                             {% endfor %}
                         </div>
                     </div>
-
-{#                    <a id="citiesModalButton" href="#" class="navbar-item">Город#}
-{#                        <i class="fa fa-layers-bottom-left"></i>#}
-{#                    </a>#}
-{#                    #}
                     <span class="navbar-burger" data-target="navbar-toggle">
                                 <span></span>
                                 <span></span>
@@ -98,7 +93,7 @@
                         <input id="citiesModalFilterField" class="input js-shuffle-search" type="text" placeholder="Поиск">
                     </div>
                 </div>
-                <div style="height: 500px; overflow-y: scroll">
+                <div class="cities-modal-scroll">
                     <section class="modal-card-body" id="citiesModalBody">
                         {% for key, city in cities() %}
                             <div class="js-cities-modal-list-item havbar-city-item" data-title="{{ city }}">

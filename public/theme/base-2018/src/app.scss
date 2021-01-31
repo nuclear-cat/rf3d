@@ -5,8 +5,6 @@ $info: #1884cc;
 @import "place_list";
 @import "~@fancyapps/fancybox/dist/jquery.fancybox.css";
 
-//@import "~photoswipe/src/css/main";
-
 section.main {
   margin-top: 30px;
 }
@@ -77,11 +75,34 @@ p:empty {
   background: none !important;
 }
 
-.havbar-cities-dropdown {
+.navbar-cities-dropdown {
   width: 1000px;
 }
 
-.havbar-cities-dropdown-city {
+.navbar-cities-dropdown-city {
   width: 20%;
   float: left;
+}
+
+.navbar-link-city-modal {
+
+}
+
+.cities-modal-scroll {
+  height: 500px;
+  overflow-y: scroll
+}
+
+.cities-modal-scroll::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+.cities-modal-scroll::-webkit-scrollbar-track {
+  box-shadow: none;
+}
+
+.cities-modal-scroll::-webkit-scrollbar-thumb {
+  background-color: $info;
+  border-radius: 9px;
+  outline: none;
 }
