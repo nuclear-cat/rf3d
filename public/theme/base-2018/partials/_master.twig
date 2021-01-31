@@ -39,12 +39,27 @@
                     <span class="navbar-item">
                                 <a class="has-text-white" href="{{ path('homepage') }}">RF3D</a>
                             </span>
-                    <a id="citiesModalButton" href="#" class="navbar-item">Город<i class="fa fa-layers-bottom-left"></i></a>
+
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a id="citiesModalButton" href="#" title="" class="navbar-link ">Город</a>
+                        <div class="navbar-dropdown havbar-cities-dropdown is-hidden-mobile is-hidden-tablet">
+                            {% for key, cityTitle in cities() %}
+                                <div class="havbar-cities-dropdown-city">
+                                    <a href="{{ path('_city_citySlug', { 'citySlug' : key }) }}" title="" class="navbar-item">{{cityTitle}}</a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+{#                    <a id="citiesModalButton" href="#" class="navbar-item">Город#}
+{#                        <i class="fa fa-layers-bottom-left"></i>#}
+{#                    </a>#}
+{#                    #}
                     <span class="navbar-burger" data-target="navbar-toggle">
                                 <span></span>
                                 <span></span>
                                 <span></span>
-                            </span>
+                    </span>
                 </div>
 
                 <div class="navbar-menu" id="navbar-toggle">
@@ -85,7 +100,7 @@
                 </div>
                 <div style="height: 500px; overflow-y: scroll">
                     <section class="modal-card-body" id="citiesModalBody">
-                        {% for key, city in cities %}
+                        {% for key, city in cities() %}
                             <div class="js-cities-modal-list-item havbar-city-item" data-title="{{ city }}">
                                 <a href="{{ path('_city_citySlug', { 'citySlug' : key }) }}" title=""
                                    class="navbar-item">{{ city }}</a>
