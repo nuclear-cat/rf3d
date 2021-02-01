@@ -20,7 +20,7 @@ cities:
       saint-petersburg: Санкт-Петербург
       yekaterinburg: Екатеринбург
       kazan: Казань
-      новгород: Нижний
+      nizhny_novgorod: 'Нижний Новгород'
       chelyabinsk: Челябинск
       samara: Самара
       rostov-on-don: Ростов-на-Дону
@@ -40,7 +40,7 @@ cities:
       vladivostok: Владивосток
       orenburg: Оренбург
       ryazan: Рязань
-      челны: Набережные
+      naberezhnye_chelny: 'Набережные Челны'
       astrakhan: Астрахань
       penza: Пенза
       kirov: Киров
@@ -59,7 +59,7 @@ cities:
       surgut: Сургут
       vladimir: Владимир
       chita: Чита
-      тагил: Нижний
+      nizhny_tagil: 'Нижний Тагил'
       arkhangelsk: Архангельск
       kaluga: Калуга
       smolensk: Смоленск
