@@ -33,23 +33,17 @@
             <div class="container">
                 <div class="navbar-brand">
                     <span id="js-back-arrow" style="display: none; padding-top: 0; padding-bottom: 0;"
-                          class="is-hidden-desktop navbar-item"><a onclick="window.history.back();"
-                                                                   class="has-text-white" href="#"><i
-                                    style="font-size: 25px;" class="fa fa-arrow-left"></i></a></span>
+                          class="is-hidden-desktop navbar-item">
+                        <a onclick="window.history.back();" class="has-text-white" href="#">
+                            <i style="font-size: 25px;" class="fa fa-arrow-left"></i>
+                        </a>
+                    </span>
                     <span class="navbar-item">
-                                <a class="has-text-white" href="{{ path('homepage') }}">RF3D</a>
-                            </span>
+                        <a class="has-text-white" href="{{ path('homepage') }}">RF3D</a>
+                    </span>
 
-                    <div class="navbar-item has-dropdown is-hoverable">
-                        <a id="citiesModalButton" href="#" title="" class="navbar-link navbar-link-city-modal is-arrowless">Город</a>
-                        <div class="navbar-dropdown navbar-cities-dropdown is-hidden-touch is-hidden-mobile">
-                            {% for key, cityTitle in cities() %}
-                                <div class="navbar-cities-dropdown-city">
-                                    <a href="{{ path('_city_citySlug', { 'citySlug' : key }) }}" title="" class="navbar-item">{{cityTitle}}</a>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
+                    <a id="citiesModalButton" href="#" title="" class="navbar-link navbar-link-city-modal is-arrowless">Город</a>
+
                     <span class="navbar-burger" data-target="navbar-toggle">
                                 <span></span>
                                 <span></span>
