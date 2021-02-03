@@ -86,23 +86,45 @@
                 <p class="modal-card-title">Выберите город</p>
                 <button data-bulma-modal="close" class="delete" aria-label="close"></button>
             </header>
-            <div class="modal-card-body" >
-                <div class="m-b-20">
-                    <div class="control has-icons-right">
-                        <input id="citiesModalFilterField" class="input js-shuffle-search" type="text" placeholder="Поиск">
-                    </div>
-                </div>
-                <div class="cities-modal-scroll">
-                    <section id="citiesModalBody">
-                        {% for key, city in cities() %}
-                            <div class="js-cities-modal-list-item havbar-city-item" data-title="{{ city }}">
-                                <a href="{{ path('_city_citySlug', { 'citySlug' : key }) }}" title=""
-                                   class="navbar-item">{{ city }}</a>
-                            </div>
-                        {% endfor %}
-                    </section>
+            <div class="has-background-white p-t-10 p-b-10 p-l-10 p-r-10">
+                <div class="control has-icons-right">
+                    <input id="citiesModalFilterField" class="input js-shuffle-search" type="text" placeholder="Поиск">
                 </div>
             </div>
+            <section class="modal-card-body scroll-bar-primary">
+                <div class="content">
+                    {% for key, city in cities() %}
+                        <div class="js-cities-modal-list-item havbar-city-item" data-title="{{ city }}">
+                            <a href="{{ path('_city_citySlug', { 'citySlug' : key }) }}" title=""
+                               class="navbar-item">{{ city }}</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+{#            <div class="modal-card-body" >#}
+{#                <div class="m-b-20">#}
+{#                    <div class="control has-icons-right">#}
+{#                        <input id="citiesModalFilterField" class="input js-shuffle-search" type="text" placeholder="Поиск">#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="cities-modal-scroll">#}
+{#                    <section id="citiesModalBody">#}
+{#                        {% for key, city in cities() %}#}
+{#                            <div class="js-cities-modal-list-item havbar-city-item" data-title="{{ city }}">#}
+{#                                <a href="{{ path('_city_citySlug', { 'citySlug' : key }) }}" title=""#}
+{#                                   class="navbar-item">{{ city }}</a>#}
+{#                            </div>#}
+{#                        {% endfor %}#}
+{#                    </section>#}
+{#                </div>#}
+{#            </div>#}
+
+
+            <footer class="modal-card-foot p-b-10 p-t-10">
+{#                <button class="button is-success">Save changes</button>#}
+                <button data-bulma-modal="close" class="button">Закрыть</button>
+            </footer>
         </div>
         <button class="modal-close is-large is-hidden-mobile is-hidden-touch " aria-label="close"></button>
     </div>
