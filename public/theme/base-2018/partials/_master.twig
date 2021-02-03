@@ -88,11 +88,11 @@
             </header>
             <div class="has-background-white p-t-10 p-b-10 p-l-10 p-r-10">
                 <div class="control has-icons-right">
-                    <input id="citiesModalFilterField" class="input js-shuffle-search" type="text" placeholder="Поиск">
+                    <input autofocus id="citiesModalFilterField" class="input" type="text" placeholder="Поиск">
                 </div>
             </div>
             <section class="modal-card-body scroll-bar-primary">
-                <div class="content">
+                <div class="content" id="citiesModalBody">
                     {% for key, city in cities() %}
                         <div class="js-cities-modal-list-item havbar-city-item" data-title="{{ city }}">
                             <a href="{{ path('_city_citySlug', { 'citySlug' : key }) }}" title=""

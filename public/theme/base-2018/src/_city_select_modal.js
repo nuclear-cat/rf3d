@@ -6,7 +6,8 @@ citiesModalButton.addEventListener("click", function () {
     citiesModal.show()
 })
 citiesModal.addEventListener('modal:show', function () {
-    console.log("opened")
+    console.log("opened");
+    document.getElementById('citiesModalFilterField').focus();
 })
 citiesModal.addEventListener("modal:close", function () {
     console.log("closed")
