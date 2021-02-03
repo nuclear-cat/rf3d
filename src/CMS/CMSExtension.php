@@ -35,7 +35,7 @@ class CMSExtension extends SimpleExtension
     public function getCities()
     {
         $cities = $this->getContainer()['config']->get('taxonomy')['cities']['options'];
-        ksort($cities);
+        sort($cities);
 
         return $cities;
     }
