@@ -82,7 +82,7 @@
     <div class="modal" id="citiesModal">
         <div class="modal-background"></div>
         <div class="modal-content modal-card">
-            <header class="modal-card-head">
+            <header class="modal-card-head is-radiusless-mobile">
                 <p class="modal-card-title">Выберите город</p>
                 <button data-bulma-modal="close" class="delete" aria-label="close"></button>
             </header>
@@ -91,7 +91,7 @@
                     <input autofocus id="citiesModalFilterField" class="input" type="text" placeholder="Поиск">
                 </div>
             </div>
-            <section class="modal-card-body scroll-bar-primary">
+            <section class="modal-card-body scroll-bar-primary is-radiusless-mobile">
                 <div class="content" id="citiesModalBody">
                     {% for key, city in cities() %}
                         <div class="js-cities-modal-list-item havbar-city-item" data-title="{{ city }}">
@@ -121,7 +121,7 @@
 {#            </div>#}
 
 
-            <footer class="modal-card-foot p-b-10 p-t-10">
+            <footer class="modal-card-foot p-b-10 p-t-10 is-radiusless">
 {#                <button class="button is-success">Save changes</button>#}
                 <button data-bulma-modal="close" class="button">Закрыть</button>
             </footer>
