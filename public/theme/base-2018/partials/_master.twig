@@ -81,16 +81,19 @@
 
     <div class="modal" id="citiesModal">
         <div class="modal-background"></div>
-        <div class="modal-content">
-            <div class="box">
-                <h3 class="title is-4">Выберите город</h3>
+        <div class="modal-content modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Выберите город</p>
+                <button class="delete" aria-label="close"></button>
+            </header>
+            <div class="modal-card-body" >
                 <div class="m-b-20">
                     <div class="control has-icons-right">
                         <input id="citiesModalFilterField" class="input js-shuffle-search" type="text" placeholder="Поиск">
                     </div>
                 </div>
                 <div class="cities-modal-scroll">
-                    <section class="modal-card-body" id="citiesModalBody">
+                    <section id="citiesModalBody">
                         {% for key, city in cities() %}
                             <div class="js-cities-modal-list-item havbar-city-item" data-title="{{ city }}">
                                 <a href="{{ path('_city_citySlug', { 'citySlug' : key }) }}" title=""
