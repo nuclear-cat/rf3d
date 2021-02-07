@@ -11,7 +11,6 @@
 {%- extends 'partials/_master.twig' -%}
 {%- block main -%}
     <style>
-
     </style>
     <section class="section main">
         <div class="container">
@@ -146,11 +145,16 @@
                                 {{ room.content | raw }}
                             </div>
                         {% endif %}
-                        <div class="js-rooms-slider js-rooms-gallery">
+                        <div class="js-rooms-slider js-rooms-gallery place-room-item">
                             {% for image in room.gallery %}
-                                <a data-fancybox="room-gallery-{{ key }}" style="padding:5px"
+                                <a data-fancybox="room-gallery-{{ key }}" style="padding:5px;"
                                    href="{{ image | thumbnail(2048, 2048, 'r') }}">
-                                    <img src="{{ image | thumbnail(480, 300, 'c') }}" alt="{{ room.title }}"/>
+                                    <div style="position: relative;">
+                                        <img src="{{ image | thumbnail(480, 300, 'c') }}" alt="{{ room.title }}"/>
+                                        <div class="place-room-item__image-overlay">
+                                            <i class="fa fa-search-plus fa-10x place-room-item__image-overlay__icon"></i>
+                                        </div>
+                                    </div>
                                 </a>
                             {% endfor %}
                         </div>
