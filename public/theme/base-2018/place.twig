@@ -97,8 +97,10 @@
                     {% if record.gallery | length > 0 %}
                         <div class="place-slider">
                             {% for image in record.gallery %}
-                                <img width="100%" class="" src="{{ image | thumbnail(256, 256, 'r') }}"
-                                     data-lazy="{{ image | thumbnail(1380, 1380, 'r') }}" alt=""/>
+                                <div style="text-align: center; height: 600px; background: #f6f6f6;">
+                                    <img style="height: 100%; margin: 0 auto;" class="" src="{{ image | thumbnail(256, 256, 'r') }}"
+                                         data-lazy="{{ image | thumbnail(1380, 1380, 'r') }}" alt=""/>
+                                </div>
                             {% endfor %}
                         </div>
                         <div class="place-slider-nav">
