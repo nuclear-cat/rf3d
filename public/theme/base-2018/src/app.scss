@@ -135,3 +135,13 @@ p:empty {
   font-size: 30px !important;
 }
 
+.place-slider__item {
+  height: 500px !important;
+}
+
+@media screen and (max-width: $tablet) {
+  .place-slider__item {
+    height: 200px !important;;
+  }
+}
+

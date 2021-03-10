@@ -12,5 +12,6 @@ $('.place-slider-nav').slick({
     slidesToScroll: 1,
     asNavFor: '.place-slider',
     dots: false,
-    focusOnSelect: true
+    focusOnSelect: true,
+    variableWidth: true,
 });

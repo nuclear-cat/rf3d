@@ -97,7 +97,12 @@
                     {% if record.gallery | length > 0 %}
                         <div class="place-slider">
                             {% for image in record.gallery %}
-                                <div style="text-align: center; height: 600px; background: #f6f6f6;">
+                                <div class="place-slider__item" style="
+                                    text-align: center;
+                                    background: #f6f6f6;
+                                ">
+{#                                    {{ dump(imageinfo(image.filename).info.exif) }}#}
+
                                     <img style="height: 100%; margin: 0 auto;" class="" src="{{ image | thumbnail(256, 256, 'r') }}"
                                          data-lazy="{{ image | thumbnail(1380, 1380, 'r') }}" alt=""/>
                                 </div>
