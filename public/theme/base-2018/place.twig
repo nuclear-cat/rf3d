@@ -108,7 +108,7 @@
                                 </div>
                             {% endfor %}
                         </div>
-                        <div class="place-slider-nav">
+                        <div class="place-slider-nav is-hidden-mobile">
                             {% for image in record.gallery %}
                                 <img width="100%" class="" src="{{ image | thumbnail(300, 200, 'c') }}" alt=""/>
                             {% endfor %}
