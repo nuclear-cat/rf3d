@@ -96,15 +96,30 @@
                 <div class="column is-9">
                     {% if record.gallery | length > 0 %}
                         <div class="place-slider">
-                            {% for image in record.gallery %}
-                                <div class="place-slider__item" style="
+                            {% for key, image in record.gallery %}
+                                <div class="place-slider__item place-room-item" style="
                                     text-align: center;
                                     background: #f6f6f6;
+                                    position: relative;
                                 ">
-{#                                    {{ dump(imageinfo(image.filename).info.exif) }}#}
+                                    <svg class="is-hidden-desktop"
+                                         style="
+                                            position: absolute;
+                                            width:39px;
+                                            top:15px;
+                                            right: 15px;
+                                            -webkit-filter: drop-shadow( 0px 2px 2px rgba(0, 0, 0, .5));
+                                            filter: drop-shadow( 0px 2px 2px rgba(0, 0, 0, .5))"
+                                         viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"
+                                         data-v-e46d5ffc="">
+                                        <path d="M21.429 18.857L30 27.43 27.429 30l-8.572-8.571v-1.355l-.463-.48a11.093 11.093 0 01-7.251 2.692 11.143 11.143 0 1111.143-11.143c0 2.76-1.012 5.297-2.692 7.251l.48.463h1.355zm-10.286 0a7.682 7.682 0 007.714-7.714 7.682 7.682 0 00-7.714-7.714 7.682 7.682 0 00-7.714 7.714 7.682 7.682 0 007.714 7.714zM15.429 12H12v3.429h-1.714V12H6.857v-1.714h3.429V6.857H12v3.429h3.429V12z" fill="#fff" data-v-e46d5ffc=""></path>
+                                    </svg>
 
-                                    <img style="height: 100%; margin: 0 auto;" class="" src="{{ image | thumbnail(256, 256, 'r') }}"
-                                         data-lazy="{{ image | thumbnail(1380, 1380, 'r') }}" alt=""/>
+                                    <a data-fancybox="place-slider-gallery"
+                                       href="{{ image | thumbnail(1380, 1380, 'r') }}">
+                                        <img style="height: 100%; margin: 0 auto;" class="" src="{{ image | thumbnail(256, 256, 'r') }}"
+                                             data-lazy="{{ image | thumbnail(1380, 1380, 'r') }}" alt=""/>
+                                    </a>
                                 </div>
                             {% endfor %}
                         </div>
