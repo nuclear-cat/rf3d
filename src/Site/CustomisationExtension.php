@@ -132,28 +132,21 @@ class CustomisationExtension extends SimpleExtension
                 d.title district_title,
                 d.slug district_slug
 
-            FROM bolt_categories c
+            FROM bolt_categories c            
 
-            # Place relations
             LEFT JOIN bolt_relations pr ON ((pr.to_id = c.id AND pr.to_contenttype = 'categories' AND pr.from_contenttype = 'places') OR (pr.from_id = c.id AND pr.from_contenttype = 'categories' AND pr.to_contenttype = 'places'))
-
-            # Places
             LEFT JOIN bolt_places p ON ((pr.from_id = p.id AND pr.from_contenttype = 'places' AND pr.to_contenttype = 'categories') OR (pr.to_id = p.id AND pr.to_contenttype = 'places' AND pr.from_contenttype = 'categories'))
 
-            # District relations
+            LEFT JOIN bolt_taxonomy cc ON (cc.content_id = c.id AND cc.contenttype = 'categories' AND cc.taxonomytype = 'cities')
+            LEFT JOIN bolt_taxonomy dc ON (dc.content_id = c.id AND dc.contenttype = 'places' AND dc.taxonomytype = 'cities')
+            
             LEFT JOIN bolt_relations dr ON ((dr.from_id = p.id AND dr.from_contenttype = 'places' AND dr.to_contenttype = 'districts') OR (dr.to_id = p.id AND dr.to_contenttype = 'places' AND dr.from_contenttype = 'districts'))
-
-            # Disctricts
             LEFT JOIN bolt_districts d ON (d.id = dr.to_id AND dr.to_contenttype = 'districts' AND dr.from_contenttype = 'places')
 
-            # Category taxonomies
-            LEFT JOIN bolt_taxonomy t ON (t.content_id = c.id AND t.contenttype = 'categories' AND t.taxonomytype = 'cities')
-
-            ". ($cityName ? 'WHERE t.slug = :cityName' : '') ."
-
+            " . ($cityName ? 'WHERE cc.slug = :cityName' : '') . "
+            
             ORDER BY  c.sort ASC, d.sort ASC
         ");
-
 
         if ($cityName) {
             $stmt->bindValue('cityName', $cityName);
@@ -167,17 +160,17 @@ class CustomisationExtension extends SimpleExtension
 
         foreach ($result as $row) {
 
-          if ($row['district_id'] > 0)  {
-              $categories[$row['category_id']]['districts'][$row['district_id']] = [
-                  'id' => $row['district_id'],
-                  'title' => $row['district_title'],
-                  'slug' => $row['district_slug'],
-              ];
-          }
-          $categories[$row['category_id']]['id'] = $row['category_id'];
-          $categories[$row['category_id']]['title'] = $row['category_title'];
-          $categories[$row['category_id']]['slug'] = $row['category_slug'];
-          $categories[$row['category_id']]['sort_order'] = $row['category_sort_order'];
+            if ($row['district_id'] > 0) {
+                $categories[$row['category_id']]['districts'][$row['district_id']] = [
+                    'id' => $row['district_id'],
+                    'title' => $row['district_title'],
+                    'slug' => $row['district_slug'],
+                ];
+            }
+            $categories[$row['category_id']]['id'] = $row['category_id'];
+            $categories[$row['category_id']]['title'] = $row['category_title'];
+            $categories[$row['category_id']]['slug'] = $row['category_slug'];
+            $categories[$row['category_id']]['sort_order'] = $row['category_sort_order'];
         }
 
         return $categories;
