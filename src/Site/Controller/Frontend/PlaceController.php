@@ -274,6 +274,7 @@ class PlaceController extends ConfigurableBase
 
         return $this->render('city_places.twig', [], [
             'citySlug' => $citySlug,
+            'city' => $citySlug,
             'places' => $places,
         ]);
     }
