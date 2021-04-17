@@ -5,16 +5,12 @@ namespace Bundle\Site;
 use Bolt\Extension\SimpleExtension;
 use Bundle\Site\Command\PlacesResortCommand;
 use Bundle\Site\Controller\Backend\DistrictListingController;
-use Bundle\Site\Controller\PlaceController;
 use Bundle\Site\Entity\Category;
 use Bundle\Site\Entity\Place;
 use Bundle\Site\Repository\CategoryRepository;
 use Bundle\Site\Repository\PlaceRepository;
 use Pimple as Container;
 use Silex\Application;
-use Silex\ControllerCollection;
-use Silex\Provider\DoctrineServiceProvider;
-use Symfony\Component\Console\Command\Command;
 
 class CustomisationExtension extends SimpleExtension
 {
@@ -136,8 +132,6 @@ class CustomisationExtension extends SimpleExtension
                 d.title district_title,
                 d.slug district_slug
 
-                #,CONCAT(d.title) districts
-
             FROM bolt_categories c
 
             # Place relations
@@ -152,15 +146,10 @@ class CustomisationExtension extends SimpleExtension
             # Disctricts
             LEFT JOIN bolt_districts d ON (d.id = dr.to_id AND dr.to_contenttype = 'districts' AND dr.from_contenttype = 'places')
 
-            # District taxonomies
-            #LEFT JOIN bolt_taxonomy t ON (t.content_id = d.id AND t.contenttype = 'districts' AND t.taxonomytype = 'cities')
-            
             # Category taxonomies
             LEFT JOIN bolt_taxonomy t ON (t.content_id = c.id AND t.contenttype = 'categories' AND t.taxonomytype = 'cities')
 
             ". ($cityName ? 'WHERE t.slug = :cityName' : '') ."
-
-            #GROUP BY c.id
 
             ORDER BY  c.sort ASC, d.sort ASC
         ");
