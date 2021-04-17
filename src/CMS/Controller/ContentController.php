@@ -69,8 +69,6 @@ class ContentController extends BackendBase
             $returnTo = $this->getReturnTo($request, $button);
             $editReferrer = $request->get('editreferrer');
 
-            dump($data);
-
             if ($button->getName() === 'delete') {
                 $this->app['storage.request.modify']->action($contentTypeKey, [$id => ['delete' => true]]);
 

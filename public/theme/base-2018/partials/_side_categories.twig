@@ -1,24 +1,18 @@
 <div class="column is-3" style="padding-top: 0;">
     <aside class="menu">
-
-        {% set categories = menuItems(city_name is defined and city_name ? city_name : null) %}
+        {% set categories = menuItems(city is defined and city ? city : null) %}
         {% set active_category = active_category is defined ? active_category : null %}
-        {% set active_district = active_district is defined ? active_district : null %}
 
         <ul class="menu-list">
             {% for category in categories %}
                 {% if not (active_category and active_category.slug != category.slug ) %}
                     <li>
-                        {#<a href="{{ category.slug }}">{{ category.title }}</a>#}
-                        <span><a href="{{ path('contentlink', { 'contenttypeslug' : 'category', 'slug' : category.slug }) }}">{{ category.title }}</a></span>
-
+                        <span>
+                            <a href="{{ path('contentlink', { 'contenttypeslug' : 'category', 'slug' : category.slug }) }}">{{ category.title }}</a>
+                        </span>
                         {% if category.districts is defined and category.districts | length > 0 %}
-
-
-
                             <ul class="is-hidden-mobile is-block-desktop">
                                 {% for district in category.districts %}
-                                    {#<li><a href="{{ path('contentlink', { 'contenttypeslug' : 'district', 'slug' : district.slug }) }}">{{ district.title }}</a></li>#}
                                     <li><a href="{{ path('_district_districtSlug_category_categorySlug', { 'districtSlug' : district.slug, 'categorySlug' : category.slug }) }}">{{ district.title }}</a></li>
                                 {% endfor %}
                             </ul>
