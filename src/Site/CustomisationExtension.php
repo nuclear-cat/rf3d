@@ -2,6 +2,7 @@
 
 namespace Bundle\Site;
 
+use Bolt\Cache;
 use Bolt\Extension\SimpleExtension;
 use Bundle\Site\Command\PlacesResortCommand;
 use Bundle\Site\Controller\Backend\DistrictListingController;
@@ -107,6 +108,16 @@ class CustomisationExtension extends SimpleExtension
 
     public function getMenuItems($cityName = null)
     {
+        $cacheKey = 'side_categories_' . $cityName;
+
+        /** @var Cache $cache */
+        $cache = $this->app['cache'];
+        $categories = $cache->fetch($cacheKey);
+
+        if ($categories) {
+            return $categories;
+        }
+
         /** @var \Bolt\Storage\Database\Connection $dbConnection */
         $dbConnection = $this->app['db'];
 
@@ -172,6 +183,8 @@ class CustomisationExtension extends SimpleExtension
             $categories[$row['category_id']]['slug'] = $row['category_slug'];
             $categories[$row['category_id']]['sort_order'] = $row['category_sort_order'];
         }
+
+        $cache->save($cacheKey, $categories, 3600 * 24 * 30);
 
         return $categories;
     }
