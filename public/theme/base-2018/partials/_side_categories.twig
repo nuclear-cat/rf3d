@@ -2,6 +2,7 @@
     <aside class="menu">
         {% set categories = menuItems(city is defined and city ? city : null) %}
         {% set active_category = active_category is defined ? active_category : null %}
+        {% set active_district = active_district is defined ? active_district : null %}
 
         <ul class="menu-list">
             {% for category in categories %}
@@ -10,7 +11,30 @@
                         <span>
                             <a href="{{ path('contentlink', { 'contenttypeslug' : 'category', 'slug' : category.slug }) }}">{{ category.title }}</a>
                         </span>
+
                         {% if category.districts is defined and category.districts | length > 0 %}
+                            <div class="m-l-10 dropdown is-hidden-desktop is-hidden-tablet" id="districtDropdown{{ category.id }}">
+                                <div class="dropdown-trigger">
+                                    <button class="button" aria-haspopup="true" onclick="document.getElementById('districtDropdown{{ category.id }}').classList.toggle('is-active');" aria-controls="dropdown-menu">
+                                        {% if active_district %}
+                                            <span>{{ active_district.title }}</span>
+                                        {% else %}
+                                            <span>Выбрать район</span>
+                                        {% endif %}
+                                        <i class="fa fa-caret-down m-l-5"></i>
+                                    </button>
+                                </div>
+                                <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                                    <div class="dropdown-content">
+                                        <a class="dropdown-item" href="{{ path('contentlink', { 'contenttypeslug' : 'category', 'slug' : category.slug }) }}">Все районы</a>
+
+                                        {% for district in category.districts %}
+                                            <a class="dropdown-item" href="{{ path('_district_districtSlug_category_categorySlug', { 'districtSlug' : district.slug, 'categorySlug' : category.slug }) }}">{{ district.title }}</a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+
                             <ul class="is-hidden-mobile is-block-desktop">
                                 {% for district in category.districts %}
                                     <li><a href="{{ path('_district_districtSlug_category_categorySlug', { 'districtSlug' : district.slug, 'categorySlug' : category.slug }) }}">{{ district.title }}</a></li>
