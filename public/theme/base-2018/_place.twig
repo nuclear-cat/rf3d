@@ -29,16 +29,6 @@
                             {% endif %}
                         {% endif %}
 
-                        {% if place.relation('categories') | first %}
-                            {% set category = place.relation('categories') | first %}
-                            {#{{ record.relation('categories') }}#}
-                            {#{% if category %}#}
-                                {#<p class="m-t-5 has-text-black"><strong>Категория:</strong> {{ category.title }}</p>#}
-                            {#{% endif %}#}
-
-                            {##}
-                        {% endif %}
-
                         {% if place.teaser %}
                             <div class="text-muted m-t-5 has-text-black">{{ place.teaser | raw }}</div>
                         {% endif %}

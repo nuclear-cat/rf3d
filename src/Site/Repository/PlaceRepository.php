@@ -62,7 +62,6 @@ class PlaceRepository extends Repository\ContentRepository
                 (cr.from_contenttype = "places" AND cr.from_id = p.id AND cr.to_contenttype = "categories") OR 
                 (cr.from_contenttype = "categories" AND cr.to_id = p.id AND cr.to_contenttype = "places"))
             ');
-//            $qb->join('cr', 'bolt_categories', 'c', '((c.id = cr.to_id AND cr.from_contenttype = "categories" AND cr.to_contenttype = "places") OR (c.id = cr.from_id AND cr.to_contenttype = "places" AND cr.from_contenttype = "categories"))');
             $qb->join('cr', 'bolt_categories', 'c', '((c.id = cr.to_id AND c.status = "published" AND cr.from_contenttype = "places" AND cr.to_contenttype = "categories") OR (c.id = cr.from_id AND c.status = "published" AND cr.to_contenttype = "places" AND cr.from_contenttype = "categories"))');
             $qb->andWhere('c.slug = :categorySlug');
             $qb->setParameter('categorySlug', $categorySlug);
